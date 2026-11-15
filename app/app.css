@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans:
+    "Inter Variable", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/* Texte long (études de cas en MDX, pages de contenu). */
+.case-body {
+  h2 {
+    @apply mt-10 mb-3 text-2xl font-semibold;
+  }
+  h3 {
+    @apply mt-6 mb-2 text-xl font-semibold;
+  }
+  p,
+  ul,
+  ol {
+    @apply mb-4 leading-relaxed;
+  }
+  ul {
+    @apply list-disc pl-6;
+  }
+  ol {
+    @apply list-decimal pl-6;
+  }
+  a {
+    @apply text-indigo-700 underline underline-offset-4 dark:text-indigo-300;
+  }
+}
+
+html,
+body {
+  @apply bg-white dark:bg-gray-950;
+
+  @media (prefers-color-scheme: dark) {
+    color-scheme: dark;
+  }
+}
