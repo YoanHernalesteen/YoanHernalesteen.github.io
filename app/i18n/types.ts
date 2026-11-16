@@ -1,3 +1,4 @@
+import type { CaseBrief } from "~/content/cases";
 import type { Focus } from "~/content/positioning";
 
 // Langues du site. Ajouter "en" ici obligera TypeScript à réclamer
@@ -118,6 +119,8 @@ export interface Dictionary {
     readCase: string;
     coverPlaceholder: string;
     back: string;
+    next: string;
+    brief: { title: string } & Record<keyof CaseBrief, string>;
   };
   tracks: {
     tous: string;

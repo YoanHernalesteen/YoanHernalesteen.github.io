@@ -1,7 +1,7 @@
-import { data, Link } from "react-router";
+import { data } from "react-router";
 
 import { CaseArticle } from "~/components/CaseArticle";
-import { getCase } from "~/content/cases";
+import { cases, getCase, nextCase } from "~/content/cases";
 import { site } from "~/content/site";
 import { LANG, t } from "~/i18n";
 
@@ -29,15 +29,6 @@ export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
 
 export default function CasePage({ loaderData }: Route.ComponentProps) {
   return (
-    // Conteneur provisoire, en attendant la refonte de la page (étape 6).
-    <div className="page py-8">
-      <Link
-        to="/cas"
-        className="mb-6 inline-block text-sm underline underline-offset-4"
-      >
-        {t.cases.back}
-      </Link>
-      <CaseArticle study={loaderData} />
-    </div>
+    <CaseArticle study={loaderData} next={nextCase(cases, loaderData.slug)} />
   );
 }

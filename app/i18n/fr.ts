@@ -155,6 +155,15 @@ export const fr = {
     readCase: "Lire l'étude de cas →",
     coverPlaceholder: "[Visuel du projet : capture, photo ou vidéo]",
     back: "← Toutes les études de cas",
+    next: "Étude suivante",
+    brief: {
+      title: "En bref",
+      role: "Mon rôle",
+      period: "Période",
+      team: "Équipe",
+      tools: "Outils",
+      shows: "Ce que ce cas montre",
+    },
   },
   tracks: {
     tous: "Tous",

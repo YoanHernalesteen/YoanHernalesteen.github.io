@@ -5,6 +5,7 @@ import {
   featuredCases,
   filterCases,
   getCase,
+  nextCase,
   sortCasesForTrack,
 } from "./cases";
 
@@ -13,6 +14,27 @@ import { makeCase } from "~/test/makeCase";
 const devOnly = makeCase({ slug: "dev-only", tracks: ["dev"] });
 const produitOnly = makeCase({ slug: "produit-only", tracks: ["produit"] });
 const both = makeCase({ slug: "both", tracks: ["dev", "produit"] });
+
+describe("nextCase", () => {
+  const list = [
+    makeCase({ slug: "a" }),
+    makeCase({ slug: "b" }),
+    makeCase({ slug: "c" }),
+  ];
+
+  it("renvoie le cas suivant dans la liste", () => {
+    expect(nextCase(list, "a")?.slug).toBe("b");
+  });
+
+  it("revient au premier après le dernier", () => {
+    expect(nextCase(list, "c")?.slug).toBe("a");
+  });
+
+  it("renvoie undefined pour un slug inconnu ou une liste d'un seul cas", () => {
+    expect(nextCase(list, "inconnu")).toBeUndefined();
+    expect(nextCase([makeCase({ slug: "seul" })], "seul")).toBeUndefined();
+  });
+});
 
 describe("featuredCases", () => {
   it("ne garde que les cas mis en avant, ceux de la piste demandée d'abord", () => {

@@ -90,3 +90,25 @@
     @apply text-dev underline underline-offset-4;
   }
 }
+
+/* Sections numérotées 01, 02… d'une étude de cas. Le numéro est généré
+ * en CSS : le texte MDX reste de simples titres « ## Le contexte ». */
+.case-body-numbered {
+  counter-reset: case-section;
+
+  & > h2:first-child {
+    @apply mt-0;
+  }
+
+  h2 {
+    counter-increment: case-section;
+  }
+
+  h2::before {
+    /* Après « / » : texte alternatif vide, le numéro n'est pas lu
+     * par les lecteurs d'écran (il n'apporte rien à l'écoute). */
+    content: counter(case-section, decimal-leading-zero) / "";
+    @apply mb-1.5 block font-mono text-[13px] font-normal;
+    color: var(--case-accent, var(--color-dev));
+  }
+}

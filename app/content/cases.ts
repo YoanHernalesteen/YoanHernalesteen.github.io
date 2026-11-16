@@ -222,3 +222,13 @@ export function featuredCases(
     track,
   );
 }
+
+// Le cas qui suit dans la liste, en revenant au premier après le dernier.
+export function nextCase(
+  list: readonly CaseStudy[],
+  slug: string,
+): CaseStudy | undefined {
+  const index = list.findIndex((c) => c.slug === slug);
+  if (index === -1 || list.length < 2) return undefined;
+  return list[(index + 1) % list.length];
+}
