@@ -6,19 +6,42 @@ interface Props {
   testimonial: Testimonial;
   // Phrase mise en avant sur la page qui affiche la carte.
   highlight: Localized;
+  // « large » : une seule recommandation en pleine largeur (pages de profil).
+  size?: "default" | "large";
 }
 
-export function TestimonialCard({ testimonial, highlight }: Props) {
+const sizes = {
+  default: {
+    figure: "flex-[1_1_320px] rounded-xl p-7",
+    quote: "text-[17px] leading-[1.6]",
+  },
+  large: {
+    figure: "w-full rounded-2xl p-7 md:p-10",
+    quote:
+      "max-w-[900px] font-display text-xl leading-[1.4] font-medium md:text-[26px]",
+  },
+} as const;
+
+export function TestimonialCard({
+  testimonial,
+  highlight,
+  size = "default",
+}: Props) {
   const paragraphs = testimonial.paragraphs[LANG];
   // Pas de dépliage si la phrase mise en avant est déjà tout le texte.
   const hasMore = paragraphs.join(" ") !== highlight[LANG];
+  const style = sizes[size];
 
   return (
-    <figure className="m-0 flex min-w-0 flex-[1_1_320px] flex-col gap-5 rounded-xl border border-line bg-surface p-7">
+    <figure
+      className={`m-0 flex min-w-0 flex-col gap-5 border border-line bg-surface ${style.figure}`}
+    >
       {/* Guillemets ajoutés en CSS : le texte reste celui de la personne.
           flex-1 : la citation prend la place libre et pousse le dépliage
           et la signature en bas de la carte. */}
-      <blockquote className="m-0 flex-1 text-[17px] leading-[1.6] before:mr-1 before:content-['«'] after:ml-1 after:content-['»']">
+      <blockquote
+        className={`m-0 flex-1 before:mr-1 before:content-['«'] after:ml-1 after:content-['»'] ${style.quote}`}
+      >
         {highlight[LANG]}
       </blockquote>
 

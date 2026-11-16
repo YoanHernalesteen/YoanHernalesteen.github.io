@@ -17,6 +17,23 @@ export interface DoorText {
   cta: string;
 }
 
+// Textes communs aux pages de profil (/dev, /produit).
+export interface ProfileText {
+  metaTitle: string;
+  eyebrow: string;
+  title: string;
+  lede: string;
+  cvCta: string;
+  casesEyebrow: string;
+  casesTitle: string;
+  contactTitle: string;
+}
+
+export interface TitledText {
+  title: string;
+  text: string;
+}
+
 export interface Dictionary {
   skipToContent: string;
   nav: {
@@ -62,6 +79,23 @@ export interface Dictionary {
     careerLede: string;
     contactTitle: string;
     contactLede: string;
+  };
+  dev: ProfileText & {
+    githubCta: string;
+    stackEyebrow: string;
+    stack: readonly TitledText[];
+    strengthsEyebrow: string;
+    strengths: readonly TitledText[];
+  };
+  produit: ProfileText & {
+    casesCta: string;
+    methodEyebrow: string;
+    methodTitle: string;
+    method: readonly TitledText[];
+    gamesEyebrow: string;
+    gamesTitle: string;
+    gamesLede: string;
+    allCredits: string;
   };
   testimonial: {
     readFull: string;
