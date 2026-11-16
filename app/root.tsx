@@ -11,6 +11,7 @@ import {
 import { SiteFooter } from "~/components/SiteFooter";
 import { SiteHeader } from "~/components/SiteHeader";
 import { LANG, t } from "~/i18n";
+import { themeInitScript } from "~/theme";
 
 import type { Route } from "./+types/root";
 // Polices hébergées avec le site : aucune requête vers Google (RGPD, performance).
@@ -21,10 +22,14 @@ import "./app.css";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang={LANG}>
+    // suppressHydrationWarning : le script ci-dessous peut ajouter data-theme
+    // sur <html> avant que React ne reprenne la main ; c'est voulu.
+    <html lang={LANG} suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {/* Applique le thème enregistré avant l'affichage (pas de flash). */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <Meta />
         <Links />
       </head>
@@ -36,8 +41,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
           {t.skipToContent}
         </a>
         <SiteHeader />
-        {/* Conteneur provisoire : chaque page gérera sa largeur (étapes 3 à 6). */}
-        <main id="contenu" className="page flex-1 py-8">
+        {/* Pleine largeur : chaque page gère ses bandeaux et ses conteneurs. */}
+        <main id="contenu" className="flex-1">
           {children}
         </main>
         <SiteFooter />
@@ -55,13 +60,16 @@ export default function App() {
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   if (isRouteErrorResponse(error) && error.status === 404) {
     return (
-      <>
-        <h1 className="text-3xl font-bold">{t.notFound.title}</h1>
-        <p className="mt-4">{t.notFound.text}</p>
-        <Link to="/" className="mt-4 inline-block underline underline-offset-4">
+      <div className="page py-16">
+        <h1 className="font-display text-4xl font-bold">{t.notFound.title}</h1>
+        <p className="mt-4 text-lg text-muted">{t.notFound.text}</p>
+        <Link
+          to="/"
+          className="mt-4 inline-flex min-h-11 items-center font-semibold underline underline-offset-4"
+        >
           {t.notFound.back}
         </Link>
-      </>
+      </div>
     );
   }
 
@@ -69,14 +77,14 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
     import.meta.env.DEV && error instanceof Error ? error.stack : undefined;
 
   return (
-    <>
-      <h1 className="text-3xl font-bold">{t.error.title}</h1>
-      <p className="mt-4">{t.error.text}</p>
+    <div className="page py-16">
+      <h1 className="font-display text-4xl font-bold">{t.error.title}</h1>
+      <p className="mt-4 text-lg text-muted">{t.error.text}</p>
       {stack && (
         <pre className="mt-4 w-full overflow-x-auto p-4">
           <code>{stack}</code>
         </pre>
       )}
-    </>
+    </div>
   );
 }

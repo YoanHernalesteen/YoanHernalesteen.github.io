@@ -15,7 +15,8 @@ export function meta(): Route.MetaDescriptors {
 
 export default function Cases() {
   return (
-    <>
+    // Conteneur provisoire, en attendant la refonte de la page (étape 5).
+    <div className="page py-8">
       <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
         {t.cases.title}
       </h1>
@@ -25,6 +26,6 @@ export default function Cases() {
       <CaseFilter
         cases={sortCasesForTrack(cases, positionings[FOCUS].primaryTrack)}
       />
-    </>
+    </div>
   );
 }

@@ -3,8 +3,11 @@
 /*
  * Système de design (maquette, direction A).
  * Les couleurs portent un nom de rôle, pas de teinte : les utilitaires
- * Tailwind (bg-surface, text-ink…) lisent ces variables, et le mode sombre
- * se contente de les redéfinir plus bas.
+ * Tailwind (bg-surface, text-ink…) lisent ces variables.
+ *
+ * light-dark(clair, sombre) choisit la valeur selon `color-scheme` :
+ * - par défaut « light dark », donc la préférence du système ;
+ * - forcé par data-theme="light" ou "dark" sur <html> (bouton de thème).
  */
 @theme {
   --font-sans:
@@ -14,52 +17,38 @@
     "Space Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
 
-  --color-bg: #fafaf9;
-  --color-surface: #ffffff;
-  --color-ink: #16181d;
-  --color-body: #374151;
-  --color-muted: #4b5563;
-  --color-subtle: #6b7280;
-  --color-line: #e4e4e0;
-  --color-line-strong: #d4d4cf;
-  --color-chip: #f1f1ee;
-  --color-dev: #1d4ed8;
-  --color-dev-soft: #e8eeff;
-  --color-dev-line: #c9d6ff;
-  --color-produit: #9a3412;
-  --color-produit-soft: #fdede3;
-  --color-produit-line: #f7cbb0;
-  --color-on-accent: #ffffff;
+  --color-bg: light-dark(#fafaf9, #111318);
+  --color-surface: light-dark(#ffffff, #1a1d23);
+  --color-ink: light-dark(#16181d, #f3f4f6);
+  --color-body: light-dark(#374151, #d1d5db);
+  --color-muted: light-dark(#4b5563, #b4bac4);
+  --color-subtle: light-dark(#6b7280, #a1a7b3);
+  --color-line: light-dark(#e4e4e0, #2a2e36);
+  --color-line-strong: light-dark(#d4d4cf, #3a3f48);
+  --color-chip: light-dark(#f1f1ee, #242830);
+  --color-dev: light-dark(#1d4ed8, #93b4ff);
+  --color-dev-soft: light-dark(#e8eeff, #17233f);
+  --color-dev-line: light-dark(#c9d6ff, #2b3e6e);
+  --color-produit: light-dark(#9a3412, #f4a57a);
+  --color-produit-soft: light-dark(#fdede3, #3a2116);
+  --color-produit-line: light-dark(#f7cbb0, #6b3a22);
+  --color-on-accent: light-dark(#ffffff, #111318);
   /* Bandeaux sombres (contact, pied de page) */
-  --color-night: #16181d;
+  --color-night: light-dark(#16181d, #0b0c0f);
   --color-night-ink: #fafaf9;
   --color-night-muted: #9ca3af;
-  --color-night-line: #2e3138;
+  --color-night-line: light-dark(#2e3138, #23262d);
 }
 
 @layer base {
-  @media (prefers-color-scheme: dark) {
-    :root {
-      color-scheme: dark;
-      --color-bg: #111318;
-      --color-surface: #1a1d23;
-      --color-ink: #f3f4f6;
-      --color-body: #d1d5db;
-      --color-muted: #b4bac4;
-      --color-subtle: #a1a7b3;
-      --color-line: #2a2e36;
-      --color-line-strong: #3a3f48;
-      --color-chip: #242830;
-      --color-dev: #93b4ff;
-      --color-dev-soft: #17233f;
-      --color-dev-line: #2b3e6e;
-      --color-produit: #f4a57a;
-      --color-produit-soft: #3a2116;
-      --color-produit-line: #6b3a22;
-      --color-on-accent: #111318;
-      --color-night: #0b0c0f;
-      --color-night-line: #23262d;
-    }
+  :root {
+    color-scheme: light dark;
+  }
+  :root[data-theme="light"] {
+    color-scheme: light;
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
   }
 
   html,

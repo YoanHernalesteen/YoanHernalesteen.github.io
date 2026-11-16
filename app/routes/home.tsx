@@ -1,97 +1,223 @@
 import { Link } from "react-router";
 
 import { CaseCard } from "~/components/CaseCard";
-import { cases, sortCasesForTrack } from "~/content/cases";
-import { FOCUS, positionings } from "~/content/positioning";
+import { ContactSection } from "~/components/ContactSection";
+import { TestimonialCard } from "~/components/TestimonialCard";
+import { cases, featuredCases } from "~/content/cases";
+import {
+  FOCUS,
+  FOCUSES,
+  positionings,
+  profilePaths,
+  type Focus,
+} from "~/content/positioning";
+import { career, stats } from "~/content/profile";
 import { site } from "~/content/site";
-import { t } from "~/i18n";
+import { testimonialsFor } from "~/content/testimonials";
+import { LANG, t } from "~/i18n";
 
 import type { Route } from "./+types/home";
 
-const positioning = positionings[FOCUS];
-const text = t.positioning[FOCUS];
+// L'angle actif d'abord, puis les autres.
+const doorOrder: Focus[] = [FOCUS, ...FOCUSES.filter((f) => f !== FOCUS)];
+
+// Couleurs de chaque porte, selon sa piste.
+const doorStyles = {
+  dev: {
+    card: "bg-dev-soft border-dev-line",
+    accent: "text-dev",
+  },
+  produit: {
+    card: "bg-produit-soft border-produit-line",
+    accent: "text-produit",
+  },
+} as const;
 
 export function meta(): Route.MetaDescriptors {
+  const title = `${site.name} · ${t.home.metaTitle}`;
   return [
-    { title: `${site.name} · ${text.role}` },
-    { name: "description", content: text.headline },
-    { property: "og:title", content: `${site.name} · ${text.role}` },
-    { property: "og:description", content: text.headline },
+    { title },
+    { name: "description", content: t.home.lede },
+    { property: "og:title", content: title },
+    { property: "og:description", content: t.home.lede },
   ];
 }
 
 export default function Home() {
-  const featured = sortCasesForTrack(cases, positioning.primaryTrack);
+  const featured = featuredCases(cases, positionings[FOCUS].primaryTrack);
 
   return (
     <>
-      <section className="py-8">
-        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-          {site.name}
+      <section className="page pt-16 pb-12 md:pt-24 md:pb-16">
+        <p className="eyebrow mb-5">{t.home.eyebrow}</p>
+        <h1 className="max-w-[980px] font-display text-[clamp(2.4rem,6vw,5rem)] leading-[1.02] font-bold tracking-[-0.02em]">
+          {t.home.title}
         </h1>
-        <p className="mt-2 text-xl font-medium text-indigo-700 dark:text-indigo-300">
-          {text.role}
+        <p className="mt-7 max-w-[720px] text-lg leading-[1.6] text-muted md:text-xl">
+          {t.home.lede}
         </p>
-        <p className="mt-4 max-w-2xl text-lg text-gray-700 dark:text-gray-300">
-          {text.headline}
-        </p>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <a
-            href={positioning.cvHref}
-            className="rounded-md bg-indigo-700 px-4 py-2 font-medium text-white hover:bg-indigo-800 dark:bg-indigo-300 dark:text-gray-950 dark:hover:bg-indigo-200"
-          >
-            {text.cvLabel}
-          </a>
-          <Link
-            to="/contact"
-            className="rounded-md border border-gray-300 px-4 py-2 font-medium hover:bg-gray-100 dark:border-gray-700 dark:hover:bg-gray-900"
-          >
-            {t.home.contactCta}
-          </Link>
+      </section>
+
+      <p className="page eyebrow pb-4">{t.home.doorsEyebrow}</p>
+      <section
+        aria-label={t.home.doorsLabel}
+        className="page flex flex-wrap gap-6 pb-20"
+      >
+        {doorOrder.map((focus, index) => {
+          const door = t.doors[focus];
+          const style = doorStyles[positionings[focus].primaryTrack];
+          return (
+            <Link
+              key={focus}
+              to={profilePaths[focus]}
+              className={`flex min-w-0 flex-[1_1_420px] flex-col gap-4 rounded-2xl border p-7 md:p-9 ${style.card}`}
+            >
+              <span className={`eyebrow ${style.accent}`}>
+                {String(index + 1).padStart(2, "0")} · {door.eyebrow}
+              </span>
+              <span className="font-display text-2xl leading-tight font-bold md:text-[32px]">
+                {door.title}
+              </span>
+              <span className="leading-[1.6] text-body">{door.text}</span>
+              <span className="flex flex-wrap gap-2">
+                {door.chips.map((chip) => (
+                  <span
+                    key={chip}
+                    className="rounded-lg bg-surface px-2.5 py-1.5 text-[13px] text-body"
+                  >
+                    {chip}
+                  </span>
+                ))}
+              </span>
+              <span className={`mt-2 font-semibold ${style.accent}`}>
+                {door.cta}
+              </span>
+            </Link>
+          );
+        })}
+      </section>
+
+      <section
+        aria-label={t.home.statsLabel}
+        className="border-y border-line bg-surface"
+      >
+        <div className="page flex flex-wrap gap-8 py-10">
+          {stats.map((stat) => (
+            <div key={stat.value} className="flex-[1_1_220px]">
+              <p className="font-display text-5xl leading-none font-bold">
+                {stat.value}
+              </p>
+              <p className="mt-2 text-[15px] leading-normal text-muted">
+                {stat.label[LANG]}
+                {stat.link && (
+                  <>
+                    {" · "}
+                    <a href={stat.link.href} className="underline">
+                      {stat.link.label[LANG]}
+                    </a>
+                  </>
+                )}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
-      <section aria-labelledby="skills-title" className="py-6">
-        <h2 id="skills-title" className="text-2xl font-semibold">
-          {t.home.skillsTitle}
-        </h2>
-        <ul className="mt-4 flex flex-wrap gap-2">
-          {text.skills.map((skill) => (
-            <li
-              key={skill}
-              className="rounded bg-gray-100 px-3 py-1 text-sm dark:bg-gray-800"
+      <section
+        aria-labelledby="cases-eyebrow cases-title"
+        className="page pt-20 pb-8 md:pt-24"
+      >
+        <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p id="cases-eyebrow" className="eyebrow">
+              {t.home.casesEyebrow}
+            </p>
+            <h2
+              id="cases-title"
+              className="mt-2 font-display text-3xl leading-tight font-bold md:text-[40px]"
             >
-              {skill}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section aria-labelledby="cases-title" className="py-6">
-        <h2 id="cases-title" className="text-2xl font-semibold">
-          {t.home.casesTitle}
-        </h2>
-        <div className="mt-4 grid gap-4">
+              {t.home.casesTitle}
+            </h2>
+          </div>
+          <Link
+            to="/cas"
+            className="inline-flex min-h-11 items-center font-semibold underline-offset-4 hover:underline"
+          >
+            {t.home.allCases}
+          </Link>
+        </div>
+        <div className="grid gap-6 md:grid-cols-3">
           {featured.map((study) => (
             <CaseCard key={study.slug} study={study} />
           ))}
         </div>
-        <Link
-          to="/cas"
-          className="mt-4 inline-block underline underline-offset-4"
-        >
-          {t.home.allCases}
-        </Link>
       </section>
 
-      <section aria-labelledby="career-title" className="py-6">
-        <h2 id="career-title" className="text-2xl font-semibold">
+      <section
+        aria-label={t.home.testimonialsLabel}
+        className="page pt-16 md:pt-20"
+      >
+        <p className="eyebrow">{t.home.testimonialsLabel}</p>
+        <h2 className="mt-2 font-display text-3xl leading-tight font-bold md:text-[40px]">
+          {t.home.testimonialsTitle}
+        </h2>
+        <div className="mt-8 flex flex-wrap gap-6">
+          {testimonialsFor("accueil").map(({ testimonial, highlight }) => (
+            <TestimonialCard
+              key={testimonial.role[LANG] + highlight[LANG]}
+              testimonial={testimonial}
+              highlight={highlight}
+            />
+          ))}
+        </div>
+        <a
+          href={site.linkedin}
+          className="mt-4 inline-flex min-h-11 items-center font-semibold underline-offset-4 hover:underline"
+        >
+          {t.home.allTestimonials}
+        </a>
+      </section>
+
+      <section
+        id="parcours"
+        aria-labelledby="career-title"
+        className="page scroll-mt-4 py-20 md:py-24"
+      >
+        <p className="eyebrow">{t.nav.career}</p>
+        <h2
+          id="career-title"
+          className="mt-2 font-display text-3xl leading-tight font-bold md:text-[40px]"
+        >
           {t.home.careerTitle}
         </h2>
-        <p className="mt-4 text-gray-700 dark:text-gray-300">
-          {site.employers.join(" · ")}
+        <p className="mt-4 max-w-[680px] text-lg leading-[1.6] text-muted">
+          {t.home.careerLede}
         </p>
+        <ol className="mt-10 flex flex-wrap gap-6">
+          {career.map((step) => (
+            <li
+              key={step.startYear + step.title[LANG]}
+              className={`flex-[1_1_240px] border-t-2 pt-4 ${step.current ? "border-dev" : "border-ink"}`}
+            >
+              <p
+                className={`font-mono text-[13px] ${step.current ? "text-dev" : "text-subtle"}`}
+              >
+                {step.period[LANG]}
+              </p>
+              <p className="mt-2 font-semibold">{step.title[LANG]}</p>
+              <p className="mt-1 text-sm leading-normal text-muted">
+                {step.details[LANG]}
+              </p>
+            </li>
+          ))}
+        </ol>
       </section>
+
+      <ContactSection
+        title={t.home.contactTitle}
+        lede={t.home.contactLede}
+        cvs={doorOrder}
+      />
     </>
   );
 }

@@ -29,6 +29,15 @@ describe("SiteHeader", () => {
     );
   });
 
+  it("renvoie vers le contact de l'accueil depuis une page sans bloc contact", () => {
+    renderHeaderAt("/cas");
+
+    expect(screen.getByRole("link", { name: "Contact" })).toHaveAttribute(
+      "href",
+      "/#contact",
+    );
+  });
+
   it("propose le CV de l'angle actif sur l'accueil", () => {
     renderHeaderAt("/");
 

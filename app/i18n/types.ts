@@ -8,20 +8,20 @@ export type Lang = "fr";
 // `Record<Lang, T>` = un objet avec une clé par langue, chacune de type T.
 export type Localized<T = string> = Record<Lang, T>;
 
-export interface PositioningText {
-  role: string;
-  headline: string;
-  cvLabel: string;
-  skills: readonly string[];
+// Une porte de l'accueil (« Je recrute un développeur »…).
+export interface DoorText {
+  eyebrow: string;
+  title: string;
+  text: string;
+  chips: readonly string[];
+  cta: string;
 }
 
 export interface Dictionary {
   skipToContent: string;
   nav: {
     label: string;
-    home: string;
     cases: string;
-    about: string;
     career: string;
     contact: string;
   };
@@ -33,17 +33,43 @@ export interface Dictionary {
     menuOpen: string;
     menuClose: string;
   };
+  theme: {
+    label: string;
+    system: string;
+    light: string;
+    dark: string;
+  };
   footer: {
     legal: string;
     builtWith: string;
     sourceCode: string;
   };
   home: {
-    contactCta: string;
-    skillsTitle: string;
+    metaTitle: string;
+    eyebrow: string;
+    title: string;
+    lede: string;
+    doorsEyebrow: string;
+    doorsLabel: string;
+    statsLabel: string;
+    casesEyebrow: string;
     casesTitle: string;
     allCases: string;
+    testimonialsLabel: string;
+    testimonialsTitle: string;
+    allTestimonials: string;
     careerTitle: string;
+    careerLede: string;
+    contactTitle: string;
+    contactLede: string;
+  };
+  testimonial: {
+    readFull: string;
+    translatedFrom: string;
+    original: string;
+  };
+  contact: {
+    pdf: string;
   };
   cases: {
     title: string;
@@ -65,6 +91,6 @@ export interface Dictionary {
     title: string;
     text: string;
   };
-  // Un texte par angle : impossible d'oublier un angle, TypeScript le signale.
-  positioning: Record<Focus, PositioningText>;
+  // Une porte par angle : impossible d'oublier un angle, TypeScript le signale.
+  doors: Record<Focus, DoorText>;
 }

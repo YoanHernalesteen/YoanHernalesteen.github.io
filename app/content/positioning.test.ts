@@ -25,13 +25,14 @@ describe("le positionnement", () => {
 
   it.each(FOCUSES)("l'angle « %s » est complet", (focus) => {
     const { primaryTrack, cvHref } = positionings[focus];
-    const text = fr.positioning[focus];
+    const door = fr.doors[focus];
 
     expect(["dev", "produit"]).toContain(primaryTrack);
     expect(cvHref).toMatch(/^\/cv\/.+\.pdf$/);
-    expect(text.role.trim()).not.toBe("");
-    expect(text.headline.trim()).not.toBe("");
-    expect(text.cvLabel.trim()).not.toBe("");
-    expect(text.skills.length).toBeGreaterThan(0);
+    expect(fr.header.cvByFocus[focus].trim()).not.toBe("");
+    expect(door.title.trim()).not.toBe("");
+    expect(door.text.trim()).not.toBe("");
+    expect(door.cta.trim()).not.toBe("");
+    expect(door.chips.length).toBeGreaterThan(0);
   });
 });

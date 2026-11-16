@@ -5,6 +5,8 @@ import { FOCUS, focusForPath, positionings } from "~/content/positioning";
 import { site } from "~/content/site";
 import { t } from "~/i18n";
 
+import { ThemeToggle } from "./ThemeToggle";
+
 const MENU_ID = "menu-principal";
 
 const linkClass =
@@ -23,6 +25,10 @@ export function SiteHeader() {
         label: t.header.cvByFocus[pageFocus],
       }
     : { href: positionings[FOCUS].cvHref, label: t.header.cv };
+
+  // L'accueil et les pages de profil ont un bloc contact ; ailleurs,
+  // le lien mène à celui de l'accueil.
+  const contactHref = pathname === "/" || pageFocus ? "#contact" : "/#contact";
 
   const close = () => setOpen(false);
 
@@ -44,38 +50,42 @@ export function SiteHeader() {
           {site.name}
         </Link>
 
-        <button
-          ref={toggleRef}
-          type="button"
-          aria-expanded={open}
-          aria-controls={MENU_ID}
-          aria-label={open ? t.header.menuClose : t.header.menuOpen}
-          onClick={() => setOpen((value) => !value)}
-          className="inline-flex size-11 items-center justify-center rounded-[10px] border border-line-strong bg-surface md:hidden"
-        >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            aria-hidden="true"
+        {/* Mobile : à droite du nom. Bureau : après la navigation (order-last). */}
+        <div className="flex items-center gap-2 md:order-last">
+          <ThemeToggle />
+          <button
+            ref={toggleRef}
+            type="button"
+            aria-expanded={open}
+            aria-controls={MENU_ID}
+            aria-label={open ? t.header.menuClose : t.header.menuOpen}
+            onClick={() => setOpen((value) => !value)}
+            className="inline-flex size-11 items-center justify-center rounded-[10px] border border-line-strong bg-surface md:hidden"
           >
-            {open ? (
-              <path d="M6 6l12 12M18 6L6 18" />
-            ) : (
-              <path d="M4 7h16M4 12h16M4 17h16" />
-            )}
-          </svg>
-        </button>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              aria-hidden="true"
+            >
+              {open ? (
+                <path d="M6 6l12 12M18 6L6 18" />
+              ) : (
+                <path d="M4 7h16M4 12h16M4 17h16" />
+              )}
+            </svg>
+          </button>
+        </div>
 
         <nav
           id={MENU_ID}
           aria-label={t.nav.label}
           onKeyDown={onKeyDown}
-          className={`${open ? "flex" : "hidden"} w-full flex-col gap-1 py-3 md:flex md:w-auto md:flex-row md:items-center md:gap-6 md:py-0`}
+          className={`${open ? "flex" : "hidden"} w-full flex-col gap-1 py-3 md:ml-auto md:flex md:w-auto md:flex-row md:items-center md:gap-6 md:py-0`}
         >
           <NavLink
             to="/cas"
@@ -87,7 +97,7 @@ export function SiteHeader() {
           <Link to="/#parcours" onClick={close} className={linkClass}>
             {t.nav.career}
           </Link>
-          <a href="#contact" onClick={close} className={linkClass}>
+          <a href={contactHref} onClick={close} className={linkClass}>
             {t.nav.contact}
           </a>
           <a

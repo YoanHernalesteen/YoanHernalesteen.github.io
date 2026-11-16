@@ -29,7 +29,8 @@ export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
 
 export default function CasePage({ loaderData }: Route.ComponentProps) {
   return (
-    <>
+    // Conteneur provisoire, en attendant la refonte de la page (étape 6).
+    <div className="page py-8">
       <Link
         to="/cas"
         className="mb-6 inline-block text-sm underline underline-offset-4"
@@ -37,6 +38,6 @@ export default function CasePage({ loaderData }: Route.ComponentProps) {
         {t.cases.back}
       </Link>
       <CaseArticle study={loaderData} />
-    </>
+    </div>
   );
 }

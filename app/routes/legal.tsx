@@ -13,10 +13,8 @@ export function meta(): Route.MetaDescriptors {
 // TODO : relire avant la mise en ligne (adresse e-mail, mesure d'audience).
 export default function Legal() {
   return (
-    <article className="case-body">
-      <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-        {t.footer.legal}
-      </h1>
+    <article className="case-body page max-w-[760px] py-16">
+      <h1 className="font-display text-4xl font-bold">{t.footer.legal}</h1>
       <h2>Éditeur</h2>
       <p>
         {site.name}, particulier.
