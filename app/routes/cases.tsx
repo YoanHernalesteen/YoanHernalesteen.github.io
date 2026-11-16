@@ -7,22 +7,26 @@ import { t } from "~/i18n";
 import type { Route } from "./+types/cases";
 
 export function meta(): Route.MetaDescriptors {
+  const title = `${t.cases.metaTitle} · ${site.name}`;
   return [
-    { title: `${t.cases.title} · ${site.name}` },
+    { title },
     { name: "description", content: t.cases.intro },
+    { property: "og:title", content: title },
+    { property: "og:description", content: t.cases.intro },
   ];
 }
 
 export default function Cases() {
   return (
-    // Conteneur provisoire, en attendant la refonte de la page (étape 5).
-    <div className="page py-8">
-      <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+    <div className="page pt-16 pb-24 md:pt-18">
+      <p className="eyebrow">{t.cases.eyebrow}</p>
+      <h1 className="mt-2 font-display text-[clamp(2.25rem,4vw,3.25rem)] leading-[1.1] font-bold">
         {t.cases.title}
       </h1>
-      <p className="mt-4 mb-8 text-lg text-gray-700 dark:text-gray-300">
+      <p className="mt-4 mb-8 max-w-[680px] text-lg leading-[1.6] text-muted">
         {t.cases.intro}
       </p>
+      {/* Les cas de l'angle actif (FOCUS) d'abord. */}
       <CaseFilter
         cases={sortCasesForTrack(cases, positionings[FOCUS].primaryTrack)}
       />

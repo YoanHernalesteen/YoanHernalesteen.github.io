@@ -27,7 +27,7 @@ describe("CaseFilter", () => {
   it("affiche tous les cas par défaut", () => {
     renderFilter();
 
-    expect(screen.getByRole("button", { name: "Tous" })).toHaveAttribute(
+    expect(screen.getByRole("button", { name: "Tous · 2" })).toHaveAttribute(
       "aria-pressed",
       "true",
     );
@@ -37,12 +37,23 @@ describe("CaseFilter", () => {
     ).toBeInTheDocument();
   });
 
+  it("indique le nombre de cas de chaque piste", () => {
+    renderFilter();
+
+    expect(
+      screen.getByRole("button", { name: "Développement · 1" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Produit · 1" }),
+    ).toBeInTheDocument();
+  });
+
   it("ne garde que les cas de la piste choisie", () => {
     renderFilter();
 
-    fireEvent.click(screen.getByRole("button", { name: "Produit" }));
+    fireEvent.click(screen.getByRole("button", { name: "Produit · 1" }));
 
-    expect(screen.getByRole("button", { name: "Produit" })).toHaveAttribute(
+    expect(screen.getByRole("button", { name: "Produit · 1" })).toHaveAttribute(
       "aria-pressed",
       "true",
     );
@@ -52,5 +63,13 @@ describe("CaseFilter", () => {
     expect(
       screen.getByRole("link", { name: "Cas produit" }),
     ).toBeInTheDocument();
+  });
+
+  it("annonce le nombre de résultats aux lecteurs d'écran", () => {
+    renderFilter();
+
+    fireEvent.click(screen.getByRole("button", { name: "Produit · 1" }));
+
+    expect(screen.getByRole("status")).toHaveTextContent("1 étude de cas");
   });
 });

@@ -14,20 +14,31 @@ export function CaseFilter({ cases }: { cases: readonly CaseStudy[] }) {
 
   return (
     <>
-      <div role="group" aria-label={t.cases.filterLabel} className="flex gap-2">
+      <div
+        role="group"
+        aria-label={t.cases.filterLabel}
+        className="flex flex-wrap items-center gap-2.5"
+      >
         {FILTERS.map((f) => (
           <button
             key={f}
             type="button"
             aria-pressed={filter === f}
             onClick={() => setFilter(f)}
-            className="rounded-full border border-gray-300 px-4 py-1.5 text-sm aria-pressed:border-indigo-700 aria-pressed:bg-indigo-700 aria-pressed:text-white dark:border-gray-700 dark:aria-pressed:border-indigo-300 dark:aria-pressed:bg-indigo-300 dark:aria-pressed:text-gray-950"
+            className="min-h-11 rounded-full border border-line-strong bg-surface px-[18px] text-[15px] font-semibold text-ink aria-pressed:border-ink aria-pressed:bg-ink aria-pressed:text-bg"
           >
-            {t.tracks[f]}
+            {t.cases.filters[f]} · {filterCases(cases, f).length}
           </button>
         ))}
       </div>
-      <div className="mt-6 grid gap-4">
+
+      {/* role="status" : les lecteurs d'écran annoncent le nouveau nombre
+          de résultats à chaque changement de filtre. */}
+      <p role="status" className="sr-only">
+        {t.cases.resultCount(visible.length)}
+      </p>
+
+      <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {visible.map((study) => (
           <CaseCard key={study.slug} study={study} />
         ))}

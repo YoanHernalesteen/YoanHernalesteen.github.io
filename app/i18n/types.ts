@@ -106,9 +106,17 @@ export interface Dictionary {
     pdf: string;
   };
   cases: {
+    metaTitle: string;
+    eyebrow: string;
     title: string;
     intro: string;
     filterLabel: string;
+    // Libellés des boutons du filtre (les badges des cartes utilisent `tracks`).
+    filters: Record<"tous" | "dev" | "produit", string>;
+    // Une fonction : le texte dépend du nombre (singulier, pluriel).
+    resultCount: (count: number) => string;
+    readCase: string;
+    coverPlaceholder: string;
     back: string;
   };
   tracks: {

@@ -139,10 +139,21 @@ export const fr = {
     pdf: "PDF",
   },
   cases: {
-    title: "Études de cas",
+    metaTitle: "Études de cas",
+    eyebrow: "Études de cas",
+    title: "Du game design au code",
     intro:
-      "Des projets racontés de bout en bout : le problème, mes décisions, les résultats.",
-    filterLabel: "Filtrer par piste",
+      "Chaque cas raconte le problème, mon rôle, les décisions prises et ce qui a changé. Filtrez selon le poste que vous cherchez à pourvoir.",
+    filterLabel: "Filtrer les études de cas",
+    filters: {
+      tous: "Tous",
+      dev: "Développement",
+      produit: "Produit",
+    },
+    resultCount: (count) =>
+      count > 1 ? `${count} études de cas` : `${count} étude de cas`,
+    readCase: "Lire l'étude de cas →",
+    coverPlaceholder: "[Visuel du projet : capture, photo ou vidéo]",
     back: "← Toutes les études de cas",
   },
   tracks: {
