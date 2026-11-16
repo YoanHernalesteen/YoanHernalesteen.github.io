@@ -2,23 +2,17 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { createRoutesStub } from "react-router";
 import { describe, expect, it } from "vitest";
 
-import type { CaseStudy } from "~/content/cases";
+import { makeCase } from "~/test/makeCase";
 
 import { CaseFilter } from "./CaseFilter";
 
-const list: CaseStudy[] = [
-  {
-    slug: "cas-dev",
-    title: { fr: "Cas dev" },
-    summary: { fr: "Résumé dev" },
-    tracks: ["dev"],
-  },
-  {
+const list = [
+  makeCase({ slug: "cas-dev", title: { fr: "Cas dev" }, tracks: ["dev"] }),
+  makeCase({
     slug: "cas-produit",
     title: { fr: "Cas produit" },
-    summary: { fr: "Résumé produit" },
     tracks: ["produit"],
-  },
+  }),
 ];
 
 function renderFilter() {

@@ -2,30 +2,36 @@ import { describe, expect, it } from "vitest";
 
 import {
   cases,
+  featuredCases,
   filterCases,
   getCase,
   sortCasesForTrack,
-  type CaseStudy,
 } from "./cases";
 
-const devOnly: CaseStudy = {
-  slug: "dev-only",
-  title: { fr: "Dev" },
-  summary: { fr: "Dev" },
-  tracks: ["dev"],
-};
-const produitOnly: CaseStudy = {
-  slug: "produit-only",
-  title: { fr: "Produit" },
-  summary: { fr: "Produit" },
-  tracks: ["produit"],
-};
-const both: CaseStudy = {
-  slug: "both",
-  title: { fr: "Les deux" },
-  summary: { fr: "Les deux" },
-  tracks: ["dev", "produit"],
-};
+import { makeCase } from "~/test/makeCase";
+
+const devOnly = makeCase({ slug: "dev-only", tracks: ["dev"] });
+const produitOnly = makeCase({ slug: "produit-only", tracks: ["produit"] });
+const both = makeCase({ slug: "both", tracks: ["dev", "produit"] });
+
+describe("featuredCases", () => {
+  it("ne garde que les cas mis en avant, ceux de la piste demandée d'abord", () => {
+    const list = [
+      makeCase({ slug: "a", tracks: ["dev"], featured: true }),
+      makeCase({ slug: "b", tracks: ["produit"], featured: false }),
+      makeCase({ slug: "c", tracks: ["produit"], featured: true }),
+    ];
+
+    expect(featuredCases(list, "produit").map((c) => c.slug)).toEqual([
+      "c",
+      "a",
+    ]);
+  });
+
+  it("met en avant 3 cas sur le site", () => {
+    expect(featuredCases(cases, "dev")).toHaveLength(3);
+  });
+});
 
 describe("sortCasesForTrack", () => {
   it("place d'abord les cas de la piste demandée, sans changer leur ordre", () => {
@@ -78,6 +84,16 @@ describe("la liste des études de cas", () => {
     expect(new Set(slugs).size).toBe(slugs.length);
     for (const slug of slugs) {
       expect(slug).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/);
+    }
+  });
+
+  it("donne à chaque cas une année, des mots-clés et un encadré complet", () => {
+    for (const c of cases) {
+      expect(c.year.fr.trim(), c.slug).not.toBe("");
+      expect(c.tags.fr.length, c.slug).toBeGreaterThan(0);
+      for (const value of Object.values(c.brief.fr)) {
+        expect(value.trim(), c.slug).not.toBe("");
+      }
     }
   });
 
