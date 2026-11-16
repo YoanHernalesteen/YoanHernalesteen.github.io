@@ -13,8 +13,10 @@ import { SiteHeader } from "~/components/SiteHeader";
 import { LANG, t } from "~/i18n";
 
 import type { Route } from "./+types/root";
-// Police hébergée avec le site : aucune requête vers Google (RGPD, performance).
+// Polices hébergées avec le site : aucune requête vers Google (RGPD, performance).
 import "@fontsource-variable/inter";
+import "@fontsource-variable/jetbrains-mono";
+import "@fontsource-variable/space-grotesk";
 import "./app.css";
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -26,18 +28,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="flex min-h-screen flex-col text-gray-900 dark:text-gray-100">
+      <body className="flex min-h-screen flex-col font-sans">
         <a
           href="#contenu"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:text-gray-900"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-[10px] focus:bg-surface focus:px-4 focus:py-2 focus:text-ink"
         >
           {t.skipToContent}
         </a>
         <SiteHeader />
-        <main
-          id="contenu"
-          className="mx-auto w-full max-w-3xl flex-1 px-4 py-8"
-        >
+        {/* Conteneur provisoire : chaque page gérera sa largeur (étapes 3 à 6). */}
+        <main id="contenu" className="page flex-1 py-8">
           {children}
         </main>
         <SiteFooter />

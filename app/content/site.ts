@@ -4,7 +4,9 @@ export const site = {
   // TODO : adresse dédiée au portfolio (elle sera publique et indexée)
   email: "TODO@exemple.com",
   github: "https://github.com/YoanHernalesteen",
-  // TODO : URL du profil LinkedIn
-  linkedin: "https://www.linkedin.com/in/TODO",
+  repository: "https://github.com/YoanHernalesteen/YoanHernalesteen.github.io",
+  linkedin: "https://www.linkedin.com/in/yoanhernalesteen",
+  // Fixe plutôt que calculée : évite un écart entre le HTML prérendu et le navigateur.
+  copyrightYear: 2026,
   employers: ["Ubisoft", "Gameloft", "Don't Nod", "Ninja Theory", "Ellii"],
 } as const;

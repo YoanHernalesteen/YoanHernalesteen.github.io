@@ -7,10 +7,22 @@ export const fr = {
     home: "Accueil",
     cases: "Études de cas",
     about: "À propos",
+    career: "Parcours",
     contact: "Contact",
+  },
+  header: {
+    cv: "Télécharger mon CV",
+    cvByFocus: {
+      "dev-produit": "CV développeur",
+      po: "CV Product Owner",
+    },
+    menuOpen: "Ouvrir le menu",
+    menuClose: "Fermer le menu",
   },
   footer: {
     legal: "Mentions légales",
+    builtWith: "Codé en React + TypeScript",
+    sourceCode: "code source",
   },
   home: {
     contactCta: "Me contacter",

@@ -20,3 +20,18 @@ export const positionings: Record<Focus, Positioning> = {
   "dev-produit": { primaryTrack: "dev", cvHref: "/cv/cv-dev-produit.pdf" },
   po: { primaryTrack: "produit", cvHref: "/cv/cv-product-owner.pdf" },
 };
+
+// Page de profil propre à chaque angle.
+export const profilePaths: Record<Focus, string> = {
+  "dev-produit": "/dev",
+  po: "/produit",
+};
+
+// L'angle d'une page de profil (/dev, /produit), ou undefined ailleurs.
+export function focusForPath(pathname: string): Focus | undefined {
+  return FOCUSES.find(
+    (focus) =>
+      pathname === profilePaths[focus] ||
+      pathname.startsWith(`${profilePaths[focus]}/`),
+  );
+}

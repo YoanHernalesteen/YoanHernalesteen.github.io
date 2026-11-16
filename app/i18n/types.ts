@@ -22,10 +22,21 @@ export interface Dictionary {
     home: string;
     cases: string;
     about: string;
+    career: string;
     contact: string;
+  };
+  header: {
+    // Libellé du bouton CV hors pages de profil.
+    cv: string;
+    // Libellé du bouton CV sur /dev et /produit.
+    cvByFocus: Record<Focus, string>;
+    menuOpen: string;
+    menuClose: string;
   };
   footer: {
     legal: string;
+    builtWith: string;
+    sourceCode: string;
   };
   home: {
     contactCta: string;

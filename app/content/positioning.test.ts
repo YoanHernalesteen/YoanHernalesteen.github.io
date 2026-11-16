@@ -2,7 +2,21 @@ import { describe, expect, it } from "vitest";
 
 import { fr } from "~/i18n/fr";
 
-import { FOCUS, FOCUSES, positionings } from "./positioning";
+import { FOCUS, FOCUSES, focusForPath, positionings } from "./positioning";
+
+describe("focusForPath", () => {
+  it("reconnaît les pages de profil", () => {
+    expect(focusForPath("/dev")).toBe("dev-produit");
+    expect(focusForPath("/produit")).toBe("po");
+    expect(focusForPath("/produit/")).toBe("po");
+  });
+
+  it("renvoie undefined ailleurs, même pour un chemin qui commence pareil", () => {
+    expect(focusForPath("/")).toBeUndefined();
+    expect(focusForPath("/cas")).toBeUndefined();
+    expect(focusForPath("/devis")).toBeUndefined();
+  });
+});
 
 describe("le positionnement", () => {
   it("a un angle actif parmi les angles connus", () => {

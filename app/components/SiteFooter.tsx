@@ -5,17 +5,22 @@ import { t } from "~/i18n";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-gray-200 dark:border-gray-800">
-      <div className="mx-auto flex max-w-3xl flex-wrap gap-4 px-4 py-6 text-sm text-gray-700 dark:text-gray-300">
-        <a href={site.github} className="hover:underline">
-          GitHub
-        </a>
-        <a href={site.linkedin} className="hover:underline">
-          LinkedIn
-        </a>
-        <Link to="/mentions-legales" className="hover:underline">
-          {t.footer.legal}
-        </Link>
+    <footer className="bg-night text-night-muted">
+      <div className="page flex flex-wrap justify-between gap-3 py-6 text-[13px]">
+        <span>
+          © {site.copyrightYear} {site.name}
+        </span>
+        <span className="flex flex-wrap gap-x-4 gap-y-2">
+          <span className="font-mono">
+            {t.footer.builtWith} ·{" "}
+            <a href={site.repository} className="text-night-ink underline">
+              {t.footer.sourceCode}
+            </a>
+          </span>
+          <Link to="/mentions-legales" className="text-night-ink underline">
+            {t.footer.legal}
+          </Link>
+        </span>
       </div>
     </footer>
   );
