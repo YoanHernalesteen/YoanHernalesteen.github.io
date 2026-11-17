@@ -11,6 +11,7 @@ import { games } from "~/content/profile";
 import { site } from "~/content/site";
 import { testimonialsFor } from "~/content/testimonials";
 import { LANG, t } from "~/i18n";
+import { pageMeta } from "~/seo";
 
 import type { Route } from "./+types/produit";
 
@@ -18,12 +19,7 @@ const text = t.produit;
 
 export function meta(): Route.MetaDescriptors {
   const title = `${text.metaTitle} · ${site.name}`;
-  return [
-    { title },
-    { name: "description", content: text.lede },
-    { property: "og:title", content: title },
-    { property: "og:description", content: text.lede },
-  ];
+  return pageMeta({ title, description: text.lede, path: "/produit" });
 }
 
 export default function Produit() {

@@ -1,16 +1,19 @@
 import { site } from "~/content/site";
 import { t } from "~/i18n";
+import { pageMeta } from "~/seo";
 
 import type { Route } from "./+types/legal";
 
 export function meta(): Route.MetaDescriptors {
-  return [
-    { title: `${t.footer.legal} · ${site.name}` },
-    { name: "robots", content: "noindex" },
-  ];
+  return pageMeta({
+    title: `${t.footer.legal} · ${site.name}`,
+    description: `Mentions légales du site de ${site.name}.`,
+    path: "/mentions-legales",
+    noindex: true,
+  });
 }
 
-// TODO : relire avant la mise en ligne (adresse e-mail, mesure d'audience).
+// TODO : relire avant la mise en ligne (mesure d'audience).
 export default function Legal() {
   return (
     <article className="case-body page max-w-[760px] py-16">

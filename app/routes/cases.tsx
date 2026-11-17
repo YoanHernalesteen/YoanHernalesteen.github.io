@@ -3,17 +3,13 @@ import { cases, sortCasesForTrack } from "~/content/cases";
 import { FOCUS, positionings } from "~/content/positioning";
 import { site } from "~/content/site";
 import { t } from "~/i18n";
+import { pageMeta } from "~/seo";
 
 import type { Route } from "./+types/cases";
 
 export function meta(): Route.MetaDescriptors {
   const title = `${t.cases.metaTitle} · ${site.name}`;
-  return [
-    { title },
-    { name: "description", content: t.cases.intro },
-    { property: "og:title", content: title },
-    { property: "og:description", content: t.cases.intro },
-  ];
+  return pageMeta({ title, description: t.cases.intro, path: "/cas" });
 }
 
 export default function Cases() {

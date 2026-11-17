@@ -1,8 +1,10 @@
 // Informations publiques affichées sur le site.
 export const site = {
   name: "Yoan Hernalesteen",
-  // TODO : adresse dédiée au portfolio (elle sera publique et indexée)
-  email: "TODO@exemple.com",
+  // Adresse publique du site (domaine acheté chez Cloudflare).
+  url: "https://yoanhernalesteen.com",
+  // Adresse dédiée au portfolio (Cloudflare Email Routing) : publique et indexée.
+  email: "contact@yoanhernalesteen.com",
   github: "https://github.com/YoanHernalesteen",
   repository: "https://github.com/YoanHernalesteen/YoanHernalesteen.github.io",
   linkedin: "https://www.linkedin.com/in/yoanhernalesteen",

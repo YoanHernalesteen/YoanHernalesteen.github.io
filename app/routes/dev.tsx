@@ -10,6 +10,7 @@ import { positionings } from "~/content/positioning";
 import { site } from "~/content/site";
 import { testimonialsFor } from "~/content/testimonials";
 import { LANG, t } from "~/i18n";
+import { pageMeta } from "~/seo";
 
 import type { Route } from "./+types/dev";
 
@@ -17,12 +18,7 @@ const text = t.dev;
 
 export function meta(): Route.MetaDescriptors {
   const title = `${text.metaTitle} · ${site.name}`;
-  return [
-    { title },
-    { name: "description", content: text.lede },
-    { property: "og:title", content: title },
-    { property: "og:description", content: text.lede },
-  ];
+  return pageMeta({ title, description: text.lede, path: "/dev" });
 }
 
 export default function Dev() {

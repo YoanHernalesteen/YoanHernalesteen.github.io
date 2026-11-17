@@ -4,6 +4,7 @@ import { CaseArticle } from "~/components/CaseArticle";
 import { cases, getCase, nextCase } from "~/content/cases";
 import { site } from "~/content/site";
 import { LANG, t } from "~/i18n";
+import { pageMeta } from "~/seo";
 
 import type { Route } from "./+types/case";
 
@@ -19,12 +20,11 @@ export function meta({ loaderData }: Route.MetaArgs): Route.MetaDescriptors {
   if (!loaderData) return [{ title: `${t.notFound.title} · ${site.name}` }];
 
   const title = `${loaderData.title[LANG]} · ${site.name}`;
-  return [
-    { title },
-    { name: "description", content: loaderData.summary[LANG] },
-    { property: "og:title", content: title },
-    { property: "og:description", content: loaderData.summary[LANG] },
-  ];
+  return pageMeta({
+    title,
+    description: loaderData.summary[LANG],
+    path: `/cas/${loaderData.slug}`,
+  });
 }
 
 export default function CasePage({ loaderData }: Route.ComponentProps) {

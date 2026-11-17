@@ -15,6 +15,7 @@ import { career, stats } from "~/content/profile";
 import { site } from "~/content/site";
 import { testimonialsFor } from "~/content/testimonials";
 import { LANG, t } from "~/i18n";
+import { pageMeta } from "~/seo";
 
 import type { Route } from "./+types/home";
 
@@ -35,12 +36,7 @@ const doorStyles = {
 
 export function meta(): Route.MetaDescriptors {
   const title = `${site.name} · ${t.home.metaTitle}`;
-  return [
-    { title },
-    { name: "description", content: t.home.lede },
-    { property: "og:title", content: title },
-    { property: "og:description", content: t.home.lede },
-  ];
+  return pageMeta({ title, description: t.home.lede, path: "/" });
 }
 
 export default function Home() {
