@@ -33,47 +33,28 @@ export interface CaseStudy {
 
 export const cases: readonly CaseStudy[] = [
   {
-    slug: "ellii-tests-seniors",
-    title: { fr: "Ellii : tester avec 12 seniors pour revoir un parcours" },
-    summary: {
-      fr: "Organiser des tests utilisateurs, synthétiser les retours et transformer les irritants en améliorations produit.",
-    },
-    tracks: ["produit"],
-    year: { fr: "2026" },
-    org: "Ellii",
-    tags: { fr: ["Tests utilisateurs", "Synthèse", "PostHog"] },
-    featured: true,
-    brief: {
-      fr: {
-        role: "Développeur full-stack : organisation des tests, synthèse, propositions d'améliorations",
-        period: "2026 · [durée]",
-        team: "[taille et rôles de l'équipe]",
-        tools: "PostHog, [autres outils]",
-        shows: "Recherche utilisateur, synthèse, décisions produit, mesure",
-      },
-    },
-  },
-  {
-    slug: "ellii-feature-refonte",
+    // Fusion des anciens cas « tests avec 12 seniors » et « feature de la
+    // refonte » : les tests ont servi à valider la refonte.
+    slug: "ellii-refonte-tests-seniors",
     title: {
-      fr: "Ellii : une feature de la refonte, du besoin à la mise en ligne",
+      fr: "Ellii : refondre l'application et la valider avec 12 seniors",
     },
     summary: {
-      fr: "Développer une fonctionnalité front et back dans la refonte complète de l'application, de la spec aux tests.",
+      fr: "Développer la refonte complète de l'application, puis la tester auprès de 12 seniors pour la valider et l'améliorer.",
     },
     tracks: ["dev", "produit"],
     year: { fr: "2026" },
     org: "Ellii",
-    tags: { fr: ["Ruby on Rails", "RSpec", "Sidekiq"] },
-    featured: false,
+    tags: { fr: ["Ruby on Rails", "Tests utilisateurs", "PostHog"] },
+    featured: true,
     brief: {
       fr: {
-        role: "Développeur full-stack",
+        role: "Développeur full-stack : [partie de la refonte développée], organisation des tests, synthèse, propositions d'améliorations",
         period: "2026 · [durée]",
         team: "[taille et rôles de l'équipe]",
-        tools: "Ruby on Rails, RSpec, Sidekiq, [autres outils]",
+        tools: "Ruby on Rails, RSpec, Sidekiq, PostHog, [autres outils]",
         shows:
-          "Développement front et back, tests, suivi après la mise en ligne",
+          "Recherche utilisateur, décisions produit, développement front et back, mesure",
       },
     },
   },
