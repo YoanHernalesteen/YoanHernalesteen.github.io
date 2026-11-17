@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { career, games, stats } from "./profile";
+import { career, games, gamesNewestFirst, stats } from "./profile";
 import {
   TESTIMONIAL_PAGES,
   testimonials,
@@ -14,8 +14,21 @@ describe("le parcours", () => {
     expect(years).toEqual([...years].sort((a, b) => a - b));
   });
 
+  it("indique pour chaque étape s'il s'agit d'une formation ou d'un poste", () => {
+    for (const step of career) {
+      expect(["formation", "poste"]).toContain(step.kind);
+    }
+    // Les formations : bachelier, master, puis bootcamp Le Wagon.
+    expect(
+      career
+        .filter((step) => step.kind === "formation")
+        .map((s) => s.startYear),
+    ).toEqual([2004, 2007, 2025]);
+  });
+
   it("se termine par le poste actuel", () => {
     expect(career.at(-1)?.current).toBe(true);
+    expect(career.at(-1)?.kind).toBe("poste");
     expect(career.filter((step) => step.current)).toHaveLength(1);
   });
 });
@@ -38,6 +51,31 @@ describe("les jeux livrés", () => {
       expect(game.meta.fr.trim()).not.toBe("");
       expect(game.role.fr.trim()).not.toBe("");
     }
+  });
+
+  it("donnent à chaque visuel un texte alternatif et un copyright", () => {
+    for (const game of games) {
+      if (!game.image) continue;
+      expect(game.image.alt.fr.trim(), game.title).not.toBe("");
+      expect(game.image.credit, game.title).toMatch(/^© /);
+    }
+  });
+
+  it("se trient du plus récent au plus ancien", () => {
+    const years = gamesNewestFirst(games).map((game) => game.year);
+
+    expect(years).toEqual([...years].sort((a, b) => b - a));
+    expect(gamesNewestFirst(games)[0].title).toBe(
+      "Banishers: Ghosts of New Eden",
+    );
+  });
+
+  it("ne modifient pas la liste d'origine en la triant", () => {
+    const before = games.map((game) => game.title);
+
+    gamesNewestFirst(games);
+
+    expect(games.map((game) => game.title)).toEqual(before);
   });
 });
 

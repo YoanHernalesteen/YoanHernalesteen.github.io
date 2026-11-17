@@ -1,3 +1,6 @@
+import { existsSync } from "node:fs";
+import path from "node:path";
+
 import { describe, expect, it } from "vitest";
 
 import { fr } from "~/i18n/fr";
@@ -34,5 +37,13 @@ describe("le positionnement", () => {
     expect(door.text.trim()).not.toBe("");
     expect(door.cta.trim()).not.toBe("");
     expect(door.chips.length).toBeGreaterThan(0);
+  });
+
+  it.each(FOCUSES)("le CV de l'angle « %s » existe dans public/", (focus) => {
+    // /cv/x.pdf est servi depuis public/cv/x.pdf : sans le fichier, le
+    // bouton de téléchargement mènerait à une page introuvable.
+    const file = path.join("public", positionings[focus].cvHref);
+
+    expect(existsSync(file), file).toBe(true);
   });
 });

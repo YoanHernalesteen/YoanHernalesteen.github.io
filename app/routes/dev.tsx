@@ -4,12 +4,12 @@ import { CaseCard } from "~/components/CaseCard";
 import { ContactSection } from "~/components/ContactSection";
 import { heroButton, ProfileHero } from "~/components/ProfileHero";
 import { SectionHeader, sectionLabel } from "~/components/SectionHeader";
-import { TestimonialCard } from "~/components/TestimonialCard";
+import { TestimonialList } from "~/components/TestimonialList";
 import { cases, filterCases } from "~/content/cases";
 import { positionings } from "~/content/positioning";
 import { site } from "~/content/site";
 import { testimonialsFor } from "~/content/testimonials";
-import { LANG, t } from "~/i18n";
+import { t } from "~/i18n";
 import { pageMeta } from "~/seo";
 
 import type { Route } from "./+types/dev";
@@ -110,16 +110,11 @@ export default function Dev() {
       </section>
 
       <section aria-label={t.home.testimonialsLabel} className="page py-20">
-        <div className="flex flex-col gap-6">
-          {testimonialsFor("dev").map(({ testimonial, highlight }) => (
-            <TestimonialCard
-              key={testimonial.role[LANG] + highlight[LANG]}
-              testimonial={testimonial}
-              highlight={highlight}
-              size="large"
-            />
-          ))}
-        </div>
+        <TestimonialList
+          items={testimonialsFor("dev")}
+          size="large"
+          className="grid gap-6"
+        />
       </section>
 
       <ContactSection title={text.contactTitle} cvs={["dev-produit"]} />

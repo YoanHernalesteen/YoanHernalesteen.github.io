@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { createRoutesStub } from "react-router";
 import { describe, expect, it } from "vitest";
 
+import type { CaseStudy } from "~/content/cases";
 import { makeCase } from "~/test/makeCase";
 
 import { CaseCard } from "./CaseCard";
@@ -15,9 +16,9 @@ const study = makeCase({
   tags: { fr: ["Ruby on Rails", "OpenAI"] },
 });
 
-function renderCard() {
+function renderCard(card: CaseStudy = study) {
   const Stub = createRoutesStub([
-    { path: "/", Component: () => <CaseCard study={study} /> },
+    { path: "/", Component: () => <CaseCard study={card} /> },
   ]);
   render(<Stub />);
 }
@@ -41,5 +42,24 @@ describe("CaseCard", () => {
     expect(screen.getByText("Une app Rails.")).toBeInTheDocument();
     expect(screen.getByText("Ruby on Rails")).toBeInTheDocument();
     expect(screen.getByText("OpenAI")).toBeInTheDocument();
+  });
+
+  it("n'affiche ni image ni emplacement vide sans visuel", () => {
+    renderCard();
+
+    expect(document.querySelector("img")).toBeNull();
+    expect(screen.queryByText(/Visuel du projet/)).not.toBeInTheDocument();
+  });
+
+  it("affiche le visuel du cas, décoratif sur la carte", () => {
+    renderCard({
+      ...study,
+      cover: { src: "/cover.webp", alt: { fr: "Capture de l'app" } },
+    });
+
+    const image = document.querySelector("img");
+    expect(image).toHaveAttribute("src", "/cover.webp");
+    // Le titre nomme déjà le lien : l'image de la carte est décorative.
+    expect(image).toHaveAttribute("alt", "");
   });
 });

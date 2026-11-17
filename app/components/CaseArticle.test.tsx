@@ -70,4 +70,22 @@ describe("CaseArticle", () => {
       screen.getByRole("link", { name: new RegExp(next.title.fr) }),
     ).toHaveAttribute("href", `/cas/${next.slug}`);
   });
+
+  it("n'affiche pas d'emplacement vide quand le cas n'a pas de visuel", () => {
+    renderArticle({ ...requireCase("media-trackr"), cover: undefined });
+
+    expect(screen.queryByRole("img")).not.toBeInTheDocument();
+    expect(screen.queryByText(/Visuel du projet/)).not.toBeInTheDocument();
+  });
+
+  it("affiche le visuel du cas avec son texte alternatif", () => {
+    renderArticle({
+      ...requireCase("media-trackr"),
+      cover: { src: "/cover.webp", alt: { fr: "Capture de l'app" } },
+    });
+
+    expect(
+      screen.getByRole("img", { name: "Capture de l'app" }),
+    ).toHaveAttribute("src", "/cover.webp");
+  });
 });

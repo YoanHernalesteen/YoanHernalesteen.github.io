@@ -14,7 +14,8 @@ export interface Testimonial {
   paragraphs: Localized<readonly string[]>;
   // Langue d'origine quand le texte affiché est une traduction.
   translatedFrom?: "en";
-  // Texte original, affiché à côté de la traduction.
+  // Texte original. Pas affiché sur le site français : il servira tel quel
+  // pour la version anglaise.
   original?: readonly string[];
   // Phrase mise en avant sur chaque page où la recommandation apparaît.
   // Partial<Record<…>> : un objet dont chaque clé de page est facultative.

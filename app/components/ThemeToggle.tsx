@@ -4,20 +4,15 @@ import { t } from "~/i18n";
 import {
   getServerThemeSnapshot,
   getThemeSnapshot,
-  nextTheme,
   setTheme,
   subscribeTheme,
+  toggleTheme,
   type ThemeChoice,
 } from "~/theme";
 
-// Icônes décoratives : le nom du bouton porte l'information.
+// Icônes décoratives : le nom et l'état du bouton portent l'information.
+// On montre le thème affiché : soleil en clair, lune en sombre.
 const icons: Record<ThemeChoice, React.ReactNode> = {
-  system: (
-    <>
-      <rect x="3" y="4" width="18" height="12" rx="2" />
-      <path d="M8 20h8M12 16v4" />
-    </>
-  ),
   light: (
     <>
       <circle cx="12" cy="12" r="4" />
@@ -28,22 +23,23 @@ const icons: Record<ThemeChoice, React.ReactNode> = {
 };
 
 export function ThemeToggle() {
-  // useSyncExternalStore lit une valeur qui vit hors de React (ici le
-  // localStorage) et réaffiche le composant quand elle change. Le 3e
-  // argument donne la valeur utilisée au prérendu : « system ».
-  const choice = useSyncExternalStore(
+  // useSyncExternalStore lit une valeur qui vit hors de React (le choix
+  // enregistré ou la préférence du navigateur) et réaffiche le composant
+  // quand elle change. Le 3e argument donne la valeur utilisée au prérendu.
+  const theme = useSyncExternalStore(
     subscribeTheme,
     getThemeSnapshot,
     getServerThemeSnapshot,
   );
-  const label = `${t.theme.label} : ${t.theme[choice]}`;
 
   return (
+    // Un interrupteur : « Thème sombre », activé ou non (aria-pressed).
     <button
       type="button"
-      aria-label={label}
-      title={label}
-      onClick={() => setTheme(nextTheme(choice))}
+      aria-label={t.theme.dark}
+      aria-pressed={theme === "dark"}
+      title={t.theme.dark}
+      onClick={() => setTheme(toggleTheme(theme))}
       className="inline-flex size-11 items-center justify-center rounded-[10px] border border-line-strong bg-surface text-ink"
     >
       <svg
@@ -57,7 +53,7 @@ export function ThemeToggle() {
         strokeLinejoin="round"
         aria-hidden="true"
       >
-        {icons[choice]}
+        {icons[theme]}
       </svg>
     </button>
   );

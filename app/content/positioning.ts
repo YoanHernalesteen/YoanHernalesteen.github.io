@@ -17,8 +17,14 @@ interface Positioning {
 }
 
 export const positionings: Record<Focus, Positioning> = {
-  "dev-produit": { primaryTrack: "dev", cvHref: "/cv/cv-dev-produit.pdf" },
-  po: { primaryTrack: "produit", cvHref: "/cv/cv-product-owner.pdf" },
+  "dev-produit": {
+    primaryTrack: "dev",
+    cvHref: "/cv/yoan-hernalesteen-cv-developpeur.pdf",
+  },
+  po: {
+    primaryTrack: "produit",
+    cvHref: "/cv/yoan-hernalesteen-cv-product-owner.pdf",
+  },
 };
 
 // Page de profil propre à chaque angle.

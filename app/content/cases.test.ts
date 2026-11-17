@@ -119,6 +119,12 @@ describe("la liste des études de cas", () => {
     }
   });
 
+  it("donne un texte alternatif à chaque visuel", () => {
+    for (const c of cases) {
+      if (c.cover) expect(c.cover.alt.fr.trim(), c.slug).not.toBe("");
+    }
+  });
+
   it("a exactement un fichier MDX français par cas", () => {
     // Glob paresseux : on lit seulement les noms de fichiers, sans les compiler.
     const files = Object.keys(import.meta.glob("./cases/fr/*.mdx"));

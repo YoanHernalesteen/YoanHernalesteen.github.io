@@ -1,3 +1,4 @@
+import mediaTrackrCover from "~/assets/cases/media-trackr/cover.webp";
 import type { Localized } from "~/i18n/types";
 
 export type Track = "dev" | "produit";
@@ -29,6 +30,10 @@ export interface CaseStudy {
   // Affiché sur l'accueil.
   featured: boolean;
   brief: Localized<CaseBrief>;
+  // Visuel facultatif : sans lui, la carte et la page s'affichent sans image.
+  // `src` vient d'un import d'image placée dans app/assets/cases/<slug>/,
+  // par exemple : import mediaTrackrCover from "~/assets/cases/media-trackr/cover.webp";
+  cover?: { src: string; alt: Localized };
 }
 
 export const cases: readonly CaseStudy[] = [
@@ -59,6 +64,31 @@ export const cases: readonly CaseStudy[] = [
     },
   },
   {
+    // Ne montrer aucun nom ni classement d'animateurs : décrire la méthode.
+    slug: "ellii-recommandation-ateliers",
+    title: {
+      fr: "Ellii : recommander les ateliers à programmer à partir des données",
+    },
+    summary: {
+      fr: "Concevoir et développer un algorithme qui estime le remplissage des ateliers et les meilleurs créneaux, pour recommander à l'équipe les ateliers à proposer.",
+    },
+    tracks: ["dev", "produit"],
+    year: { fr: "2026" },
+    org: "Ellii",
+    tags: { fr: ["Données d'usage", "Aide à la décision", "Back-office"] },
+    featured: true,
+    brief: {
+      fr: {
+        role: "Conception et développement, sur un chantier jusque-là délaissé",
+        period: "2026 · [durée]",
+        team: "[taille et rôles de l'équipe]",
+        tools: "[outils et technologies]",
+        shows:
+          "Analyse de données, décision produit, développement d'un outil interne",
+      },
+    },
+  },
+  {
     slug: "media-trackr",
     title: { fr: "Media Trackr : 3 API et un chatbot IA en 2 semaines, à 3" },
     summary: {
@@ -68,7 +98,13 @@ export const cases: readonly CaseStudy[] = [
     year: { fr: "2025" },
     org: "Le Wagon",
     tags: { fr: ["Ruby on Rails", "OMDb, IGDB, Open Library", "OpenAI"] },
-    featured: true,
+    featured: false,
+    cover: {
+      src: mediaTrackrCover,
+      alt: {
+        fr: "L'app Media Trackr : son logo et trois œuvres suivies, le film Dune, le livre Le Seigneur des Anneaux et le jeu Zelda: Tears of the Kingdom.",
+      },
+    },
     brief: {
       fr: {
         role: "[ton rôle dans l'équipe]",
@@ -103,6 +139,31 @@ export const cases: readonly CaseStudy[] = [
     },
   },
   {
+    // Uniquement des éléments publics : le jeu sorti, ses menus, la presse.
+    slug: "dont-nod-jusant-accessibilite",
+    title: {
+      fr: "Don't Nod · Jusant : rendre l'escalade accessible en simplifiant les contrôles",
+    },
+    summary: {
+      fr: "Les contrôles d'escalade demandaient d'alterner et de maintenir les gâchettes en continu, avec un système d'endurance exigeant. Des options d'accessibilité ont ouvert le jeu aux joueurs qui ne pouvaient pas suivre ce rythme.",
+    },
+    tracks: ["produit"],
+    year: { fr: "2023" },
+    org: "Don't Nod",
+    tags: { fr: ["Accessibilité", "Tests utilisateurs", "Unreal Engine 5"] },
+    featured: false,
+    brief: {
+      fr: {
+        role: "Level designer : options d'accessibilité liées aux contrôles, contrôles clavier et souris",
+        period: "6 mois, autour de la sortie en 2023",
+        team: "[taille et rôles de l'équipe]",
+        tools: "Unreal Engine 5, [autres outils]",
+        shows:
+          "Accessibilité, conception à partir des difficultés des joueurs, options de jeu",
+      },
+    },
+  },
+  {
     slug: "ubisoft-mighty-quest",
     title: {
       fr: "Ubisoft : boucle de jeu, rétention et monétisation d'un RPG mobile",
@@ -114,7 +175,7 @@ export const cases: readonly CaseStudy[] = [
     year: { fr: "2016 – 2019" },
     org: "Ubisoft",
     tags: { fr: ["Rétention", "Monétisation", "Encadrement"] },
-    featured: true,
+    featured: false,
     brief: {
       fr: {
         role: "Senior Game Designer",
@@ -137,7 +198,7 @@ export const cases: readonly CaseStudy[] = [
     year: { fr: "2014 – 2016" },
     org: "Gameloft",
     tags: { fr: ["Pilotage multi-studios", "Pitch", "Free-to-play"] },
-    featured: false,
+    featured: true,
     brief: {
       fr: {
         role: "Game Content Manager",
@@ -145,6 +206,36 @@ export const cases: readonly CaseStudy[] = [
         team: "6 studios internationaux",
         tools: "[outils]",
         shows: "Pilotage de plusieurs équipes, suivi après la sortie",
+      },
+    },
+  },
+  {
+    slug: "jpp-speedrun",
+    title: {
+      fr: "JPP Speedrun : cofonder et organiser des marathons de speedrun en direct",
+    },
+    summary: {
+      fr: "Cofonder un événement de speedrun francophone et en organiser deux éditions par an : programmation, coordination de l'équipe et supervision technique de la diffusion.",
+    },
+    tracks: ["produit"],
+    year: { fr: "Depuis 2026" },
+    org: "JPP Speedrun",
+    tags: {
+      fr: [
+        "Organisation d'événements",
+        "Coordination d'équipe",
+        "Diffusion en direct",
+      ],
+    },
+    featured: false,
+    brief: {
+      fr: {
+        role: "Cofondateur : programmation, coordination de l'équipe, supervision technique",
+        period: "Depuis 2026 · 2 événements par an",
+        team: "[taille et rôles de l'équipe]",
+        tools: "[outils de diffusion et d'organisation]",
+        shows:
+          "Pilotage d'un projet à date fixe, coordination de bénévoles, décisions en direct",
       },
     },
   },

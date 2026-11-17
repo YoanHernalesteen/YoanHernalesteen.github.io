@@ -89,6 +89,15 @@
   a {
     @apply text-dev underline underline-offset-4;
   }
+  figure {
+    @apply my-8;
+  }
+  img {
+    @apply w-full rounded-xl border border-line;
+  }
+  figcaption {
+    @apply mt-2 text-sm text-subtle;
+  }
 }
 
 /* Sections numérotées 01, 02… d'une étude de cas. Le numéro est généré

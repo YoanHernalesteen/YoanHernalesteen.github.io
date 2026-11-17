@@ -1,8 +1,10 @@
 import { Link } from "react-router";
 
+import { CareerKindIcon } from "~/components/CareerKindIcon";
 import { CaseCard } from "~/components/CaseCard";
 import { ContactSection } from "~/components/ContactSection";
-import { TestimonialCard } from "~/components/TestimonialCard";
+import { SectionHeader, sectionLabel } from "~/components/SectionHeader";
+import { TestimonialList } from "~/components/TestimonialList";
 import { cases, featuredCases } from "~/content/cases";
 import {
   FOCUS,
@@ -13,6 +15,7 @@ import {
 } from "~/content/positioning";
 import { career, stats } from "~/content/profile";
 import { site } from "~/content/site";
+import { speedrunActivities } from "~/content/speedrun";
 import { testimonialsFor } from "~/content/testimonials";
 import { LANG, t } from "~/i18n";
 import { pageMeta } from "~/seo";
@@ -157,15 +160,11 @@ export default function Home() {
         <h2 className="mt-2 font-display text-3xl leading-tight font-bold md:text-[40px]">
           {t.home.testimonialsTitle}
         </h2>
-        <div className="mt-8 flex flex-wrap gap-6">
-          {testimonialsFor("accueil").map(({ testimonial, highlight }) => (
-            <TestimonialCard
-              key={testimonial.role[LANG] + highlight[LANG]}
-              testimonial={testimonial}
-              highlight={highlight}
-            />
-          ))}
-        </div>
+        <TestimonialList
+          items={testimonialsFor("accueil")}
+          alignRows
+          className="mt-8 grid gap-6 md:grid-cols-3 md:gap-y-0"
+        />
         <a
           href={site.linkedin}
           className="mt-4 inline-flex min-h-11 items-center font-semibold underline-offset-4 hover:underline"
@@ -186,20 +185,42 @@ export default function Home() {
         >
           {t.home.careerTitle}
         </h2>
-        <p className="mt-4 max-w-[680px] text-lg leading-[1.6] text-muted">
+        {/* Plus large que les autres introductions : la phrase tient sur
+            une ligne sur ordinateur, et revient à la ligne sur mobile. */}
+        <p className="mt-4 max-w-[860px] text-lg leading-[1.6] text-muted">
           {t.home.careerLede}
         </p>
-        <ol className="mt-10 flex flex-wrap gap-6">
+        {/* Grille : une étape seule en fin de ligne garde la largeur
+            d'une colonne au lieu de s'étirer. */}
+        <ol className="mt-10 grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
           {career.map((step) => (
             <li
               key={step.startYear + step.title[LANG]}
-              className={`flex-[1_1_240px] border-t-2 pt-4 ${step.current ? "border-dev" : "border-ink"}`}
+              // Formation : ligne en pointillés ; poste : ligne pleine.
+              // L'étiquette écrite reste l'information principale.
+              className={`border-t-2 pt-4 ${step.kind === "formation" ? "border-dashed" : "border-solid"} ${step.current ? "border-dev" : "border-ink"}`}
             >
-              <p
-                className={`font-mono text-[13px] ${step.current ? "text-dev" : "text-subtle"}`}
-              >
-                {step.period[LANG]}
-              </p>
+              {/* Étiquette à gauche, logo en haut à droite : le texte reste
+                  aligné d'une étape à l'autre, avec ou sans logo. */}
+              <div className="flex items-start justify-between gap-3">
+                <p
+                  className={`flex items-center gap-1.5 font-mono text-[13px] ${step.current ? "text-dev" : "text-subtle"}`}
+                >
+                  <CareerKindIcon kind={step.kind} />
+                  {t.home.careerKinds[step.kind]} · {step.period[LANG]}
+                </p>
+                {step.logo && (
+                  <img
+                    src={step.logo}
+                    alt=""
+                    width={40}
+                    height={40}
+                    loading="lazy"
+                    decoding="async"
+                    className="size-10 shrink-0 rounded-lg ring-1 ring-line"
+                  />
+                )}
+              </div>
               <p className="mt-2 font-semibold">{step.title[LANG]}</p>
               <p className="mt-1 text-sm leading-normal text-muted">
                 {step.details[LANG]}
@@ -207,6 +228,59 @@ export default function Home() {
             </li>
           ))}
         </ol>
+      </section>
+
+      <section
+        aria-labelledby={sectionLabel("speedrun")}
+        className="page pb-20 md:pb-24"
+      >
+        <SectionHeader
+          id="speedrun"
+          eyebrow={t.home.speedrunEyebrow}
+          title={t.home.speedrunTitle}
+        />
+        <p className="-mt-3 max-w-[760px] text-lg leading-[1.6] text-muted">
+          {t.home.speedrunLede}
+        </p>
+        <div className="mt-8 grid gap-6 md:grid-cols-3">
+          {speedrunActivities.map((activity) => (
+            <article
+              key={activity.name}
+              className="flex flex-col gap-3 rounded-xl border border-line bg-surface p-6"
+            >
+              <h3 className="font-display text-xl font-bold">
+                {activity.name}
+              </h3>
+              <p className="font-mono text-[13px] text-subtle">
+                {activity.role[LANG]} · {t.home.since(activity.since)}
+              </p>
+              <p className="text-[15px] leading-[1.6] text-body">
+                {activity.text[LANG]}
+              </p>
+              {(activity.links || activity.caseSlug) && (
+                <p className="mt-auto flex flex-wrap gap-x-4 gap-y-1 pt-1 text-[15px] font-semibold">
+                  {activity.caseSlug && (
+                    <Link
+                      to={`/cas/${activity.caseSlug}`}
+                      className="underline-offset-4 hover:underline"
+                    >
+                      {t.home.speedrunCase}
+                    </Link>
+                  )}
+                  {activity.links?.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      className="underline-offset-4 hover:underline"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </p>
+              )}
+            </article>
+          ))}
+        </div>
       </section>
 
       <ContactSection

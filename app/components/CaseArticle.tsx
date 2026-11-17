@@ -55,13 +55,16 @@ export function CaseArticle({ study, next }: Props) {
         {study.summary[LANG]}
       </p>
 
-      {/* Emplacement provisoire du visuel principal. */}
-      <div
-        aria-hidden="true"
-        className="mt-10 flex h-56 items-center justify-center rounded-2xl border border-dashed border-line-strong bg-chip p-6 text-center font-mono text-sm text-muted md:h-96"
-      >
-        {t.cases.coverPlaceholder}
-      </div>
+      {/* Visuel principal, s'il existe. Il est en haut de page : chargé
+          tout de suite, sans lazy loading. */}
+      {study.cover && (
+        <img
+          src={study.cover.src}
+          alt={study.cover.alt[LANG]}
+          decoding="async"
+          className="mt-10 aspect-video w-full rounded-2xl border border-line object-cover"
+        />
+      )}
 
       <div className="mt-14 flex flex-wrap items-start gap-14">
         {Body && (

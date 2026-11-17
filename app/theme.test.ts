@@ -1,36 +1,49 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import { mockSystemTheme } from "~/test/mockSystemTheme";
+
 import {
   applyTheme,
-  nextTheme,
+  getThemeSnapshot,
   readStoredTheme,
   resetThemeMemory,
   setTheme,
-  getThemeSnapshot,
+  systemTheme,
   THEME_STORAGE_KEY,
+  toggleTheme,
 } from "./theme";
 
 beforeEach(() => {
   localStorage.clear();
   resetThemeMemory();
   delete document.documentElement.dataset.theme;
+  mockSystemTheme("light");
 });
 
 afterEach(() => {
   vi.restoreAllMocks();
 });
 
-describe("nextTheme", () => {
-  it("passe de Système à Clair, puis Sombre, puis Système", () => {
-    expect(nextTheme("system")).toBe("light");
-    expect(nextTheme("light")).toBe("dark");
-    expect(nextTheme("dark")).toBe("system");
+describe("toggleTheme", () => {
+  it("passe du clair au sombre et inversement", () => {
+    expect(toggleTheme("light")).toBe("dark");
+    expect(toggleTheme("dark")).toBe("light");
+  });
+});
+
+describe("systemTheme", () => {
+  it("suit la préférence du navigateur", () => {
+    mockSystemTheme("dark");
+    expect(systemTheme()).toBe("dark");
+
+    mockSystemTheme("light");
+    expect(systemTheme()).toBe("light");
   });
 });
 
 describe("readStoredTheme", () => {
-  it("suit le système quand rien n'est enregistré", () => {
-    expect(readStoredTheme()).toBe("system");
+  it("renvoie null quand rien n'est enregistré", () => {
+    expect(readStoredTheme()).toBeNull();
   });
 
   it("relit un choix enregistré", () => {
@@ -39,33 +52,41 @@ describe("readStoredTheme", () => {
     expect(readStoredTheme()).toBe("dark");
   });
 
-  it("ignore une valeur inconnue", () => {
-    localStorage.setItem(THEME_STORAGE_KEY, "violet");
+  it("ignore une valeur inconnue, y compris l'ancien « system »", () => {
+    localStorage.setItem(THEME_STORAGE_KEY, "system");
 
-    expect(readStoredTheme()).toBe("system");
+    expect(readStoredTheme()).toBeNull();
   });
 
-  it("suit le système si le stockage est bloqué", () => {
+  it("renvoie null si le stockage est bloqué", () => {
     vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
       throw new Error("SecurityError");
     });
 
-    expect(readStoredTheme()).toBe("system");
+    expect(readStoredTheme()).toBeNull();
+  });
+});
+
+describe("getThemeSnapshot", () => {
+  it("suit le navigateur tant que le visiteur n'a rien choisi", () => {
+    mockSystemTheme("dark");
+
+    expect(getThemeSnapshot()).toBe("dark");
+  });
+
+  it("privilégie le choix enregistré", () => {
+    mockSystemTheme("dark");
+    localStorage.setItem(THEME_STORAGE_KEY, "light");
+
+    expect(getThemeSnapshot()).toBe("light");
   });
 });
 
 describe("applyTheme", () => {
-  it("pose data-theme pour un choix explicite", () => {
+  it("pose data-theme sur <html>", () => {
     applyTheme("light");
 
     expect(document.documentElement.dataset.theme).toBe("light");
-  });
-
-  it("retire data-theme pour revenir au système", () => {
-    applyTheme("dark");
-    applyTheme("system");
-
-    expect(document.documentElement.dataset.theme).toBeUndefined();
   });
 });
 
@@ -78,21 +99,14 @@ describe("setTheme", () => {
     expect(getThemeSnapshot()).toBe("dark");
   });
 
-  it("efface l'enregistrement quand on revient au système", () => {
-    setTheme("dark");
-    setTheme("system");
-
-    expect(localStorage.getItem(THEME_STORAGE_KEY)).toBeNull();
-  });
-
   it("fonctionne pour la visite en cours même si le stockage est bloqué", () => {
     vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => {
       throw new Error("QuotaExceededError");
     });
 
-    setTheme("light");
+    setTheme("dark");
 
-    expect(document.documentElement.dataset.theme).toBe("light");
-    expect(getThemeSnapshot()).toBe("light");
+    expect(document.documentElement.dataset.theme).toBe("dark");
+    expect(getThemeSnapshot()).toBe("dark");
   });
 });

@@ -1,8 +1,11 @@
-// Choix du thème : suivre le système, ou forcer le clair ou le sombre.
-export const THEME_CHOICES = ["system", "light", "dark"] as const;
+// Thème du site : clair ou sombre. Tant que le visiteur n'a rien choisi,
+// le site suit la préférence de son navigateur (prefers-color-scheme).
+export const THEME_CHOICES = ["light", "dark"] as const;
 export type ThemeChoice = (typeof THEME_CHOICES)[number];
 
 export const THEME_STORAGE_KEY = "theme";
+
+const DARK_QUERY = "(prefers-color-scheme: dark)";
 
 // `value is ThemeChoice` : un « type guard ». Si la fonction renvoie true,
 // TypeScript sait ensuite que `value` est un ThemeChoice.
@@ -10,38 +13,43 @@ function isThemeChoice(value: unknown): value is ThemeChoice {
   return (THEME_CHOICES as readonly unknown[]).includes(value);
 }
 
-export function nextTheme(choice: ThemeChoice): ThemeChoice {
-  const index = THEME_CHOICES.indexOf(choice);
-  return THEME_CHOICES[(index + 1) % THEME_CHOICES.length];
+export function toggleTheme(choice: ThemeChoice): ThemeChoice {
+  return choice === "dark" ? "light" : "dark";
 }
 
-// localStorage peut être bloqué (navigation privée, réglages) : on retombe
-// alors sur le thème du système.
-export function readStoredTheme(): ThemeChoice {
+// Préférence du navigateur. matchMedia peut manquer (vieux navigateurs,
+// tests) : on retombe alors sur le clair.
+export function systemTheme(): ThemeChoice {
+  if (typeof window.matchMedia !== "function") return "light";
+  return window.matchMedia(DARK_QUERY).matches ? "dark" : "light";
+}
+
+// Choix enregistré lors d'une visite précédente, ou null s'il n'y en a pas.
+// localStorage peut être bloqué (navigation privée, réglages) : null aussi.
+export function readStoredTheme(): ThemeChoice | null {
   try {
     const value = localStorage.getItem(THEME_STORAGE_KEY);
-    return isThemeChoice(value) ? value : "system";
+    return isThemeChoice(value) ? value : null;
   } catch {
-    return "system";
+    return null;
   }
 }
 
 function storeTheme(choice: ThemeChoice): void {
   try {
-    if (choice === "system") localStorage.removeItem(THEME_STORAGE_KEY);
-    else localStorage.setItem(THEME_STORAGE_KEY, choice);
+    localStorage.setItem(THEME_STORAGE_KEY, choice);
   } catch {
     // Pas d'enregistrement possible : le choix vaut pour la visite en cours.
   }
 }
 
-// data-theme sur <html> force un thème ; son absence laisse le système décider.
+// data-theme sur <html> force un thème. Sans cet attribut, le CSS suit la
+// préférence du navigateur (voir app.css).
 export function applyTheme(
   choice: ThemeChoice,
   root: HTMLElement = document.documentElement,
 ): void {
-  if (choice === "system") delete root.dataset.theme;
-  else root.dataset.theme = choice;
+  root.dataset.theme = choice;
 }
 
 // --- Petit « store » lu par useSyncExternalStore (voir ThemeToggle). ---
@@ -50,13 +58,15 @@ export function applyTheme(
 let memory: ThemeChoice | null = null;
 const listeners = new Set<() => void>();
 
+// Thème réellement affiché : choix du visiteur, sinon préférence du navigateur.
 export function getThemeSnapshot(): ThemeChoice {
-  return memory ?? readStoredTheme();
+  return memory ?? readStoredTheme() ?? systemTheme();
 }
 
-// Pendant le prérendu, on ne connaît pas le choix du visiteur.
+// Pendant le prérendu, on ne connaît ni le choix ni le navigateur du
+// visiteur. Le bouton se corrige juste après le chargement de la page.
 export function getServerThemeSnapshot(): ThemeChoice {
-  return "system";
+  return "light";
 }
 
 export function subscribeTheme(listener: () => void): () => void {
@@ -64,14 +74,23 @@ export function subscribeTheme(listener: () => void): () => void {
   const onStorage = (event: StorageEvent) => {
     if (event.key !== THEME_STORAGE_KEY) return;
     memory = null;
-    applyTheme(readStoredTheme());
+    const stored = readStoredTheme();
+    if (stored) applyTheme(stored);
     listener();
   };
+  // Le visiteur change la préférence de son système pendant la visite.
+  const media =
+    typeof window.matchMedia === "function"
+      ? window.matchMedia(DARK_QUERY)
+      : null;
+
   listeners.add(listener);
   window.addEventListener("storage", onStorage);
+  media?.addEventListener("change", listener);
   return () => {
     listeners.delete(listener);
     window.removeEventListener("storage", onStorage);
+    media?.removeEventListener("change", listener);
   };
 }
 

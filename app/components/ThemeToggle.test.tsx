@@ -1,6 +1,7 @@
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it } from "vitest";
 
+import { mockSystemTheme } from "~/test/mockSystemTheme";
 import { resetThemeMemory, THEME_STORAGE_KEY } from "~/theme";
 
 import { ThemeToggle } from "./ThemeToggle";
@@ -9,32 +10,40 @@ beforeEach(() => {
   localStorage.clear();
   resetThemeMemory();
   delete document.documentElement.dataset.theme;
+  mockSystemTheme("light");
 });
 
 describe("ThemeToggle", () => {
-  it("indique le thème du système par défaut", () => {
+  it("est un interrupteur « Thème sombre »", () => {
     render(<ThemeToggle />);
 
     expect(
-      screen.getByRole("button", { name: "Thème : Système" }),
+      screen.getByRole("button", { name: "Thème sombre" }),
     ).toBeInTheDocument();
   });
 
-  it("passe d'un thème à l'autre à chaque clic", () => {
+  it("reflète le thème du navigateur par défaut", () => {
+    mockSystemTheme("dark");
+
+    render(<ThemeToggle />);
+
+    expect(screen.getByRole("button")).toHaveAttribute("aria-pressed", "true");
+  });
+
+  it("bascule entre clair et sombre, et mémorise le choix", () => {
     render(<ThemeToggle />);
     const button = screen.getByRole("button");
+    expect(button).toHaveAttribute("aria-pressed", "false");
 
     act(() => fireEvent.click(button));
-    expect(button).toHaveAccessibleName("Thème : Clair");
-    expect(document.documentElement.dataset.theme).toBe("light");
-
-    act(() => fireEvent.click(button));
-    expect(button).toHaveAccessibleName("Thème : Sombre");
+    expect(button).toHaveAttribute("aria-pressed", "true");
+    expect(document.documentElement.dataset.theme).toBe("dark");
     expect(localStorage.getItem(THEME_STORAGE_KEY)).toBe("dark");
 
     act(() => fireEvent.click(button));
-    expect(button).toHaveAccessibleName("Thème : Système");
-    expect(document.documentElement.dataset.theme).toBeUndefined();
+    expect(button).toHaveAttribute("aria-pressed", "false");
+    expect(document.documentElement.dataset.theme).toBe("light");
+    expect(localStorage.getItem(THEME_STORAGE_KEY)).toBe("light");
   });
 
   it("reprend le choix enregistré lors d'une visite précédente", () => {
@@ -42,8 +51,6 @@ describe("ThemeToggle", () => {
 
     render(<ThemeToggle />);
 
-    expect(
-      screen.getByRole("button", { name: "Thème : Sombre" }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole("button")).toHaveAttribute("aria-pressed", "true");
   });
 });

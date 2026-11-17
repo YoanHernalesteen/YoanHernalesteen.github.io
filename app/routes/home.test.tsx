@@ -9,6 +9,8 @@ import {
   positionings,
   profilePaths,
 } from "~/content/positioning";
+import { career } from "~/content/profile";
+import { speedrunActivities } from "~/content/speedrun";
 import { testimonialsFor } from "~/content/testimonials";
 
 import Home from "./home";
@@ -78,6 +80,74 @@ describe("Home", () => {
 
     expect(document.getElementById("parcours")).not.toBeNull();
     expect(document.getElementById("contact")).not.toBeNull();
+  });
+
+  it("étiquette chaque étape du parcours comme formation ou poste", () => {
+    renderHome();
+
+    const timeline = document.getElementById("parcours");
+    if (!timeline) throw new Error("section parcours introuvable");
+    const labels = { formation: "Formation", poste: "Poste" } as const;
+
+    for (const step of career) {
+      expect(
+        within(timeline).getByText(`${labels[step.kind]} · ${step.period.fr}`),
+      ).toBeInTheDocument();
+    }
+  });
+
+  it("ajoute une icône décorative devant chaque étiquette", () => {
+    renderHome();
+
+    const timeline = document.getElementById("parcours");
+    if (!timeline) throw new Error("section parcours introuvable");
+    const icons = timeline.querySelectorAll("li svg");
+
+    expect(icons).toHaveLength(career.length);
+    for (const icon of icons) {
+      // Masquée aux lecteurs d'écran : l'étiquette écrite suffit.
+      expect(icon).toHaveAttribute("aria-hidden", "true");
+    }
+  });
+
+  it("affiche le logo des entreprises qui en ont un, en décoration", () => {
+    renderHome();
+
+    const timeline = document.getElementById("parcours");
+    if (!timeline) throw new Error("section parcours introuvable");
+    const logos = Array.from(timeline.querySelectorAll("li img"));
+
+    expect(logos.length).toBeGreaterThan(0);
+    expect(logos.map((logo) => logo.getAttribute("src"))).toEqual(
+      career.flatMap((step) => (step.logo ? [step.logo] : [])),
+    );
+    for (const logo of logos) {
+      // Le nom de l'entreprise est écrit juste à côté.
+      expect(logo).toHaveAttribute("alt", "");
+    }
+  });
+
+  it("présente les activités speedrun, avec leurs liens", () => {
+    renderHome();
+
+    const section = screen.getByRole("region", {
+      name: /Organiser des événements en direct/,
+    });
+    for (const activity of speedrunActivities) {
+      expect(
+        within(section).getByRole("heading", { level: 3, name: activity.name }),
+      ).toBeInTheDocument();
+      for (const link of activity.links ?? []) {
+        expect(
+          within(section).getByRole("link", { name: link.label }),
+        ).toHaveAttribute("href", link.href);
+      }
+      if (activity.caseSlug) {
+        expect(
+          within(section).getByRole("link", { name: /étude de cas/ }),
+        ).toHaveAttribute("href", `/cas/${activity.caseSlug}`);
+      }
+    }
   });
 
   it("propose les deux CV dans le bloc contact", () => {

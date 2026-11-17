@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 
 import { cases, filterCases } from "~/content/cases";
 import { positionings } from "~/content/positioning";
-import { games } from "~/content/profile";
+import { games, gamesNewestFirst } from "~/content/profile";
 import { testimonialsFor } from "~/content/testimonials";
 
 import Produit from "./produit";
@@ -61,13 +61,33 @@ describe("la page /produit", () => {
     );
   });
 
-  it("présente les jeux livrés", () => {
+  it("présente les jeux livrés, du plus récent au plus ancien", () => {
+    renderProduit();
+
+    const section = screen.getByRole("region", { name: /25 jeux/ });
+    const titles = within(section)
+      .getAllByRole("heading", { level: 3 })
+      .map((h) => h.textContent);
+
+    expect(titles).toEqual(gamesNewestFirst(games).map((game) => game.title));
+  });
+
+  it("affiche les visuels des jeux avec leur copyright, sans emplacement vide", () => {
     renderProduit();
 
     const section = screen.getByRole("region", { name: /25 jeux/ });
     for (const game of games) {
-      expect(within(section).getByText(game.title)).toBeInTheDocument();
+      if (!game.image) continue;
+      const image = within(section).getByRole("img", {
+        name: game.image.alt.fr,
+      });
+      // Le copyright est dans la légende de cette image précise.
+      const figure = image.closest("figure");
+      if (!figure) throw new Error(`pas de légende pour ${game.title}`);
+      expect(within(figure).getByText(game.image.credit)).toBeInTheDocument();
     }
+    expect(within(section).queryByText(/\[Visuel/)).not.toBeInTheDocument();
+    expect(within(section).queryByText(/\[Mosaïque/)).not.toBeInTheDocument();
   });
 
   it("affiche les recommandations choisies pour cette page", () => {

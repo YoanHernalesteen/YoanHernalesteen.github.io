@@ -1,5 +1,5 @@
-import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { fireEvent, render, screen } from "@testing-library/react";
+import { describe, expect, it, vi } from "vitest";
 
 import type { Testimonial } from "~/content/testimonials";
 
@@ -20,10 +20,17 @@ const short: Testimonial = {
   highlights: { accueil: { fr: "Phrase clé." } },
 };
 
+const highlight = { fr: "Phrase clé." };
+
 describe("TestimonialCard", () => {
   it("affiche la phrase mise en avant et le poste, sans nom", () => {
     render(
-      <TestimonialCard testimonial={long} highlight={{ fr: "Phrase clé." }} />,
+      <TestimonialCard
+        testimonial={long}
+        highlight={highlight}
+        expanded={false}
+        onToggle={() => {}}
+      />,
     );
 
     expect(screen.getByText("Phrase clé.")).toBeInTheDocument();
@@ -31,29 +38,74 @@ describe("TestimonialCard", () => {
     expect(screen.getByText(/a encadré Yoan/)).toBeInTheDocument();
   });
 
-  it("propose le texte complet, la traduction et l'original en anglais", () => {
+  it("garde le texte complet replié et hors de portée tant qu'il est fermé", () => {
     render(
-      <TestimonialCard testimonial={long} highlight={{ fr: "Phrase clé." }} />,
+      <TestimonialCard
+        testimonial={long}
+        highlight={highlight}
+        expanded={false}
+        onToggle={() => {}}
+      />,
     );
 
+    const button = screen.getByRole("button", {
+      name: "Lire la recommandation complète",
+    });
+    expect(button).toHaveAttribute("aria-expanded", "false");
+    // inert : ni clavier ni lecteur d'écran n'atteignent le texte replié.
     expect(
-      screen.getByText("Lire la recommandation complète"),
-    ).toBeInTheDocument();
-    expect(screen.getByText("Premier paragraphe.")).toBeInTheDocument();
+      screen.getByText("Premier paragraphe.").closest("[inert]"),
+    ).not.toBeNull();
+  });
+
+  it("affiche le texte complet en français une fois déplié", () => {
+    render(
+      <TestimonialCard
+        testimonial={long}
+        highlight={highlight}
+        expanded
+        onToggle={() => {}}
+      />,
+    );
+
+    const button = screen.getByRole("button", {
+      name: "Masquer la recommandation complète",
+    });
+    expect(button).toHaveAttribute("aria-expanded", "true");
+    expect(
+      screen.getByText("Premier paragraphe.").closest("[inert]"),
+    ).toBeNull();
+    // On signale la traduction, mais on n'affiche que la version française.
     expect(screen.getByText(/Traduit de l'anglais/)).toBeInTheDocument();
-    // L'original est balisé en anglais pour les lecteurs d'écran.
-    expect(
-      screen.getByText("First paragraph.").closest("[lang]"),
-    ).toHaveAttribute("lang", "en");
+    expect(screen.queryByText("First paragraph.")).not.toBeInTheDocument();
+  });
+
+  it("prévient son parent quand on clique sur le bouton", () => {
+    const onToggle = vi.fn();
+    render(
+      <TestimonialCard
+        testimonial={long}
+        highlight={highlight}
+        expanded={false}
+        onToggle={onToggle}
+      />,
+    );
+
+    fireEvent.click(screen.getByRole("button"));
+
+    expect(onToggle).toHaveBeenCalledOnce();
   });
 
   it("ne propose pas de dépliage quand la phrase est tout le texte", () => {
     render(
-      <TestimonialCard testimonial={short} highlight={{ fr: "Phrase clé." }} />,
+      <TestimonialCard
+        testimonial={short}
+        highlight={highlight}
+        expanded={false}
+        onToggle={() => {}}
+      />,
     );
 
-    expect(
-      screen.queryByText("Lire la recommandation complète"),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByRole("button")).not.toBeInTheDocument();
   });
 });

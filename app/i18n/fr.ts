@@ -18,10 +18,7 @@ export const fr = {
     menuClose: "Fermer le menu",
   },
   theme: {
-    label: "Thème",
-    system: "Système",
-    light: "Clair",
-    dark: "Sombre",
+    dark: "Thème sombre",
   },
   footer: {
     legal: "Mentions légales",
@@ -29,11 +26,11 @@ export const fr = {
     sourceCode: "code source",
   },
   home: {
-    metaTitle: "Conception produit et développement Ruby on Rails",
-    eyebrow: "Conception produit · Développement Ruby on Rails",
+    metaTitle: "Conception produit et développement Ruby on Rails / React",
+    eyebrow: "Conception produit · Développement Ruby on Rails / React",
     title: "Je conçois et je code des produits web.",
-    // TODO : « 16 ans » ou « 17 ans » ? La frise va de 2008 à 2025.
-    lede: "Pendant 16 ans, j'ai conçu des jeux vidéo chez Ubisoft, Gameloft, Don't Nod et Ninja Theory : specs, priorisation, Scrum. Aujourd'hui, je développe en Ruby on Rails chez Ellii, avec le même réflexe : partir de l'utilisateur.",
+
+    lede: "Pendant 16 ans, j'ai conçu des jeux vidéo chez Don't Nod, Ubisoft, Gameloft et Ninja Theory : specs, priorisation, Scrum. Aujourd'hui, je développe en Ruby on Rails chez Ellii, avec le même réflexe : partir de l'utilisateur.",
     doorsEyebrow: "Deux façons de lire mon profil",
     doorsLabel: "Choisir un profil",
     statsLabel: "En chiffres",
@@ -45,15 +42,25 @@ export const fr = {
     allTestimonials: "Toutes mes recommandations sur LinkedIn →",
     careerTitle: "Du game design au code",
     careerLede:
-      "Le fil rouge : concevoir pour des utilisateurs, piloter des features de bout en bout et travailler en Scrum.",
-    contactTitle: "Un poste à pourvoir ? Parlons-en.",
+      "Le fil rouge : concevoir pour des utilisateurs, piloter des features, travailler en Scrum.",
+    careerKinds: {
+      formation: "Formation",
+      poste: "Poste",
+    },
+    speedrunEyebrow: "Speedrun",
+    speedrunTitle: "Organiser des événements en direct",
+    speedrunLede:
+      "En dehors du travail, je pilote des marathons de speedrun : une date fixe, une équipe de bénévoles, une programmation à construire et une technique qui doit tenir en direct.",
+    since: (year) => `depuis ${year}`,
+    speedrunCase: "Lire l'étude de cas →",
+    contactTitle: "Me contacter pour un poste ou une mission",
     contactLede:
       "Basé à Issy-les-Moulineaux. Ouvert à l'Île-de-France, à Lille, à la Belgique et au télétravail.",
   },
   dev: {
     metaTitle: "Profil développeur",
     eyebrow: "Côté code",
-    // TODO : « 16 ans » ou « 17 ans » ?
+
     title: "Développeur Ruby on Rails, avec 16 ans de culture produit.",
     lede: "Chez Ellii, je développe des features front et back pour la refonte complète d'une plateforme d'ateliers en ligne pour seniors, testées avec RSpec. Je pratique React et Next.js sur mes projets personnels depuis 2021, et je progresse en TypeScript avec ce site.",
     cvCta: "Télécharger le CV développeur",
@@ -132,8 +139,8 @@ export const fr = {
   },
   testimonial: {
     readFull: "Lire la recommandation complète",
+    hideFull: "Masquer la recommandation complète",
     translatedFrom: "Traduit de l'anglais",
-    original: "Texte original",
   },
   contact: {
     pdf: "PDF",
@@ -153,7 +160,6 @@ export const fr = {
     resultCount: (count) =>
       count > 1 ? `${count} études de cas` : `${count} étude de cas`,
     readCase: "Lire l'étude de cas →",
-    coverPlaceholder: "[Visuel du projet : capture, photo ou vidéo]",
     back: "← Toutes les études de cas",
     next: "Étude suivante",
     brief: {

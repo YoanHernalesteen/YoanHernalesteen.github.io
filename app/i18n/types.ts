@@ -1,5 +1,6 @@
 import type { CaseBrief } from "~/content/cases";
 import type { Focus } from "~/content/positioning";
+import type { CareerKind } from "~/content/profile";
 
 // Langues du site. Ajouter "en" ici obligera TypeScript à réclamer
 // la traduction partout où un texte est typé `Localized<…>`.
@@ -52,9 +53,7 @@ export interface Dictionary {
     menuClose: string;
   };
   theme: {
-    label: string;
-    system: string;
-    light: string;
+    // Nom de l'interrupteur de thème (activé = sombre).
     dark: string;
   };
   footer: {
@@ -78,6 +77,13 @@ export interface Dictionary {
     allTestimonials: string;
     careerTitle: string;
     careerLede: string;
+    careerKinds: Record<CareerKind, string>;
+    speedrunEyebrow: string;
+    speedrunTitle: string;
+    speedrunLede: string;
+    // « depuis 2026 » : une fonction, car le texte contient l'année.
+    since: (year: number) => string;
+    speedrunCase: string;
     contactTitle: string;
     contactLede: string;
   };
@@ -100,8 +106,8 @@ export interface Dictionary {
   };
   testimonial: {
     readFull: string;
+    hideFull: string;
     translatedFrom: string;
-    original: string;
   };
   contact: {
     pdf: string;
@@ -117,7 +123,6 @@ export interface Dictionary {
     // Une fonction : le texte dépend du nombre (singulier, pluriel).
     resultCount: (count: number) => string;
     readCase: string;
-    coverPlaceholder: string;
     back: string;
     next: string;
     brief: { title: string } & Record<keyof CaseBrief, string>;

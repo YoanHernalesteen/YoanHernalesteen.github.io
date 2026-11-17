@@ -9,13 +9,17 @@ export function CaseCard({ study }: { study: CaseStudy }) {
   return (
     // relative : sert de cadre au lien étiré du titre (voir plus bas).
     <article className="relative flex min-w-0 flex-col gap-3.5 rounded-xl border border-line bg-surface p-6 transition-shadow focus-within:ring-2 focus-within:ring-dev hover:shadow-md">
-      {/* Emplacement provisoire du visuel. */}
-      <div
-        aria-hidden="true"
-        className="flex aspect-video items-center justify-center rounded-lg border border-dashed border-line-strong bg-chip p-3 text-center font-mono text-xs text-muted"
-      >
-        {t.cases.coverPlaceholder}
-      </div>
+      {/* alt="" : le titre nomme déjà le lien, l'image de la carte est
+          décorative. lazy : chargée seulement à l'approche de l'écran. */}
+      {study.cover && (
+        <img
+          src={study.cover.src}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          className="aspect-video w-full rounded-lg object-cover"
+        />
+      )}
 
       <div className="flex items-center justify-between gap-2">
         <div className="flex gap-1.5">
