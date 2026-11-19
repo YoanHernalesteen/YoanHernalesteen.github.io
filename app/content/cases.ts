@@ -1,4 +1,9 @@
+import jusantCover from "~/assets/cases/dont-nod-jusant-accessibilite/escalade.webp";
+import elliiRefonteCover from "~/assets/cases/ellii-refonte-tests-seniors/cover.webp";
+import elliiRecommandationCover from "~/assets/cases/ellii-recommandation-ateliers/cover.webp";
+import jppCover from "~/assets/cases/jpp-speedrun/logo.webp";
 import mediaTrackrCover from "~/assets/cases/media-trackr/cover.webp";
+import rolistesCover from "~/assets/cases/the-rolistes/cover.webp";
 import type { Localized } from "~/i18n/types";
 
 export type Track = "dev" | "produit";
@@ -32,7 +37,8 @@ export interface CaseStudy {
   // Visuel facultatif : sans lui, la carte et la page s'affichent sans image.
   // `src` vient d'un import d'image placée dans app/assets/cases/<slug>/,
   // par exemple : import mediaTrackrCover from "~/assets/cases/media-trackr/cover.webp";
-  cover?: { src: string; alt: Localized };
+  // `credit` : mention de copyright affichée sous l'image (« © Don't Nod »).
+  cover?: { src: string; alt: Localized; credit?: string };
 }
 
 // Les études de cas affichées sur le site. Les brouillons sont à part, dans
@@ -53,6 +59,12 @@ export const cases: readonly CaseStudy[] = [
     org: "Ellii",
     tags: { fr: ["Ruby on Rails", "Tests utilisateurs", "PostHog"] },
     featured: true,
+    cover: {
+      src: elliiRefonteCover,
+      alt: {
+        fr: "L'accueil du nouveau site Ellii : le slogan « Le plaisir d'être ensemble, la liberté d'être chez soi » sur une photo de yoga, et les chiffres clés.",
+      },
+    },
     brief: {
       fr: {
         role: "Développeur full-stack : pages publiques de la refonte (accueil, pages partenaires, FAQ, navigation), protocole de test, conduite des 12 tests, synthèse et recommandations, mesure de l'impact",
@@ -81,6 +93,12 @@ export const cases: readonly CaseStudy[] = [
       fr: ["Ruby on Rails", "Modèle de prévision", "Aide à la décision"],
     },
     featured: true,
+    cover: {
+      src: elliiRecommandationCover,
+      alt: {
+        fr: "L'onglet Diagnostic de l'outil : pour chaque atelier, le risque d'annulation, les inscrits et présents attendus, le rythme récent et la tendance.",
+      },
+    },
     brief: {
       fr: {
         role: "Développeur full-stack : analyse des données, conception et validation du modèle de prévision, intégration dans l'application (back, front, tests), propositions de planning",
@@ -134,6 +152,13 @@ export const cases: readonly CaseStudy[] = [
     org: "The Rolistes",
     tags: { fr: ["React", "Next.js", "Maintenance"] },
     featured: false,
+    cover: {
+      src: rolistesCover,
+      alt: {
+        fr: "L'accueil du site The Rolistes : le menu, une annonce, la grande illustration du podcast en noir et blanc et les derniers épisodes.",
+      },
+      credit: "Illustration © The Rolistes",
+    },
     brief: {
       fr: {
         role: "Développeur pour un client : cadrage, direction artistique définie avec le client, développement, déploiement et maintenance",
@@ -158,6 +183,13 @@ export const cases: readonly CaseStudy[] = [
     org: "Don't Nod",
     tags: { fr: ["Accessibilité", "Tests utilisateurs", "Unreal Engine 5"] },
     featured: true,
+    cover: {
+      src: jusantCover,
+      alt: {
+        fr: "Jusant : le personnage grimpe sous un surplomb rocheux, encordé, au-dessus d'une mer de nuages.",
+      },
+      credit: "© Don't Nod",
+    },
     brief: {
       fr: {
         role: "Game et level designer : options d'accessibilité liées aux contrôles, contrôles clavier et souris",
@@ -189,6 +221,10 @@ export const cases: readonly CaseStudy[] = [
       ],
     },
     featured: false,
+    cover: {
+      src: jppCover,
+      alt: { fr: "Le logo de JPP Speedrun, en lettres découpées." },
+    },
     brief: {
       fr: {
         role: "Cofondateur : processus de diffusion, formulaires de soumission, lien avec les restreams, revue des soumissions, planning",

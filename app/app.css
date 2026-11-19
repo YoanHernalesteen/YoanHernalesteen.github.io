@@ -103,6 +103,12 @@
   figcaption {
     @apply mt-2 text-sm text-subtle;
   }
+  /* MDX enveloppe dans un <p> une légende écrite sur plusieurs lignes :
+     elle garde le style de la légende, pas celui du texte courant. */
+  figcaption p {
+    @apply m-0 text-inherit leading-normal;
+    font-size: inherit;
+  }
 }
 
 /* Sections numérotées 01, 02… d'une étude de cas. Le numéro est généré

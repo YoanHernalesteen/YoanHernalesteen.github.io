@@ -1,3 +1,7 @@
+import indexDesktop from "../../../assets/cases/ellii-refonte-tests-seniors/index-desktop.webp";
+import activiteDesktop from "../../../assets/cases/ellii-refonte-tests-seniors/activite-desktop.webp";
+import mobile from "../../../assets/cases/ellii-refonte-tests-seniors/mobile.webp";
+
 ## Le contexte
 
 Ellii vend des ateliers en ligne à des seniors : yoga, chant, dessin, langues, gym douce… Les membres achètent des _elliixirs_, une monnaie virtuelle, puis les dépensent pour réserver une séance. Beaucoup sont peu à l'aise avec le numérique.
@@ -24,6 +28,30 @@ Mais ces mêmes membres trouvaient déjà l'ancien site facile à utiliser. Le r
 
 3. **Observer.** J'ai mené les tests avec 12 membres entre fin juillet et début septembre 2026, à distance et en partage d'écran. La plupart utilisaient un petit ordinateur portable ou une tablette. Les profils allaient du membre occasionnel au membre qui réserve plusieurs fois par semaine. Les séances duraient jusqu'à 1 h 30.
 
+<figure>
+  <img
+    src={indexDesktop}
+    alt="Les deux pages d'index du nouveau site : à gauche, les activités en cartes, filtrables par catégorie ; à droite, les séances classées par jour, avec l'heure, l'animateur et un bouton pour s'inscrire."
+    loading="lazy"
+  />
+  <figcaption>
+    Les pages d'index, au cœur des tests : trouver un atelier par activité ou
+    par date.
+  </figcaption>
+</figure>
+
+<figure>
+  <img
+    src={activiteDesktop}
+    alt="La page d'une activité, ici le yoga : la prochaine séance, la note des participants, une vidéo de présentation, la description, les avis et les prochains ateliers."
+    loading="lazy"
+  />
+  <figcaption>
+    Le détail d'une activité : description, avis et prochains ateliers sur une
+    seule page.
+  </figcaption>
+</figure>
+
 4. **Synthétiser.** J'ai rédigé les conclusions et classé les irritants selon leur fréquence et leur gravité : la tâche échoue-t-elle, ou est-ce une simple gêne ? Au-delà des écrans, les tests ont montré comment ces seniors utilisent le web :
    - **La mémorisation est difficile.** Ils retiennent mal où se trouve une information d'un écran à l'autre, et ne savent pas toujours s'ils sont connectés.
    - **Les conventions du web ne sont pas acquises.** Ils ignorent que le logo ramène à l'accueil et cherchent un lien « Accueil ». Ils prennent un bloc explicatif pour un bouton.
@@ -33,6 +61,18 @@ Mais ces mêmes membres trouvaient déjà l'ancien site facile à utiliser. Le r
    - le parrainage, mal compris et parfois même ignoré ;
    - la recharge et le solde d'elliixirs : le bouton « Se faire plaisir » n'était pas clair, et le solde restait introuvable sur un petit écran ;
    - la confusion entre « Mon historique » et « Mes activités ».
+
+<figure>
+  <img
+    src={mobile}
+    alt="Deux pages du nouveau site sur téléphone : à gauche, les séances par date, avec une liste déroulante, une recherche et des cartes de séance avec l'heure et un bouton Je m'inscris ; à droite, la description du yoga et les avis des participants."
+    loading="lazy"
+  />
+  <figcaption>
+    Sur téléphone : les séances par date et le détail d'une activité. Le choix
+    entre activité et date passe par une liste déroulante.
+  </figcaption>
+</figure>
 
 5. **Prioriser et corriger.** J'ai traité d'abord ce qui empêchait de terminer une tâche, avant les remarques de goût. Dès août, l'équipe a livré :
    - une page de parrainage refaite et reformulée ;

@@ -48,6 +48,7 @@ export const testimonials: readonly Testimonial[] = [
   },
   {
     role: { fr: "Producer · Don't Nod" },
+    relation: { fr: "a encadré Yoan sur Jusant" },
     paragraphs: {
       fr: [
         "J'ai eu la chance de travailler avec Yoan pendant plus de 3 ans, et ce fut un vrai plaisir !",

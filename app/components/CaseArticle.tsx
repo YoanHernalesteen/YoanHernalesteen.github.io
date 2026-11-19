@@ -58,12 +58,19 @@ export function CaseArticle({ study, next }: Props) {
       {/* Visuel principal, s'il existe. Il est en haut de page : chargé
           tout de suite, sans lazy loading. */}
       {study.cover && (
-        <img
-          src={study.cover.src}
-          alt={study.cover.alt[LANG]}
-          decoding="async"
-          className="mt-10 aspect-video w-full rounded-2xl border border-line object-cover"
-        />
+        <figure className="mt-10">
+          <img
+            src={study.cover.src}
+            alt={study.cover.alt[LANG]}
+            decoding="async"
+            className="aspect-video w-full rounded-2xl border border-line object-cover"
+          />
+          {study.cover.credit && (
+            <figcaption className="mt-2 text-sm text-subtle">
+              {study.cover.credit}
+            </figcaption>
+          )}
+        </figure>
       )}
 
       <div className="mt-14 flex flex-wrap items-start gap-14">

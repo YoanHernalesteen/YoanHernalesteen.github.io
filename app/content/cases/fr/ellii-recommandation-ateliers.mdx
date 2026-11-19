@@ -1,4 +1,11 @@
+import suggestions from "../../../assets/cases/ellii-recommandation-ateliers/suggestions.webp";
+import publicTab from "../../../assets/cases/ellii-recommandation-ateliers/public.webp";
+import simulation from "../../../assets/cases/ellii-recommandation-ateliers/simulation.webp";
+import reglages from "../../../assets/cases/ellii-recommandation-ateliers/reglages.webp";
+import fiabilite from "../../../assets/cases/ellii-recommandation-ateliers/fiabilite.webp";
+
 {/* Confidentialité : aucun nom ni classement d'animateurs ; chiffres de revenus en pourcentage, avec l'accord d'Ellii. */}
+{/* Captures de l'admin publiées avec l'accord d'Ellii : prénoms des animateurs et montants en euros floutés. */}
 
 ## Le contexte
 
@@ -23,7 +30,41 @@ En résumé : l'outil estime, pour chaque séance, ses chances d'être annulée 
 
 4. **Proposer.** J'ai construit un planning pour novembre 2026 à partir du modèle. Le classement repose sur le risque d'annulation et le nombre de participants attendus, pas sur la marge : c'est la participation qui pèse le plus dans le renouvellement des contrats partenaires. J'ai aussi mis en place une revue des créneaux proposés par les animateurs.
 
+<figure>
+  <img
+    src={suggestions}
+    alt="L'onglet Suggestions : des compteurs (propositions à valider, sessions à promouvoir, à annuler tôt, à ajouter, ateliers à réduire), l'avis sur les propositions des animateurs, les séances à promouvoir avec leurs chances d'atteindre le minimum, et les séances à ajouter semaine par semaine avec leur risque d'annulation."
+    loading="lazy"
+  />
+  <figcaption>
+    L'onglet Suggestions. Les prénoms des animateurs sont floutés.
+  </figcaption>
+</figure>
+
+<figure>
+  <img
+    src={publicTab}
+    alt="L'onglet Public : pour chaque activité, les sessions par semaine, le remplissage, la part de sessions complètes, la part de nouveaux membres, leur taux de retour, et un conseil sur la fréquence."
+    loading="lazy"
+  />
+  <figcaption>
+    L'onglet Public : faut-il ajouter une séance à une activité ?
+  </figcaption>
+</figure>
+
 5. **Intégrer.** J'ai découpé le travail en 4 tickets et 4 pull requests (Rails, Minitest, Turbo/Stimulus). Le résultat est un espace réservé aux admins, avec des onglets Diagnostic, Suggestions, Fiabilité et Simulation, et des réglages modifiables. Un job de nuit recalcule les prévisions.
+
+<figure>
+  <img
+    src={simulation}
+    alt="L'onglet Simulation : un calendrier du nombre de séances programmées par jour, le choix d'un atelier et d'une heure, puis le risque d'annulation, les inscrits et présents attendus, et le détail du calcul."
+    loading="lazy"
+  />
+  <figcaption>
+    L'onglet Simulation : tester une séance avant de la créer. Les prénoms et
+    les montants sont floutés.
+  </figcaption>
+</figure>
 
 6. **Mesurer.** Chaque prévision est enregistrée au moment de la publication. L'onglet Fiabilité la compare en continu à ce qui s'est réellement passé.
 
@@ -32,6 +73,19 @@ En résumé : l'outil estime, pour chaque séance, ses chances d'être annulée 
 - **Un outil réglable par l'équipe, sans pouvoir dérégler le modèle.** L'option écartée : tout coder en dur, si bien que chaque changement de règle passe par un développeur. À l'inverse, tout rendre modifiable aurait permis de casser sans le savoir un modèle validé. J'ai donc séparé les réglages en deux :
   - les règles métier sont modifiables par un admin, dans des bornes fixées, avec la valeur recommandée affichée à côté. On voit qui a fait chaque changement et quand, et on peut revenir à la recommandation en un clic ;
   - les paramètres du modèle, validés par le backtest, restent verrouillés : ils sont seulement affichés.
+
+<figure>
+  <img
+    src={reglages}
+    alt="L'onglet Réglages : chaque règle métier avec sa description, la valeur recommandée, la valeur en vigueur modifiable et un bouton Enregistrer."
+    loading="lazy"
+  />
+  <figcaption>
+    Les réglages modifiables, avec la valeur recommandée à côté. Les montants
+    sont floutés.
+  </figcaption>
+</figure>
+
 - **Aider à décider plutôt qu'automatiser.** L'option écartée : laisser l'algorithme publier ou annuler les séances lui-même. À la place, l'outil fait des propositions et donne ses raisons : promouvoir une séance, l'annuler tôt, en ajouter ou en retirer.
   - Les propositions des animateurs reçoivent un verdict (Fiable, À surveiller, Risqué, Bloqué), avec un motif et un autre jour possible.
   - Un admin peut exclure un couple animateur × atelier des prévisions. Il doit dire pourquoi, et l'outil garde une trace de qui l'a fait et quand.
@@ -39,6 +93,18 @@ En résumé : l'outil estime, pour chaque séance, ses chances d'être annulée 
   La raison : l'équipe sait des choses que les données ignorent, comme un animateur en congé ou un partenaire à satisfaire.
 
 - **Un outil qui mesure sa propre fiabilité.** L'option écartée : valider le modèle une fois à la livraison, puis lui faire confiance. À la place, chaque prévision est figée au moment de la publication et comparée en continu au résultat réel. La raison : le public et l'offre évoluent. Si le modèle se dégrade, l'équipe doit le voir avant de prendre de mauvaises décisions.
+
+<figure>
+  <img
+    src={fiabilite}
+    alt="L'onglet Fiabilité : sur 214 séances, les annulations et les sessions non rentables prévues comparées aux réelles, et la qualité du repérage."
+    loading="lazy"
+  />
+  <figcaption>
+    L'onglet Fiabilité : les prévisions comparées à ce qui s'est passé. Les
+    montants sont floutés.
+  </figcaption>
+</figure>
 
 ## Les résultats
 
