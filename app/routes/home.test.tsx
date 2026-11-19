@@ -64,7 +64,9 @@ describe("Home", () => {
   it("affiche les recommandations de l'accueil", () => {
     renderHome();
 
-    const section = screen.getByRole("region", { name: "Recommandations" });
+    const section = screen.getByRole("region", {
+      name: "Recommandations Ils ont travaillé avec moi",
+    });
     // Les citations affichées, dans l'ordre (le texte complet déplié peut
     // répéter la phrase : on vise donc les blockquote).
     const quotes = Array.from(section.querySelectorAll("blockquote")).map(

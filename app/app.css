@@ -67,6 +67,11 @@
   @apply mx-auto w-full max-w-[1200px] px-6;
 }
 
+/* Lien « … → » sous une section ; 44 px de haut pour le tactile. */
+@utility more-link {
+  @apply inline-flex min-h-11 items-center font-semibold underline-offset-4 hover:underline;
+}
+
 /* Texte long (études de cas en MDX, pages de contenu). */
 .case-body {
   h2 {

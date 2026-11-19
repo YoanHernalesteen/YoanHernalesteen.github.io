@@ -120,28 +120,19 @@ export default function Home() {
       </section>
 
       <section
-        aria-labelledby="cases-eyebrow cases-title"
+        aria-labelledby={sectionLabel("cases")}
         className="page pt-20 pb-8 md:pt-24"
       >
-        <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p id="cases-eyebrow" className="eyebrow">
-              {t.home.casesEyebrow}
-            </p>
-            <h2
-              id="cases-title"
-              className="mt-2 font-display text-3xl leading-tight font-bold md:text-[40px]"
-            >
-              {t.home.casesTitle}
-            </h2>
-          </div>
-          <Link
-            to="/cas"
-            className="inline-flex min-h-11 items-center font-semibold underline-offset-4 hover:underline"
-          >
-            {t.home.allCases}
-          </Link>
-        </div>
+        <SectionHeader
+          id="cases"
+          eyebrow={t.home.casesEyebrow}
+          title={t.home.casesTitle}
+          action={
+            <Link to="/cas" className="more-link">
+              {t.home.allCases}
+            </Link>
+          }
+        />
         <div className="grid gap-6 md:grid-cols-3">
           {featured.map((study) => (
             <CaseCard key={study.slug} study={study} />
@@ -150,41 +141,37 @@ export default function Home() {
       </section>
 
       <section
-        aria-label={t.home.testimonialsLabel}
+        aria-labelledby={sectionLabel("testimonials")}
         className="page pt-16 md:pt-20"
       >
-        <p className="eyebrow">{t.home.testimonialsLabel}</p>
-        <h2 className="mt-2 font-display text-3xl leading-tight font-bold md:text-[40px]">
-          {t.home.testimonialsTitle}
-        </h2>
+        <SectionHeader
+          id="testimonials"
+          eyebrow={t.home.testimonialsLabel}
+          title={t.home.testimonialsTitle}
+        />
         <TestimonialList
           items={testimonialsFor("accueil")}
           alignRows
-          className="mt-8 grid gap-6 md:grid-cols-3 md:gap-y-0"
+          className="grid gap-6 md:grid-cols-3 md:gap-y-0"
         />
-        <a
-          href={site.linkedin}
-          className="mt-4 inline-flex min-h-11 items-center font-semibold underline-offset-4 hover:underline"
-        >
+        <a href={site.linkedin} className="mt-4 more-link">
           {t.home.allTestimonials}
         </a>
       </section>
 
       <section
         id="parcours"
-        aria-labelledby="career-title"
+        aria-labelledby={sectionLabel("career")}
         className="page scroll-mt-4 py-20 md:py-24"
       >
-        <p className="eyebrow">{t.nav.career}</p>
-        <h2
-          id="career-title"
-          className="mt-2 font-display text-3xl leading-tight font-bold md:text-[40px]"
-        >
-          {t.home.careerTitle}
-        </h2>
+        <SectionHeader
+          id="career"
+          eyebrow={t.nav.career}
+          title={t.home.careerTitle}
+        />
         {/* Plus large que les autres introductions : la phrase tient sur
             une ligne sur ordinateur, et revient à la ligne sur mobile. */}
-        <p className="mt-4 max-w-[860px] text-lg leading-[1.6] text-muted">
+        <p className="-mt-3 max-w-[860px] text-lg leading-[1.6] text-muted">
           {t.home.careerLede}
         </p>
         {/* Grille : une étape seule en fin de ligne garde la largeur
@@ -225,10 +212,7 @@ export default function Home() {
             </li>
           ))}
         </ol>
-        <a
-          href={site.mobygames}
-          className="mt-8 inline-flex min-h-11 items-center font-semibold underline-offset-4 hover:underline"
-        >
+        <a href={site.mobygames} className="mt-8 more-link">
           {t.home.careerCredits}
         </a>
       </section>

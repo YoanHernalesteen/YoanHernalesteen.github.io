@@ -84,10 +84,7 @@ export default function Produit() {
           eyebrow={text.casesEyebrow}
           title={text.casesTitle}
           action={
-            <Link
-              to="/cas"
-              className="inline-flex min-h-11 items-center font-semibold underline-offset-4 hover:underline"
-            >
+            <Link to="/cas" className="more-link">
               {t.home.allCases}
             </Link>
           }
@@ -139,10 +136,7 @@ export default function Produit() {
             </li>
           ))}
         </ul>
-        <a
-          href={site.mobygames}
-          className="mt-3 inline-flex min-h-11 items-center font-semibold underline-offset-4 hover:underline"
-        >
+        <a href={site.mobygames} className="mt-3 more-link">
           {text.allCredits}
         </a>
       </section>
