@@ -68,7 +68,10 @@ export interface Dictionary {
     lede: string;
     doorsEyebrow: string;
     doorsLabel: string;
-    statsLabel: string;
+    pillarsLabel: string;
+    // Les trois piliers du profil, chacun avec sa preuve.
+    pillars: readonly TitledText[];
+    careerCredits: string;
     casesEyebrow: string;
     casesTitle: string;
     allCases: string;

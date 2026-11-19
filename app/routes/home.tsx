@@ -13,7 +13,7 @@ import {
   profilePaths,
   type Focus,
 } from "~/content/positioning";
-import { career, stats } from "~/content/profile";
+import { career } from "~/content/profile";
 import { site } from "~/content/site";
 import { speedrunActivities } from "~/content/speedrun";
 import { testimonialsFor } from "~/content/testimonials";
@@ -96,26 +96,23 @@ export default function Home() {
         })}
       </section>
 
+      {/* Le profil en trois piliers, chacun avec sa preuve. */}
       <section
-        aria-label={t.home.statsLabel}
+        aria-labelledby="pillars-title"
         className="border-y border-line bg-surface"
       >
-        <div className="page flex flex-wrap gap-8 py-10">
-          {stats.map((stat) => (
-            <div key={stat.value} className="flex-[1_1_220px]">
-              <p className="font-display text-5xl leading-none font-bold">
-                {stat.value}
-              </p>
-              <p className="mt-2 text-[15px] leading-normal text-muted">
-                {stat.label[LANG]}
-                {stat.link && (
-                  <>
-                    {" · "}
-                    <a href={stat.link.href} className="underline">
-                      {stat.link.label[LANG]}
-                    </a>
-                  </>
-                )}
+        {/* Titre lu par les lecteurs d'écran : évite de sauter du h1 au h3. */}
+        <h2 id="pillars-title" className="sr-only">
+          {t.home.pillarsLabel}
+        </h2>
+        <div className="page grid gap-8 py-10 md:grid-cols-3">
+          {t.home.pillars.map((pillar) => (
+            <div key={pillar.title}>
+              <h3 className="font-display text-[22px] leading-tight font-bold">
+                {pillar.title}
+              </h3>
+              <p className="mt-2 text-[15px] leading-[1.6] text-muted">
+                {pillar.text}
               </p>
             </div>
           ))}
@@ -228,6 +225,12 @@ export default function Home() {
             </li>
           ))}
         </ol>
+        <a
+          href={site.mobygames}
+          className="mt-8 inline-flex min-h-11 items-center font-semibold underline-offset-4 hover:underline"
+        >
+          {t.home.careerCredits}
+        </a>
       </section>
 
       <section

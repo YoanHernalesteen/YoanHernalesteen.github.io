@@ -47,7 +47,7 @@ export const cases: readonly CaseStudy[] = [
       fr: "Ellii : refondre l'application et la valider avec 12 seniors",
     },
     summary: {
-      fr: "Construire une grande partie des pages publiques de la refonte, puis la valider auprès de 12 membres seniors avant sa mise en ligne.",
+      fr: "Construire une partie des pages publiques de la refonte, puis la valider auprès de 12 membres seniors avant sa mise en ligne.",
     },
     tracks: ["dev", "produit"],
     year: { fr: "2026" },
@@ -100,10 +100,10 @@ export const cases: readonly CaseStudy[] = [
     summary: {
       fr: "Une app Rails qui centralise films, jeux et livres, avec des recommandations par IA.",
     },
-    tracks: ["dev"],
+    tracks: ["dev", "produit"],
     year: { fr: "2025" },
     org: "Le Wagon",
-    tags: { fr: ["Ruby on Rails", "OMDb, IGDB, Open Library", "OpenAI"] },
+    tags: { fr: ["Ruby on Rails", "Conception produit", "OpenAI"] },
     featured: false,
     cover: {
       src: mediaTrackrCover,
@@ -198,27 +198,6 @@ export const cases: readonly CaseStudy[] = [
         tools: "Twitch, YouTube, Bluesky, Discord, CryptPad",
         shows:
           "Pilotage d'un projet à date fixe, coordination de bénévoles, décisions en direct",
-      },
-    },
-  },
-  {
-    slug: "ce-portfolio",
-    title: { fr: "Ce portfolio : un site React typé, testé et accessible" },
-    summary: {
-      fr: "Composants en TypeScript, tests, intégration continue, accessibilité et performances mesurées avec Lighthouse.",
-    },
-    tracks: ["dev"],
-    year: { fr: "2026" },
-    org: "Projet personnel",
-    tags: { fr: ["TypeScript", "Vitest", "GitHub Actions"] },
-    featured: false,
-    brief: {
-      fr: {
-        role: "Conception et développement",
-        period: "2026",
-        team: "Seul",
-        tools: "React, TypeScript, React Router, Vitest, GitHub Actions",
-        shows: "TypeScript strict, tests, CI, accessibilité",
       },
     },
   },

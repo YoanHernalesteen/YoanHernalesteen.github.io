@@ -119,35 +119,6 @@ export const career: readonly CareerStep[] = [
   },
 ];
 
-export interface Stat {
-  value: string;
-  label: Localized;
-  link?: { href: string; label: Localized };
-}
-
-export const stats: readonly Stat[] = [
-  {
-    value: "25",
-    label: { fr: "jeux sortis, dont 7 sur console et PC et 18 sur mobile" },
-    link: {
-      href: "https://www.mobygames.com/person/395069/yoan-hernalesteen/credits/",
-      label: { fr: "voir mes crédits sur MobyGames" },
-    },
-  },
-  {
-    value: "6",
-    label: { fr: "studios internationaux accompagnés chez Gameloft" },
-  },
-  {
-    value: "12",
-    label: { fr: "seniors rencontrés en tests utilisateurs chez Ellii" },
-  },
-  {
-    value: "60+",
-    label: { fr: "épisodes présentés sur le site du podcast The Rolistes" },
-  },
-];
-
 export interface Game {
   title: string;
   // Année de sortie, pour le tri (pour une période, l'année de fin).

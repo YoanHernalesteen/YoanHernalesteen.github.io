@@ -54,4 +54,25 @@ export const draftCases: readonly CaseStudy[] = [
       },
     },
   },
+  {
+    slug: "ce-portfolio",
+    title: { fr: "Ce portfolio : un site React typé, testé et accessible" },
+    summary: {
+      fr: "Composants en TypeScript, tests, intégration continue, accessibilité et performances mesurées avec Lighthouse.",
+    },
+    tracks: ["dev"],
+    year: { fr: "2026" },
+    org: "Projet personnel",
+    tags: { fr: ["TypeScript", "Vitest", "GitHub Actions"] },
+    featured: false,
+    brief: {
+      fr: {
+        role: "Conception et développement",
+        period: "2026",
+        team: "Seul",
+        tools: "React, TypeScript, React Router, Vitest, GitHub Actions",
+        shows: "TypeScript strict, tests, CI, accessibilité",
+      },
+    },
+  },
 ];

@@ -10,6 +10,7 @@ import {
   profilePaths,
 } from "~/content/positioning";
 import { career } from "~/content/profile";
+import { site } from "~/content/site";
 import { speedrunActivities } from "~/content/speedrun";
 import { testimonialsFor } from "~/content/testimonials";
 
@@ -94,6 +95,34 @@ describe("Home", () => {
         within(timeline).getByText(`${labels[step.kind]} · ${step.period.fr}`),
       ).toBeInTheDocument();
     }
+  });
+
+  it("résume le profil en trois piliers, sans chiffres clés", () => {
+    renderHome();
+
+    const section = screen.getByRole("region", { name: "Mon profil en bref" });
+    expect(
+      within(section)
+        .getAllByRole("heading", { level: 3 })
+        .map((h) => h.textContent),
+    ).toEqual([
+      "Je pars de l'utilisateur",
+      "Je décide avec des données",
+      "Je code ce que je conçois",
+    ]);
+    expect(
+      screen.queryByRole("region", { name: "En chiffres" }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("propose les crédits MobyGames sous le parcours", () => {
+    renderHome();
+
+    const timeline = document.getElementById("parcours");
+    if (!timeline) throw new Error("section parcours introuvable");
+    expect(
+      within(timeline).getByRole("link", { name: /MobyGames/ }),
+    ).toHaveAttribute("href", site.mobygames);
   });
 
   it("ajoute une icône décorative devant chaque étiquette", () => {

@@ -33,7 +33,22 @@ export const fr = {
     lede: "Pendant 16 ans, j'ai conçu des jeux vidéo chez Don't Nod, Ubisoft, Gameloft et Ninja Theory : specs, priorisation, Scrum. Aujourd'hui, je développe en Ruby on Rails chez Ellii, avec le même réflexe : partir de l'utilisateur.",
     doorsEyebrow: "Deux façons de lire mon profil",
     doorsLabel: "Choisir un profil",
-    statsLabel: "En chiffres",
+    pillarsLabel: "Mon profil en bref",
+    pillars: [
+      {
+        title: "Je pars de l'utilisateur",
+        text: "16 ans à concevoir des jeux pour leurs joueurs, puis des tests avec 12 seniors pour valider une refonte.",
+      },
+      {
+        title: "Je décide avec des données",
+        text: "Un modèle de prévision qui aide l'équipe d'Ellii à construire son planning d'ateliers.",
+      },
+      {
+        title: "Je code ce que je conçois",
+        text: "Développeur Ruby on Rails / React, du besoin à la mise en production.",
+      },
+    ],
+    careerCredits: "Tous mes jeux sur MobyGames →",
     casesEyebrow: "Études de cas",
     casesTitle: "Ce que j'ai conçu et livré",
     allCases: "Toutes les études de cas →",

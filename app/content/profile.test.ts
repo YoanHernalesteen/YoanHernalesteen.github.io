@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { career, games, gamesNewestFirst, stats } from "./profile";
+import { career, games, gamesNewestFirst } from "./profile";
 import {
   TESTIMONIAL_PAGES,
   testimonials,
@@ -30,16 +30,6 @@ describe("le parcours", () => {
     expect(career.at(-1)?.current).toBe(true);
     expect(career.at(-1)?.kind).toBe("poste");
     expect(career.filter((step) => step.current)).toHaveLength(1);
-  });
-});
-
-describe("les chiffres clés", () => {
-  it("ont une valeur et une légende", () => {
-    expect(stats.length).toBeGreaterThan(0);
-    for (const stat of stats) {
-      expect(stat.value.trim()).not.toBe("");
-      expect(stat.label.fr.trim()).not.toBe("");
-    }
   });
 });
 
