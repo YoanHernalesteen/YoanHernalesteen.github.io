@@ -1,25 +1,47 @@
-{/* TODO : texte à écrire (600 à 900 mots). Le titre, le résumé et l'encadré « En bref » viennent de cases.ts. */}
-
 ## Le contexte
 
-TODO
+Après plusieurs années comme game designer et producer dans le jeu vidéo, je conçois et développe aujourd'hui des produits web. Un CV raconte mal ce parcours. Les recruteurs qui cherchent un Product Owner veulent voir comment je cadre un problème. Ceux qui cherchent un développeur veulent voir du code. Il me fallait un seul site qui parle aux deux.
+
+Je l'ai codé moi-même plutôt que de prendre un constructeur de sites. Pour un poste de développeur, le site est lui-même une preuve : son code est public, testé et vérifié à chaque push. Au quotidien, je travaille en Ruby on Rails, et j'utilise déjà Next.js sur un autre projet (The Rolistes). Ce site montre donc React et TypeScript seuls, sans framework qui fasse le travail à ma place.
 
 ## Le problème
 
-TODO : le problème en une phrase, du point de vue de l'utilisateur.
+Un recruteur passe moins d'une minute sur un portfolio : il doit comprendre tout de suite si mon profil correspond à son poste, puis trouver la preuve sans chercher.
 
 ## La démarche
 
-TODO : les étapes (préparer, observer, synthétiser, prioriser, mesurer…).
+**Maquettes d'abord.** J'ai comparé huit directions graphiques avant d'écrire une ligne de code, puis j'ai intégré celle que j'avais retenue page par page : en-tête, accueil, pages de profil, liste des cas, page d'un cas.
+
+**Une stack simple et maîtrisée.** React 19 et TypeScript en mode strict, React Router 8 et Vite, Tailwind CSS 4, MDX pour les textes.
+
+**Un site prérendu.** Au build, chaque page devient un fichier HTML statique, études de cas comprises. Le contenu s'affiche avant le chargement du JavaScript. Chaque page a son propre titre et son propre aperçu quand on la partage sur LinkedIn. Les liens directs fonctionnent sur un hébergement statique comme GitHub Pages.
+
+**Les tests d'abord.** Pour chaque fonctionnalité, j'écris d'abord le test qui la décrit, je le vois échouer, puis je l'implémente. Un test vérifie par exemple que chaque étude de cas a exactement un fichier de texte : si j'en oublie un, la suite échoue.
+
+**L'intégration continue dès le premier jour.** À chaque push, GitHub Actions vérifie les types, le lint, le formatage, lance les tests et fait le build. Les droits de la CI sont réduits au minimum : elle lit le code, rien de plus.
 
 ## Les décisions et les arbitrages
 
-TODO : 2 ou 3 choix, avec l'option écartée et la raison.
+**React Router plutôt qu'Astro.** Astro est fait pour les sites de contenu et aurait sans doute produit un site plus léger. Mais ce site doit aussi montrer que je sais construire une application React : routes, composants, état, typage. React Router en mode prérendu donne les deux à la fois : des pages statiques au premier chargement, puis une application React classique.
+
+**MDX pour les textes, TypeScript pour les métadonnées.** Le titre, le résumé, les tags et l'encadré « En bref » de chaque cas sont typés dans un fichier TypeScript, donc vérifiés par le compilateur. Le texte long est en MDX, plus agréable à écrire et à relire. J'ai écarté un CMS : il aurait ajouté un service à maintenir pour un site que je suis seul à modifier.
+
+**Des polices hébergées avec le site.** Charger les polices depuis Google Fonts aurait été plus simple. Mais cela envoie l'adresse IP du visiteur à un tiers, ce qui pose un problème de RGPD, et ajoute une connexion avant l'affichage. Le site ne fait donc aucune requête vers un tiers.
+
+**Un accueil à deux portes.** J'ai écarté deux options : un site unique et généraliste, qui ne convainc vraiment personne, et deux sites séparés, à maintenir deux fois. L'accueil propose une porte « produit » et une porte « développement », et deux pages dédiées, /produit et /dev, que j'envoie avec mes candidatures ciblées. Un seul réglage choisit quelle porte passe en premier. TypeScript exige un texte pour chaque angle, donc changer de positionnement tient en une ligne.
 
 ## Les résultats
 
-TODO : chiffres réels uniquement.
+- **Plus d'une centaine de tests automatisés** (Vitest et Testing Library), lancés à chaque push avec la vérification des types, le lint et le build.
+
+{/* TODO : Lighthouse (performance, accessibilité, bonnes pratiques, SEO), à mesurer sur le site en ligne. */}
+
+{/* TODO : accessibilité, à préciser (navigation au clavier, contrastes en thème clair et sombre, respect du réglage système du thème, textes alternatifs). */}
+
+{/* TODO : une fois en ligne, retours de recruteurs ou entretiens obtenus grâce au site, s'il y en a. */}
 
 ## Ce que je ferais autrement
 
-TODO
+**Écrire les textes avant le code.** J'ai construit les pages avec des textes provisoires, puis j'ai écrit les études de cas en dernier. Or c'est le contenu qui décide de la mise en page : plusieurs composants ont dû être ajustés une fois les vrais textes en place.
+
+**Ne pas faire confiance qu'aux tests.** Un jour, une erreur de configuration cassait le build alors que tous les tests passaient : le fichier de configuration est chargé par Node avant Vite, et les tests ne le chargent jamais. Depuis, le build fait partie de chaque vérification, en local comme dans la CI. Les tests disent que le code fait ce que j'attends ; seul le build prouve que le site sort.

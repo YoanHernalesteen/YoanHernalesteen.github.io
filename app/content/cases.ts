@@ -36,6 +36,8 @@ export interface CaseStudy {
   cover?: { src: string; alt: Localized };
 }
 
+// Les études de cas affichées sur le site. Les brouillons sont à part, dans
+// caseDrafts.ts : aucune page ne l'importe, ils ne partent donc pas en ligne.
 export const cases: readonly CaseStudy[] = [
   {
     // Fusion des anciens cas « tests avec 12 seniors » et « feature de la
@@ -45,7 +47,7 @@ export const cases: readonly CaseStudy[] = [
       fr: "Ellii : refondre l'application et la valider avec 12 seniors",
     },
     summary: {
-      fr: "Développer la refonte complète de l'application, puis la tester auprès de 12 seniors pour la valider et l'améliorer.",
+      fr: "Construire une grande partie des pages publiques de la refonte, puis la valider auprès de 12 membres seniors avant sa mise en ligne.",
     },
     tracks: ["dev", "produit"],
     year: { fr: "2026" },
@@ -54,10 +56,11 @@ export const cases: readonly CaseStudy[] = [
     featured: true,
     brief: {
       fr: {
-        role: "Développeur full-stack : [partie de la refonte développée], organisation des tests, synthèse, propositions d'améliorations",
-        period: "2026 · [durée]",
-        team: "[taille et rôles de l'équipe]",
-        tools: "Ruby on Rails, RSpec, Sidekiq, PostHog, [autres outils]",
+        role: "Développeur full-stack : pages publiques de la refonte (accueil, pages partenaires, FAQ, navigation), protocole de test, conduite des 12 tests, synthèse et recommandations, mesure de l'impact",
+        period: "2026 · 3 mois (juin → début septembre)",
+        team: "CTO, développeur front",
+        tools:
+          "Ruby on Rails, RSpec, Hotwire (Turbo/Stimulus), ViewComponent, Tailwind, Figma, PostHog",
         shows:
           "Recherche utilisateur, décisions produit, développement front et back, mesure",
       },
@@ -70,19 +73,22 @@ export const cases: readonly CaseStudy[] = [
       fr: "Ellii : recommander les ateliers à programmer à partir des données",
     },
     summary: {
-      fr: "Concevoir et développer un algorithme qui estime le remplissage des ateliers et les meilleurs créneaux, pour recommander à l'équipe les ateliers à proposer.",
+      fr: "Prévoir, avant de publier une séance, son risque d'annulation et le nombre de participants attendus, pour aider l'équipe à construire le planning.",
     },
     tracks: ["dev", "produit"],
     year: { fr: "2026" },
     org: "Ellii",
-    tags: { fr: ["Données d'usage", "Aide à la décision", "Back-office"] },
+    tags: {
+      fr: ["Ruby on Rails", "Modèle de prévision", "Aide à la décision"],
+    },
     featured: true,
     brief: {
       fr: {
-        role: "Conception et développement, sur un chantier jusque-là délaissé",
-        period: "2026 · [durée]",
-        team: "[taille et rôles de l'équipe]",
-        tools: "[outils et technologies]",
+        role: "Développeur full-stack : analyse des données, conception et validation du modèle de prévision, intégration dans l'application (back, front, tests), propositions de planning",
+        period: "2026 · environ 2 mois (fin septembre → novembre)",
+        team: "Moi + le CTO (revue du code et des choix)",
+        tools:
+          "Ruby on Rails, Minitest, Turbo/Stimulus, PostgreSQL, Solid Cache, PostHog, Linear",
         shows:
           "Analyse de données, décision produit, développement d'un outil interne",
       },
@@ -107,10 +113,11 @@ export const cases: readonly CaseStudy[] = [
     },
     brief: {
       fr: {
-        role: "[ton rôle dans l'équipe]",
-        period: "2025 · 2 semaines",
+        role: "Porteur du concept et lead technique (back-end, API et chatbot IA)",
+        period: "Décembre 2025 · 2 semaines, puis évolutions en solo",
         team: "3 développeurs",
-        tools: "Ruby on Rails, OMDb, IGDB, Open Library, API OpenAI",
+        tools:
+          "Ruby on Rails, Hotwire, OMDb, IGDB, Open Library, OpenAI (ruby_llm), Heroku",
         shows: "Intégration d'API, travail d'équipe, livraison rapide",
       },
     },
@@ -130,10 +137,10 @@ export const cases: readonly CaseStudy[] = [
     featured: false,
     brief: {
       fr: {
-        role: "[ton rôle]",
+        role: "Développeur pour un client : cadrage, direction artistique définie avec le client, développement, déploiement et maintenance",
         period: "Depuis 2021",
-        team: "[taille de l'équipe]",
-        tools: "React, Next.js",
+        team: "1 développeur (moi), avec la personne qui anime le podcast comme client (contenu et validation de la direction artistique)",
+        tools: "React, Next.js, TypeScript, Vitest, GitHub Actions",
         shows: "Un site maintenu dans la durée, une migration technique",
       },
     },
@@ -151,61 +158,16 @@ export const cases: readonly CaseStudy[] = [
     year: { fr: "2023" },
     org: "Don't Nod",
     tags: { fr: ["Accessibilité", "Tests utilisateurs", "Unreal Engine 5"] },
-    featured: false,
-    brief: {
-      fr: {
-        role: "Level designer : options d'accessibilité liées aux contrôles, contrôles clavier et souris",
-        period: "6 mois, autour de la sortie en 2023",
-        team: "[taille et rôles de l'équipe]",
-        tools: "Unreal Engine 5, [autres outils]",
-        shows:
-          "Accessibilité, conception à partir des difficultés des joueurs, options de jeu",
-      },
-    },
-  },
-  {
-    slug: "ubisoft-mighty-quest",
-    title: {
-      fr: "Ubisoft : boucle de jeu, rétention et monétisation d'un RPG mobile",
-    },
-    summary: {
-      fr: "Encadrer plusieurs designers et piloter les systèmes clés de Mighty Quest : boucle de jeu, progression, événements, boutique.",
-    },
-    tracks: ["produit"],
-    year: { fr: "2016 – 2019" },
-    org: "Ubisoft",
-    tags: { fr: ["Rétention", "Monétisation", "Encadrement"] },
-    featured: false,
-    brief: {
-      fr: {
-        role: "Senior Game Designer",
-        period: "2016 – 2019",
-        team: "[taille et rôles de l'équipe]",
-        tools: "[outils]",
-        shows: "Encadrement, systèmes de rétention et de monétisation",
-      },
-    },
-  },
-  {
-    slug: "gameloft-multi-studios",
-    title: {
-      fr: "Gameloft : superviser le design de jeux free-to-play dans plusieurs studios",
-    },
-    summary: {
-      fr: "Suivre la direction design de 15 jeux mobiles, du concept présenté à la direction jusqu'aux mises à jour après la sortie.",
-    },
-    tracks: ["produit"],
-    year: { fr: "2014 – 2016" },
-    org: "Gameloft",
-    tags: { fr: ["Pilotage multi-studios", "Pitch", "Free-to-play"] },
     featured: true,
     brief: {
       fr: {
-        role: "Game Content Manager",
-        period: "2014 – 2016",
-        team: "6 studios internationaux",
-        tools: "[outils]",
-        shows: "Pilotage de plusieurs équipes, suivi après la sortie",
+        role: "Game et level designer : options d'accessibilité liées aux contrôles, contrôles clavier et souris",
+        period:
+          "3 ans de projet, dont 6 mois sur l'accessibilité · sortie en 2023",
+        team: "Une trentaine de personnes en moyenne",
+        tools: "Unreal Engine 5",
+        shows:
+          "Accessibilité, conception à partir des difficultés des joueurs, options de jeu",
       },
     },
   },
@@ -230,10 +192,10 @@ export const cases: readonly CaseStudy[] = [
     featured: false,
     brief: {
       fr: {
-        role: "Cofondateur : programmation, coordination de l'équipe, supervision technique",
+        role: "Cofondateur : processus de diffusion, formulaires de soumission, lien avec les restreams, revue des soumissions, planning",
         period: "Depuis 2026 · 2 événements par an",
-        team: "[taille et rôles de l'équipe]",
-        tools: "[outils de diffusion et d'organisation]",
+        team: "5 cofondateurs : direction artistique, communication, Discord, modération ; tous participent à la revue des soumissions et au planning",
+        tools: "Twitch, YouTube, Bluesky, Discord, CryptPad",
         shows:
           "Pilotage d'un projet à date fixe, coordination de bénévoles, décisions en direct",
       },

@@ -1,33 +1,57 @@
-{/* TODO : texte à écrire (600 à 900 mots). Le titre, le résumé et l'encadré « En bref » viennent de cases.ts. */}
-
 {/* Confidentialité : aucun nom ni classement d'animateurs ; chiffres de revenus en pourcentage, avec l'accord d'Ellii. */}
 
 ## Le contexte
 
-Ellii propose des ateliers en ligne de prévention pour les seniors et leurs proches aidants. Après une première année d'activité, l'équipe programmait encore ses ateliers sans repères chiffrés. Le sujet était identifié, mais personne ne l'avait repris : j'en ai assuré la conception et le développement.
+Ellii vend des ateliers en ligne à des seniors : yoga, langues, chant, gym douce… Les membres achètent des _elliixirs_, une monnaie virtuelle, puis les dépensent pour réserver une séance. Une séance n'a lieu que si elle atteint un minimum de réservations, 3 ou 4 selon l'atelier ; sinon, elle est annulée. Le planning se faisait à l'intuition, à partir des créneaux proposés par les animateurs. J'ai mené ce projet pendant mon stage, en binôme avec le CTO.
 
 ## Le problème
 
-Deux questions restaient sans réponse : combien de temps à l'avance ouvrir les réservations, et combien d'ateliers proposer par jour et par semaine.
-
-TODO : les conséquences concrètes (ateliers peu remplis, places perdues…), et comment l'équipe s'en rendait compte.
+Sur les 12 derniers mois, une part importante des séances ont été annulées, et bien davantage encore pour les ateliers qui demandent 4 inscrits minimum. Chaque annulation coûte à tout le monde : le senior qui avait réservé est déçu, l'animateur perd sa séance, l'équipe perd du temps. La question était donc : peut-on prévoir, avant de publier une séance, ses chances d'être annulée et le nombre de participants attendus ? Et s'en servir pour mieux construire le planning ?
 
 ## La démarche
 
-TODO : les étapes.
+En résumé : l'outil estime, pour chaque séance, ses chances d'être annulée et le nombre de participants attendus, à partir de ce qui s'est passé pour des séances semblables.
 
-- Les données : la première année d'activité (inscriptions, créneaux, thèmes, animateurs).
-- La méthode : comment l'algorithme estime les chances de remplissage de chaque atelier, les meilleurs créneaux et le succès selon l'animateur.
-- L'outil : la section de l'administration qui recommande les ateliers à programmer.
+1. **Explorer les données.** J'ai travaillé sur un dump de production anonymisé, dans un dépôt d'analyse séparé de l'application, sans jamais versionner de données personnelles. Avant juin 2026, les annulations n'avaient pas de motif. Je les ai reconstitués à partir de l'historique d'audit, sans modifier la production. Parmi les annulations sans motif :
+   - la majorité concernaient des séances jamais publiées ;
+   - une part notable avait été décidée par un admin ;
+   - une minorité seulement était due à un manque d'inscrits.
+
+2. **Modéliser.** Le point de départ est le taux de remplissage de chaque couple animateur × atelier. Quand un couple a peu d'historique, ce taux emprunte à l'historique de l'atelier, puis de sa catégorie, puis à la moyenne globale. Il est ensuite recalé sur les 8 dernières semaines et ajusté selon deux facteurs : les séances proches qui visent le même public, et le délai entre la publication et la séance. Enfin, ce taux est traduit en risque d'annulation et en marge attendue.
+
+3. **Valider.** J'ai testé le modèle sur trois périodes passées qu'il n'avait pas vues (backtest), en comparant ses prédictions à ce qui s'est réellement passé. Une fois le modèle porté dans l'application, j'ai vérifié que le code Rails redonnait exactement les chiffres du prototype.
+
+4. **Proposer.** J'ai construit un planning pour novembre 2026 à partir du modèle. Le classement repose sur le risque d'annulation et le nombre de participants attendus, pas sur la marge : c'est la participation qui pèse le plus dans le renouvellement des contrats partenaires. J'ai aussi mis en place une revue des créneaux proposés par les animateurs.
+
+5. **Intégrer.** J'ai découpé le travail en 4 tickets et 4 pull requests (Rails, Minitest, Turbo/Stimulus). Le résultat est un espace réservé aux admins, avec des onglets Diagnostic, Suggestions, Fiabilité et Simulation, et des réglages modifiables. Un job de nuit recalcule les prévisions.
+
+6. **Mesurer.** Chaque prévision est enregistrée au moment de la publication. L'onglet Fiabilité la compare en continu à ce qui s'est réellement passé.
 
 ## Les décisions et les arbitrages
 
-TODO : 2 ou 3 choix, avec l'option écartée et la raison.
+- **Un outil réglable par l'équipe, sans pouvoir dérégler le modèle.** L'option écartée : tout coder en dur, si bien que chaque changement de règle passe par un développeur. À l'inverse, tout rendre modifiable aurait permis de casser sans le savoir un modèle validé. J'ai donc séparé les réglages en deux :
+  - les règles métier sont modifiables par un admin, dans des bornes fixées, avec la valeur recommandée affichée à côté. On voit qui a fait chaque changement et quand, et on peut revenir à la recommandation en un clic ;
+  - les paramètres du modèle, validés par le backtest, restent verrouillés : ils sont seulement affichés.
+- **Aider à décider plutôt qu'automatiser.** L'option écartée : laisser l'algorithme publier ou annuler les séances lui-même. À la place, l'outil fait des propositions et donne ses raisons : promouvoir une séance, l'annuler tôt, en ajouter ou en retirer.
+  - Les propositions des animateurs reçoivent un verdict (Fiable, À surveiller, Risqué, Bloqué), avec un motif et un autre jour possible.
+  - Un admin peut exclure un couple animateur × atelier des prévisions. Il doit dire pourquoi, et l'outil garde une trace de qui l'a fait et quand.
+
+  La raison : l'équipe sait des choses que les données ignorent, comme un animateur en congé ou un partenaire à satisfaire.
+
+- **Un outil qui mesure sa propre fiabilité.** L'option écartée : valider le modèle une fois à la livraison, puis lui faire confiance. À la place, chaque prévision est figée au moment de la publication et comparée en continu au résultat réel. La raison : le public et l'offre évoluent. Si le modèle se dégrade, l'équipe doit le voir avant de prendre de mauvaises décisions.
 
 ## Les résultats
 
-TODO : chiffres réels uniquement (taux de remplissage, adoption par l'équipe, décisions prises grâce à l'outil).
+- Le modèle a été validé sur deux périodes qu'il n'avait pas vues, de juillet à mi-novembre 2026 : ses prévisions d'annulations sont restées proches de la réalité, avec une AUC de 0,80 puis 0,81.
+
+  Une AUC de 0,8 veut dire que, dans 80 % des cas, le modèle juge une séance qui sera annulée plus risquée qu'une séance qui aura lieu.
+
+- L'analyse a fait ressortir une règle de publication : publier 3 à 4 semaines avant la séance, jamais moins de 2.
+- Le planning de novembre proposé est une projection, pas un résultat mesuré. Il prévoit nettement moins d'annulations qu'en septembre, et davantage de participants.
+- J'ai livré 4 pull requests et ouvert 5 tickets de suivi. L'un d'eux corrige un oubli repéré en chemin : à la publication, les limites de séances par jour n'étaient pas revérifiées.
+- _Avant / après en production : pas encore mesurable, les pull requests sont en cours de fusion. À compléter dans quelques semaines grâce à l'onglet Fiabilité._
 
 ## Ce que je ferais autrement
 
-TODO
+- **Mettre l'analyse sous Git dès le premier jour.** Mes premiers scripts vivaient dans un dossier temporaire, qui a été vidé trois fois. J'ai perdu du temps à les reconstruire.
+- **Sécuriser tôt les données de référence.** En cours de projet, les nouveaux dumps ont cessé d'inclure l'historique d'audit. J'ai dû conserver un ancien dump à part pour garder des chiffres comparables. Avec le recul, j'aurais aussi pu réduire plus tôt le découpage, passé de 6 pull requests à 4 tickets.

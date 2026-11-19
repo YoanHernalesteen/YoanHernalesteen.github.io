@@ -11,6 +11,8 @@ import {
 
 import { makeCase } from "~/test/makeCase";
 
+import { draftCases } from "./caseDrafts";
+
 const devOnly = makeCase({ slug: "dev-only", tracks: ["dev"] });
 const produitOnly = makeCase({ slug: "produit-only", tracks: ["produit"] });
 const both = makeCase({ slug: "both", tracks: ["dev", "produit"] });
@@ -133,5 +135,25 @@ describe("la liste des études de cas", () => {
     );
 
     expect(slugsFromFiles.sort()).toEqual(cases.map((c) => c.slug).sort());
+  });
+});
+
+describe("les brouillons", () => {
+  it("ne font pas partie des études de cas publiées", () => {
+    expect(draftCases.length).toBeGreaterThan(0);
+    for (const draft of draftCases) {
+      expect(cases.map((c) => c.slug)).not.toContain(draft.slug);
+      expect(getCase(draft.slug)).toBeUndefined();
+    }
+  });
+
+  it("ont leur texte dans brouillons/, hors des pages générées", () => {
+    // Le build ne génère que les pages des fichiers de cases/fr/.
+    const files = Object.keys(import.meta.glob("./cases/brouillons/*.mdx"));
+    const slugsFromFiles = files.map((path) =>
+      path.replace("./cases/brouillons/", "").replace(".mdx", ""),
+    );
+
+    expect(slugsFromFiles.sort()).toEqual(draftCases.map((c) => c.slug).sort());
   });
 });

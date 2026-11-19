@@ -1,28 +1,48 @@
-{/* TODO : texte à écrire (600 à 900 mots). Le titre, le résumé et l'encadré « En bref » viennent de cases.ts. */}
-
 ## Le contexte
 
-TODO : le podcast, son public, depuis 2021.
+The Rolistes est un podcast londonien consacré au jeu de rôle sur table, avec plus de 60 épisodes. Il s'adresse aux rôlistes, débutants comme confirmés. Début 2021, la personne qui anime le podcast m'a demandé de créer le site. J'apprenais alors React et j'envisageais une reconversion : j'ai accepté. Ce projet pour un vrai client est devenu mon premier projet React, et c'est lui qui m'a décidé à devenir développeur. Je le maintiens depuis.
 
 ## Le problème
 
-TODO : le problème en une phrase, du point de vue de l'utilisateur.
+« J'ai l'habitude de publier sur WordPress, mais je veux un site à l'image du podcast, où les auditeurs retrouvent facilement les épisodes, sans changer ma façon de publier. »
 
 ## La démarche
 
-TODO : les étapes, dont la migration de React vers Next.js en 2023.
+1. **2021, cadrage et première version en React + Bootstrap.** J'ai défini la direction artistique avec la personne qui anime le podcast, puis développé la liste des épisodes avec filtres, le lecteur intégré, le SEO avec React Helmet, le sitemap et l'inscription à la newsletter. Les mises à jour passaient par un script `.bat` local.
+2. **Juillet 2023, migration vers Next.js.** Le site passe en export statique, déployé sur GitHub Pages par GitHub Actions. Les pages sont générées au build, ce qui lève les limites de référencement d'une application React rendue côté client.
+3. **2025-2026, maintenance.** Passage à Node 24, ajout d'annonces et d'une page boutique.
+4. **Octobre-novembre 2026, refonte de la qualité :**
+   - suppression de Redux et de la route catch-all ;
+   - ajout d'une page 404 ;
+   - nettoyage de l'export XML pour en retirer les données sensibles, et sécurisation des liens ;
+   - chargement différé et images allégées ;
+   - génération du flux RSS au build ;
+   - migration progressive vers TypeScript ;
+   - composant SEO avec balises Open Graph ;
+   - mise en place des tests (Vitest + Testing Library) et de Prettier en CI ;
+   - republication automatique des épisodes programmés.
 
 ## Les décisions et les arbitrages
 
-TODO : 2 ou 3 choix, avec l'option écartée et la raison.
+- **Garder WordPress comme source de contenu, via son export XML, plutôt qu'un CMS headless ou une saisie directe dans le code.** La personne qui anime le podcast connaissait déjà WordPress ; lui imposer un nouvel outil aurait freiné la publication. Le site et le flux RSS sont donc générés depuis l'export WordPress au moment du build. En contrepartie, il faut nettoyer l'export (retirer les données sensibles) et le resynchroniser à chaque mise à jour.
+- **Faire un export statique sur GitHub Pages plutôt que du rendu serveur (Vercel ou un serveur dédié).** L'hébergement est gratuit et il n'y a aucun serveur à maintenir. En contrepartie, un épisode programmé n'apparaît pas tout seul. Je l'ai réglé avec une tâche planifiée qui tourne toutes les heures et ne relance le build que si un épisode vient de passer en ligne.
+- **Supprimer Redux plutôt que le garder.** Avec la génération statique, les données arrivent déjà par les props. Redux ajoutait de la complexité pour un état global qui n'existait pas.
+- **Migrer vers TypeScript fichier par fichier plutôt qu'en une fois.** Seuls les fichiers modifiés pour une autre raison passent en TypeScript, ce qui limite le risque sur un site en production.
 
 ## Les résultats
 
-TODO : chiffres réels uniquement.
+- 5 ans de maintenance continue (janvier 2021 → novembre 2026), soit 251 commits.
+- Plus de 60 épisodes publiés via le site.
+- 71 tests automatisés répartis dans 9 fichiers, tous au vert.
+- Coût d'hébergement : 0 € (GitHub Pages).
+- Publication des épisodes programmés automatisée, vérifiée toutes les heures.
+- Le site suit l'évolution du projet : la personne qui anime le podcast a depuis lancé ses propres jeux de plateau. Une page boutique et l'annonce de « Rosebois » préparent leur mise en avant sur le site.
 
 ## Ce que je ferais autrement
 
-TODO
+- **Mettre en place les tests et TypeScript dès le départ.** Les premiers tests sont arrivés cinq ans après le lancement. La refonte a donc dû corriger après coup des bugs de fuseau horaire et des liens cassés.
+- **Viser le rendu statique dès la première version.** Les limites de référencement et le déploiement par script local m'ont obligé à migrer en 2023.
+- **Formaliser le cadrage avec le client.** Une courte liste de besoins écrite au départ aurait évité des allers-retours sur la direction artistique et les fonctionnalités.
 
 ## Pour aller plus loin
 

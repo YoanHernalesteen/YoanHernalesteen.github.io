@@ -1,14 +1,10 @@
 import optionsEscalade from "../../../assets/cases/dont-nod-jusant-accessibilite/options-escalade.webp";
 
-{/* TODO : texte à écrire (600 à 900 mots). Le titre, le résumé et l'encadré « En bref » viennent de cases.ts. */}
-
 {/* Uniquement des éléments publics : le jeu sorti, ses menus, la presse. Pas de documents internes. */}
 
 ## Le contexte
 
-Jusant est un jeu d'escalade contemplatif sorti chez Don't Nod en 2023, développé sous Unreal Engine 5. En plus du level design, j'ai conçu les options d'accessibilité liées aux contrôles, ainsi que les contrôles au clavier et à la souris.
-
-TODO : l'équipe et la période.
+Jusant est un jeu d'escalade contemplatif sorti chez Don't Nod en 2023, développé sous Unreal Engine 5. En plus du level design, j'ai conçu les options d'accessibilité liées aux contrôles, ainsi que les contrôles au clavier et à la souris. Le projet a duré 3 ans ; le travail sur l'accessibilité, environ 6 mois.
 
 ## Le problème
 
@@ -18,17 +14,17 @@ Ces difficultés sont apparues lors des tests utilisateurs. Avec les contrôles 
 
 ## La démarche
 
-TODO : les étapes, des premiers constats aux options livrées.
+À la suite de retours sur la difficulté des contrôles pour certains joueurs, nous avons voulu proposer une alternative, pour que l'expérience de jeu soit inclusive.
+
+La simplification des contrôles à la manette a suivi un cycle itératif de propositions, de prototypes et de tests, dans l'organisation agile de l'équipe. Les contrôles au clavier et à la souris sont passés, eux aussi, par de nombreuses propositions avant d'arriver à leur version finale.
 
 ## Les décisions et les arbitrages
 
 **Garder les contrôles de base, et ajouter des options.** Les contrôles d'origine traduisent l'intensité de l'escalade : alterner et maintenir les gâchettes fait ressentir l'effort de chaque prise. Plutôt que de les simplifier pour tout le monde, au risque de perdre cette sensation, nous avons gardé ces contrôles par défaut et proposé des options. Le jeu reste fidèle à son intention, et s'ouvre à plus de profils de joueurs.
 
-TODO : un ou deux autres choix, avec l'option écartée et la raison (par exemple sur les contrôles au clavier et à la souris).
-
 ## Les résultats
 
-Le jeu est sorti avec des options d'accessibilité pour l'escalade. J'ai conçu celles qui concernent les contrôles :
+Quelques semaines après la sortie, une mise à jour a ajouté des options d'accessibilité pour l'escalade. J'ai conçu celles qui concernent les contrôles :
 
 - **Climbing Mode « Simplified »** : plus besoin de maintenir les boutons pour grimper, sauter ou utiliser le mousqueton.
 - **Jump Assistance** : les prises sont attrapées automatiquement pendant un saut.
@@ -43,14 +39,15 @@ Le jeu permet aussi de désactiver l'endurance (option **Stamina**).
     src={optionsEscalade}
     alt="Le menu d'accessibilité de Jusant : Climbing Mode réglé sur Simplified, Jump Assistance activée, et les options Invert Hold and Release, Rappel Mode, Stamina et Interaction Mode."
   />
-  <figcaption>Les options d'escalade du jeu sorti. © Don't Nod</figcaption>
+  <figcaption>Les options d'escalade du jeu. © Don't Nod</figcaption>
 </figure>
 
-Après la sortie, les données d'utilisation ont montré que ces options étaient bien utilisées. Des joueurs nous ont remerciés pour l'accessibilité du jeu, et l'option de contrôles simplifiés a été mentionnée dans plusieurs articles. GameAccess, la ressource sur l'accessibilité du jeu vidéo de l'association SpecialEffect, détaille ces options dans un guide consacré au jeu.
+Après leur mise en ligne, les données d'utilisation ont montré que ces options étaient bien utilisées. Des joueurs nous ont remerciés pour l'accessibilité du jeu, et l'option de contrôles simplifiés a été mentionnée dans plusieurs articles. GameAccess, la ressource sur l'accessibilité du jeu vidéo de l'association SpecialEffect, détaille ces options dans un guide consacré au jeu.
 
 ## Ce que je ferais autrement
 
-TODO
+- **Aborder l'accessibilité dès le départ.** J'aurais aimé que le sujet soit abordé en amont, pour que ces options soient disponibles dès le lancement du jeu, et pas plusieurs semaines après. Elles auraient sans doute aussi facilité le travail de l'équipe QA.
+- **Permettre de reconfigurer toutes les commandes.** Idéalement, le jeu aurait proposé de modifier l'ensemble des contrôles.
 
 ## Pour aller plus loin
 

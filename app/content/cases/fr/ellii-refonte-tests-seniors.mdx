@@ -1,32 +1,64 @@
-{/* TODO : texte à écrire (600 à 900 mots). Le titre, le résumé et l'encadré « En bref » viennent de cases.ts. */}
-
 ## Le contexte
 
-TODO : Ellii, ses utilisateurs (des seniors souvent peu à l'aise avec le numérique), la refonte complète de l'application, ton arrivée dans l'équipe.
+Ellii vend des ateliers en ligne à des seniors : yoga, chant, dessin, langues, gym douce… Les membres achètent des _elliixirs_, une monnaie virtuelle, puis les dépensent pour réserver une séance. Beaucoup sont peu à l'aise avec le numérique.
+
+En 2026, Ellii a lancé une refonte complète du site et de l'application. L'inscription, la réservation des ateliers, le profil et le parrainage ont été profondément revus. J'ai rejoint l'équipe en avril comme développeur full-stack. J'ai construit une grande partie des pages publiques de la refonte, puis organisé et mené sa validation auprès des membres.
 
 ## Le problème
 
-TODO : ce que la refonte devait résoudre, et pourquoi il fallait la valider auprès des utilisateurs avant de la généraliser.
+Les membres trouvaient l'ancien site efficace mais terne : « pas sexy mais efficace », « pas assez ludique ». La refonte devait le rendre plus chaleureux et plus lisible. Elle devait aussi mieux présenter l'offre à chaque public : seniors, proches, établissements et prescripteurs.
+
+Mais ces mêmes membres trouvaient déjà l'ancien site facile à utiliser. Le risque était réel : un site plus beau pouvait bousculer leurs habitudes et faire fuir des membres fidèles. Ce qui paraît évident à une équipe produit ne l'est pas pour une personne de 75 ans. Avant de généraliser la refonte, il fallait observer de vrais membres l'utiliser.
 
 ## La démarche
 
-TODO : de la refonte aux tests.
+1. **Développer.** Entre juin et août 2026, j'ai construit une grande partie des pages publiques de la refonte : l'accueil, les pages partenaires, la FAQ et la navigation.
 
-- Développer : la partie de la refonte que tu as construite (front et back, tests RSpec).
-- Préparer : le scénario de test et les tâches confiées aux seniors.
-- Observer : 12 seniors testent l'application (en présentiel ou à distance, durée des sessions).
-- Synthétiser : les irritants, classés par fréquence et gravité.
-- Prioriser et corriger : ce qui a changé dans la refonte grâce aux tests.
-- Mesurer : l'indicateur suivi dans PostHog.
+   L'ensemble repose sur des composants réutilisables, avec une attention particulière à l'accessibilité et aux performances. Il est couvert par des tests RSpec.
+
+2. **Préparer.** J'ai rédigé le protocole et une grille d'observation commune à toutes les séances :
+   - le participant note d'abord l'ancien site, sur ses visuels et sa facilité d'utilisation ;
+   - il découvre ensuite le nouveau site librement, en commentant à voix haute, et n'est guidé que s'il bloque ;
+   - il réalise 8 tâches concrètes : trouver un atelier, imaginer s'y inscrire, retrouver son solde d'elliixirs, recharger son compte, chercher un atelier par date, retrouver ses ateliers passés et à venir, parrainer un proche ;
+   - il note enfin le nouveau site et répond à des questions ouvertes.
+
+3. **Observer.** J'ai mené les tests avec 12 membres entre fin juillet et début septembre 2026, à distance et en partage d'écran. La plupart utilisaient un petit ordinateur portable ou une tablette. Les profils allaient du membre occasionnel au membre qui réserve plusieurs fois par semaine. Les séances duraient jusqu'à 1 h 30.
+
+4. **Synthétiser.** J'ai rédigé les conclusions et classé les irritants selon leur fréquence et leur gravité : la tâche échoue-t-elle, ou est-ce une simple gêne ? Au-delà des écrans, les tests ont montré comment ces seniors utilisent le web :
+   - **La mémorisation est difficile.** Ils retiennent mal où se trouve une information d'un écran à l'autre, et ne savent pas toujours s'ils sont connectés.
+   - **Les conventions du web ne sont pas acquises.** Ils ignorent que le logo ramène à l'accueil et cherchent un lien « Accueil ». Ils prennent un bloc explicatif pour un bouton.
+   - **Ils préfèrent faire défiler la page plutôt qu'utiliser des onglets.** Ils veulent tout voir d'un coup, surtout sur un petit écran.
+
+   Les irritants les plus fréquents :
+   - le parrainage, mal compris et parfois même ignoré ;
+   - la recharge et le solde d'elliixirs : le bouton « Se faire plaisir » n'était pas clair, et le solde restait introuvable sur un petit écran ;
+   - la confusion entre « Mon historique » et « Mes activités ».
+
+5. **Prioriser et corriger.** J'ai traité d'abord ce qui empêchait de terminer une tâche, avant les remarques de goût. Dès août, l'équipe a livré :
+   - une page de parrainage refaite et reformulée ;
+   - le solde d'elliixirs dans le menu du profil ;
+   - « Mon historique » renommé ;
+   - le bloc « Comment ça marche » retravaillé ;
+   - un fil d'Ariane pour se repérer ;
+   - des corrections de bugs.
+
+6. **Mesurer.** Avec la mise en ligne, début septembre 2026, l'équipe a ajouté dans PostHog un suivi de l'inscription, du paiement et du parrainage. De mon côté, j'ai comparé les réservations des membres existants entre la rentrée 2025 et la rentrée 2026, sur la même période et à profil égal. La campagne d'acquisition de septembre 2025 est exclue du calcul.
 
 ## Les décisions et les arbitrages
 
-TODO : 2 ou 3 choix, avec l'option écartée et la raison.
+- **Tester des membres actuels, en leur faisant noter l'ancien puis le nouveau site.** L'option écartée : tester des visiteurs qui découvrent Ellii. La raison : le principal risque était de perdre les habitués. Comme les mêmes personnes notaient les deux versions, on mesurait vraiment l'effet de la refonte.
+- **Un parcours semi-guidé, suivi de tâches précises.** L'option écartée : un test entièrement libre, ou entièrement scripté. La raison : la partie libre révèle les réflexes spontanés, comme chercher « Accueil » au lieu de cliquer sur le logo. Les tâches, elles, donnent un taux de réussite comparable d'un participant à l'autre.
+- **Corriger ce qui bloque avant ce qui déplaît.** L'option écartée : traiter les retours dans l'ordre d'arrivée, ou suivre les demandes les plus insistantes. La raison : une couleur jugée déplaisante n'empêchait personne d'avancer, alors que le parrainage échouait chez plus de la moitié des participants. Les demandes individuelles, comme trier les ateliers par animateur, ont été notées pour plus tard.
 
 ## Les résultats
 
-TODO : chiffres réels uniquement (irritants identifiés, améliorations livrées, indicateur avant / après).
+- **Visuels : une note nettement meilleure** pour le nouveau site, chez les 12 participants. Deux participants sur trois l'ont mieux noté que l'ancien, aucun ne l'a moins bien noté.
+- **Une facilité d'utilisation stable.** La refonte n'a pas dérouté les habitués, ce qui était le risque principal.
+- **Le parrainage, point faible révélé par les tests.** Moins de la moitié des participants l'ont réussi sans aide, et un tiers n'y sont pas parvenus. Sa page a été refaite en priorité.
+- **Réservations des membres existants : une hausse significative à la rentrée,** bien plus forte qu'un an plus tôt, sur la même période et à profil de membres égal. Cette hausse mesure l'effet de la refonte dans son ensemble : le paiement intégré et les cartes cadeaux sont arrivés en même temps.
+- **Paiement : nettement plus de paiements menés à terme** après la mise en ligne. Ce gain revient lui aussi à l'ensemble de la refonte.
 
 ## Ce que je ferais autrement
 
-TODO
+- **Des séances plus courtes.** Une séance s'est arrêtée au bout de 1 h 30, avant les dernières tâches, et d'autres n'ont pas pu toutes les couvrir. Je réduirais la découverte libre et je placerais en premier les tâches les plus risquées.
+- **Prévoir un plan B pour le test à distance, et inclure des nouveaux venus.** Le partage d'écran a échoué avec un vieil ordinateur ou une mauvaise connexion. Il faut prévoir un appel vidéo depuis le téléphone ou une séance en présentiel. Et comme je n'ai testé que des membres, la toute première visite d'un senior reste à valider.

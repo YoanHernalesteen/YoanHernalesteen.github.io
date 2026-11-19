@@ -1,28 +1,40 @@
-{/* TODO : texte à écrire (600 à 900 mots). Le titre, le résumé et l'encadré « En bref » viennent de cases.ts. */}
-
 ## Le contexte
 
-TODO : projet de fin de formation Le Wagon, équipe de 3, 2 semaines.
+Projet de fin de formation au Wagon (développement web), réalisé en équipe de 3 en 2 semaines, en décembre 2025. La stack était imposée : Ruby on Rails et Hotwire. J'ai eu l'idée de départ et j'ai été lead technique. J'ai continué à faire évoluer l'application seul après le bootcamp.
 
 ## Le problème
 
-TODO : le problème en une phrase, du point de vue de l'utilisateur.
+« Je regarde des films, je lis des livres et je joue à des jeux vidéo, mais je dois utiliser une application différente pour suivre chacun, et aucune ne m'aide à trouver quoi découvrir ensuite. »
 
 ## La démarche
 
-TODO : les étapes, et ce que tu as fait toi, séparé de ce qu'a fait l'équipe.
+1. **Cadrage** : le concept, les parcours utilisateur et le modèle de données. _Moi._
+2. **Fondations** : l'initialisation de l'app Rails, les modèles et le premier déploiement sur Heroku. _Moi._
+3. **Rôle de lead** : je relisais et validais les pull requests de l'équipe. _Moi._
+4. **Back-end et données** : l'intégration des 3 API externes, OMDb (films), Open Library (livres) et IGDB (jeux), avec la gestion des données manquantes (jeux sans éditeur, livres sans thème, etc.). _Moi._
+5. **Chatbot de recommandation** : une conversation par média, branchée sur OpenAI avec `ruby_llm`, avec un prompt propre à chaque type de média et un historique limité. _Moi._
+6. **Fonctionnalités transverses** : la recherche en temps réel avec Turbo Streams, les favoris (« J'aime » et « À voir ») et la page de détail d'un média. _Moi._
+7. **Le reste de l'équipe** : les collections, les avis avec notes en étoiles, le profil, les statistiques et l'authentification (Devise), ainsi que l'identité visuelle et l'interface (navigation, cartes, upload d'images avec Cloudinary).
+8. **Après le bootcamp** : refonte de l'enregistrement des médias en base, qui sont maintenant créés au moment de la recherche, puis passage à une version responsive pour ordinateur. _Moi, seul._
 
 ## Les décisions et les arbitrages
 
-TODO : 2 ou 3 choix, avec l'option écartée et la raison.
+- **Interroger 3 API spécialisées** plutôt qu'une seule source générique. Les données sont plus riches pour chaque type de média, mais il faut traiter 3 formats de réponse et des champs souvent manquants.
+- **Un chatbot centré sur un média précis** plutôt qu'un assistant généraliste. Le contexte reste court et la réponse pertinente, mais les recommandations ne tiennent pas encore compte de tout l'historique de l'utilisateur. L'historique de la conversation est aussi limité aux 10 derniers messages pour maîtriser la taille des requêtes.
+- **Mobile d'abord, sous forme de web app installable**, plutôt qu'une version pensée pour ordinateur. C'est l'usage principal visé, et la version ordinateur a été reportée après la démo.
+
+{/* TODO : à confirmer, la raison de la limite de 10 messages, et pourquoi l'ajout des favoris au contexte du chatbot a été mis de côté. */}
 
 ## Les résultats
 
-TODO : chiffres réels uniquement.
+- Une application livrée et présentée en 2 semaines, qui couvre 3 types de médias et intègre 3 API externes plus OpenAI.
+- Le projet a validé ma formation au Wagon.
+- Après le bootcamp, l'application a continué d'évoluer : les médias sont enregistrés au moment de la recherche, et une version pour ordinateur s'ajoute à la version mobile.
 
 ## Ce que je ferais autrement
 
-TODO
+- **Concevoir dès le départ le stockage des médias en base.** Au début, on affichait directement les résultats des API, et il a fallu tout restructurer en janvier.
+- **Écrire des tests automatisés dès le début.** Le projet n'en avait pas, et beaucoup de commits de la dernière semaine sont des corrections de bugs.
 
 ## Pour aller plus loin
 
