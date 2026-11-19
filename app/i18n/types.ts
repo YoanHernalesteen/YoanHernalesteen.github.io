@@ -7,7 +7,6 @@ import type { CareerKind } from "~/content/profile";
 export type Lang = "fr";
 
 // Un texte disponible dans chaque langue du site.
-// `Record<Lang, T>` = un objet avec une clé par langue, chacune de type T.
 export type Localized<T = string> = Record<Lang, T>;
 
 // Une porte de l'accueil (« Je recrute un développeur »…).

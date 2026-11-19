@@ -39,8 +39,6 @@ export function TestimonialCard({
   size = "default",
   aligned = false,
 }: Props) {
-  // useId : un identifiant unique et stable, identique au prérendu et dans
-  // le navigateur, pour relier le bouton au texte qu'il déplie.
   const contentId = useId();
   const paragraphs = testimonial.paragraphs[LANG];
   // Pas de dépliage si la phrase mise en avant est déjà tout le texte.

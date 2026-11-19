@@ -15,7 +15,6 @@ interface Props {
   eyebrow: string;
   title: string;
   lede: string;
-  // Boutons d'action sous le texte.
   actions: ReactNode;
 }
 
@@ -39,7 +38,6 @@ export function ProfileHero({ track, eyebrow, title, lede, actions }: Props) {
   );
 }
 
-// Classes des boutons d'action du bandeau.
 export const heroButton = {
   primary: (track: Track) =>
     `inline-flex min-h-12 items-center rounded-[10px] px-5 font-semibold text-on-accent hover:opacity-90 ${track === "dev" ? "bg-dev" : "bg-produit"}`,

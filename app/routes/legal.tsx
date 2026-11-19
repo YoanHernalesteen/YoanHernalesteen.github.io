@@ -13,7 +13,6 @@ export function meta(): Route.MetaDescriptors {
   });
 }
 
-// TODO : relire avant la mise en ligne (mesure d'audience).
 export default function Legal() {
   return (
     <article className="case-body page max-w-[760px] py-16">

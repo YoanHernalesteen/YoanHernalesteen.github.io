@@ -1,14 +1,12 @@
 // Thème du site : clair ou sombre. Tant que le visiteur n'a rien choisi,
 // le site suit la préférence de son navigateur (prefers-color-scheme).
-export const THEME_CHOICES = ["light", "dark"] as const;
+const THEME_CHOICES = ["light", "dark"] as const;
 export type ThemeChoice = (typeof THEME_CHOICES)[number];
 
 export const THEME_STORAGE_KEY = "theme";
 
 const DARK_QUERY = "(prefers-color-scheme: dark)";
 
-// `value is ThemeChoice` : un « type guard ». Si la fonction renvoie true,
-// TypeScript sait ensuite que `value` est un ThemeChoice.
 function isThemeChoice(value: unknown): value is ThemeChoice {
   return (THEME_CHOICES as readonly unknown[]).includes(value);
 }

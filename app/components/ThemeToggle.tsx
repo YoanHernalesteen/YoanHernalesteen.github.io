@@ -23,9 +23,6 @@ const icons: Record<ThemeChoice, React.ReactNode> = {
 };
 
 export function ThemeToggle() {
-  // useSyncExternalStore lit une valeur qui vit hors de React (le choix
-  // enregistré ou la préférence du navigateur) et réaffiche le composant
-  // quand elle change. Le 3e argument donne la valeur utilisée au prérendu.
   const theme = useSyncExternalStore(
     subscribeTheme,
     getThemeSnapshot,
@@ -33,7 +30,6 @@ export function ThemeToggle() {
   );
 
   return (
-    // Un interrupteur : « Thème sombre », activé ou non (aria-pressed).
     <button
       type="button"
       aria-label={t.theme.dark}

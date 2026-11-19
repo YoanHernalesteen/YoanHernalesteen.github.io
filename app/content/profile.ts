@@ -15,9 +15,6 @@ import rubikaLogo from "~/assets/logos/rubika.webp";
 import ubisoftLogo from "~/assets/logos/ubisoft.webp";
 import type { Localized } from "~/i18n/types";
 
-// Données de la maquette (direction A). Les valeurs entre crochets [ ]
-// sont à compléter.
-
 export type CareerKind = "formation" | "poste";
 
 export interface CareerStep {

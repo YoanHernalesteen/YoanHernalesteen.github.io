@@ -15,7 +15,6 @@ export interface CaseBrief {
 
 // Les métadonnées vivent ici, typées. Le texte de chaque cas vit dans
 // app/content/cases/<langue>/<slug>.mdx (un test vérifie la correspondance).
-// Les valeurs entre crochets [ ] sont à compléter.
 export interface CaseStudy {
   slug: string;
   title: Localized;

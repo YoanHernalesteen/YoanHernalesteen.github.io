@@ -18,7 +18,6 @@ export interface Testimonial {
   // pour la version anglaise.
   original?: readonly string[];
   // Phrase mise en avant sur chaque page où la recommandation apparaît.
-  // Partial<Record<…>> : un objet dont chaque clé de page est facultative.
   highlights: Partial<Record<TestimonialPage, Localized>>;
 }
 

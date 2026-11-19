@@ -8,7 +8,6 @@ import { CaseCard } from "./CaseCard";
 const FILTERS: readonly TrackFilter[] = ["tous", "dev", "produit"];
 
 export function CaseFilter({ cases }: { cases: readonly CaseStudy[] }) {
-  // useState<TrackFilter> : l'état ne peut valoir que "tous", "dev" ou "produit".
   const [filter, setFilter] = useState<TrackFilter>("tous");
   const visible = filterCases(cases, filter);
 

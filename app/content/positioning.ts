@@ -1,8 +1,6 @@
 import type { Track } from "./cases";
 
 // Les angles possibles du site.
-// `as const` fige le tableau : son type devient ["dev-produit", "po"]
-// au lieu de string[], ce qui permet d'en déduire le type Focus.
 export const FOCUSES = ["dev-produit", "po"] as const;
 export type Focus = (typeof FOCUSES)[number];
 

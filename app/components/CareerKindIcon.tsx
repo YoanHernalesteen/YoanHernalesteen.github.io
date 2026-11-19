@@ -4,14 +4,12 @@ import type { CareerKind } from "~/content/profile";
 
 // Tracés des icônes (style « trait », comme les autres icônes du site).
 const paths: Record<CareerKind, ReactNode> = {
-  // Chapeau de diplômé
   formation: (
     <>
       <path d="M22 10 12 5 2 10l10 5 10-5z" />
       <path d="M6 12v5c3 2 9 2 12 0v-5" />
     </>
   ),
-  // Mallette
   poste: (
     <>
       <rect x="3" y="7" width="18" height="13" rx="2" />

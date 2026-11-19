@@ -99,7 +99,6 @@ export const fr = {
     strengths: [
       {
         title: "Je pars de l'utilisateur",
-        // TODO : « 16 ans » ou « 17 ans » ?
         text: "16 ans à concevoir des parcours de jeu, l'accessibilité des contrôles de Jusant, et des tests utilisateurs auprès de 12 seniors chez Ellii.",
       },
       {
@@ -119,7 +118,6 @@ export const fr = {
     metaTitle: "Profil Product Owner",
     eyebrow: "Côté produit",
     title: "Un Product Owner qui comprend le code.",
-    // TODO : « 16 ans » ou « 17 ans » ?
     lede: "Pendant 16 ans, j'ai écrit des specs, priorisé des features et livré en Scrum avec des développeurs, des artistes et des animateurs. Chez Ubisoft, j'ai encadré plusieurs designers et piloté la rétention et la monétisation d'un RPG mobile. Chez Ellii, j'ai organisé des tests utilisateurs auprès de 12 seniors et mis en place le suivi produit avec PostHog.",
     cvCta: "Télécharger le CV Product Owner",
     casesCta: "Voir les études de cas produit",
@@ -218,7 +216,6 @@ export const fr = {
     po: {
       eyebrow: "Produit",
       title: "Je recrute un Product Owner",
-      // TODO : « 16 ans » ou « 17 ans » ?
       text: "16 ans à écrire des specs, prioriser et livrer en Scrum avec des équipes pluridisciplinaires. Des tests utilisateurs et du suivi produit chez Ellii.",
       chips: [
         "Specs",
