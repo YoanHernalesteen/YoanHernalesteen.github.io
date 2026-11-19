@@ -9,10 +9,11 @@ on:
 permissions:
   contents: read
 
-# Un nouveau push annule la vérification en cours sur la même branche.
+# Un nouveau push annule la vérification en cours sur la même branche,
+# sauf sur main, pour ne jamais couper un déploiement.
 concurrency:
   group: ci-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
   check:
@@ -32,5 +33,33 @@ jobs:
       - run: npm test
       - run: npm run build
 
-  # Le déploiement sur GitHub Pages sera ajouté ici, dans un job `deploy`
-  # qui dépendra de `check` (needs: check), au moment de la mise en ligne.
+      # Les étapes suivantes ne servent qu'au déploiement : uniquement sur main.
+      # Une URL inconnue affiche la page 404 de l'application. Les fichiers
+      # .data sont gardés : la navigation vers une étude de cas les charge.
+      - name: Préparer le site pour GitHub Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: cp build/client/__spa-fallback.html build/client/404.html
+      - uses: actions/upload-pages-artifact@v5
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        with:
+          path: build/client
+
+  # Publie sur GitHub Pages, seulement si toutes les vérifications passent.
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: check
+    runs-on: ubuntu-latest
+    # Droits limités à ce job : publier sur Pages, rien d'autre.
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # Un déploiement en cours n'est jamais interrompu à mi-chemin.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
