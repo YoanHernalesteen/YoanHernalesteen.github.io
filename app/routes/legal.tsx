@@ -32,6 +32,11 @@ export default function Legal() {
       <p>
         Ce site ne dépose aucun cookie et ne collecte aucune donnée personnelle.
       </p>
+      <p>
+        Les vidéos YouTube ne se chargent que si vous cliquez dessus. YouTube
+        peut alors déposer des cookies, selon sa propre politique de
+        confidentialité.
+      </p>
     </article>
   );
 }

@@ -158,6 +158,9 @@ export const fr = {
   contact: {
     pdf: "PDF",
   },
+  video: {
+    play: (title) => `Lire la vidéo : ${title}`,
+  },
   cases: {
     metaTitle: "Études de cas",
     eyebrow: "Études de cas",

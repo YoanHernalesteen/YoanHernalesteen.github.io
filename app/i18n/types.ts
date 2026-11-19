@@ -114,6 +114,10 @@ export interface Dictionary {
   contact: {
     pdf: string;
   };
+  video: {
+    // Nom du bouton de lecture : contient le titre de la vidéo.
+    play: (title: string) => string;
+  };
   cases: {
     metaTitle: string;
     eyebrow: string;
