@@ -62,6 +62,16 @@ describe("SiteHeader", () => {
     ).toHaveAttribute("href", positionings.po.cvHref);
   });
 
+  it("affiche l'icône du menu selon son état", () => {
+    renderHeaderAt("/");
+    const button = screen.getByRole("button", { name: "Ouvrir le menu" });
+
+    expect(button.querySelector("svg")).toHaveAttribute("data-icon", "bars");
+
+    fireEvent.click(button);
+    expect(button.querySelector("svg")).toHaveAttribute("data-icon", "xmark");
+  });
+
   it("ouvre et ferme le menu mobile", () => {
     renderHeaderAt("/");
     const button = screen.getByRole("button", { name: "Ouvrir le menu" });

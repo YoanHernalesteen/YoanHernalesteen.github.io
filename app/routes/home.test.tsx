@@ -141,6 +141,20 @@ describe("Home", () => {
     }
   });
 
+  it("distingue formations et postes par leur icône", () => {
+    renderHome();
+
+    const timeline = document.getElementById("parcours");
+    if (!timeline) throw new Error("section parcours introuvable");
+    const icons = Array.from(timeline.querySelectorAll("li svg"));
+
+    expect(icons.map((icon) => icon.getAttribute("data-icon"))).toEqual(
+      career.map((step) =>
+        step.kind === "formation" ? "graduation-cap" : "briefcase",
+      ),
+    );
+  });
+
   it("affiche le logo des entreprises qui en ont un, en décoration", () => {
     renderHome();
 

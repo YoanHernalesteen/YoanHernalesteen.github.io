@@ -1,3 +1,5 @@
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useId } from "react";
 
 import type { Testimonial } from "~/content/testimonials";
@@ -72,20 +74,11 @@ export function TestimonialCard({
             className="flex min-h-11 items-center gap-2 self-start justify-self-start text-[15px] font-semibold text-ink"
           >
             {expanded ? t.testimonial.hideFull : t.testimonial.readFull}
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+            <FontAwesomeIcon
+              icon={faChevronDown}
               aria-hidden="true"
-              className={`transition-transform duration-300 motion-reduce:transition-none ${expanded ? "rotate-180" : ""}`}
-            >
-              <path d="m6 9 6 6 6-6" />
-            </svg>
+              className={`text-[13px] transition-transform duration-300 motion-reduce:transition-none ${expanded ? "rotate-180" : ""}`}
+            />
           </button>
           {/* Animation fluide de la hauteur : la ligne de la grille passe de
               0fr (rien) à 1fr (toute la hauteur du contenu). inert retire le

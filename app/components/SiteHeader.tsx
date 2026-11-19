@@ -1,3 +1,5 @@
+import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useState, type KeyboardEvent } from "react";
 import { Link, NavLink, useLocation } from "react-router";
 
@@ -62,22 +64,11 @@ export function SiteHeader() {
             onClick={() => setOpen((value) => !value)}
             className="inline-flex size-11 items-center justify-center rounded-[10px] border border-line-strong bg-surface md:hidden"
           >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
+            <FontAwesomeIcon
+              icon={open ? faXmark : faBars}
               aria-hidden="true"
-            >
-              {open ? (
-                <path d="M6 6l12 12M18 6L6 18" />
-              ) : (
-                <path d="M4 7h16M4 12h16M4 17h16" />
-              )}
-            </svg>
+              className="text-lg"
+            />
           </button>
         </div>
 

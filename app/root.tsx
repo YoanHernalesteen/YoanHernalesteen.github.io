@@ -1,3 +1,4 @@
+import { config } from "@fortawesome/fontawesome-svg-core";
 import {
   isRouteErrorResponse,
   Link,
@@ -18,7 +19,12 @@ import type { Route } from "./+types/root";
 import "@fontsource-variable/inter";
 import "@fontsource-variable/jetbrains-mono";
 import "@fontsource-variable/space-grotesk";
+// Le CSS des icônes est inclus dans le build, et non injecté par JavaScript :
+// sans lui, les pages prérendues afficheraient des icônes géantes au chargement.
+import "@fortawesome/fontawesome-svg-core/styles.css";
 import "./app.css";
+
+config.autoAddCss = false;
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
