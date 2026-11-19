@@ -195,6 +195,21 @@ describe("Home", () => {
     }
   });
 
+  it("montre le logo de chaque événement de speedrun", () => {
+    renderHome();
+
+    const section = screen.getByRole("region", {
+      name: /Organiser des événements en direct/,
+    });
+    const articles = within(section).getAllByRole("article");
+
+    expect(articles).toHaveLength(speedrunActivities.length);
+    for (const article of articles) {
+      // Décoratif : l'événement est déjà nommé dans le titre ou le texte.
+      expect(article.querySelector("img")).toHaveAttribute("alt", "");
+    }
+  });
+
   it("propose les deux CV dans le bloc contact", () => {
     renderHome();
 

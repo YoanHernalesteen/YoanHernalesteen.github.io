@@ -235,9 +235,24 @@ export default function Home() {
               key={activity.name}
               className="flex flex-col gap-3 rounded-xl border border-line bg-surface p-6"
             >
-              <h3 className="font-display text-xl font-bold">
-                {activity.name}
-              </h3>
+              {/* Même disposition que le parcours : titre à gauche, logo
+                  décoratif en haut à droite. */}
+              <div className="flex items-start justify-between gap-3">
+                <h3 className="font-display text-xl font-bold">
+                  {activity.name}
+                </h3>
+                {activity.logo && (
+                  <img
+                    src={activity.logo}
+                    alt=""
+                    width={40}
+                    height={40}
+                    loading="lazy"
+                    decoding="async"
+                    className="size-10 shrink-0 rounded-lg ring-1 ring-line"
+                  />
+                )}
+              </div>
               <p className="font-mono text-[13px] text-subtle">
                 {activity.role[LANG]} · {t.home.since(activity.since)}
               </p>

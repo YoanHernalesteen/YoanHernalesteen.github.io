@@ -1,7 +1,13 @@
+import bbgLogo from "~/assets/logos/bigbadgame-a-thon.webp";
+import gdqLogo from "~/assets/logos/games-done-quick.webp";
+import jppLogo from "~/assets/logos/jpp-speedrun.webp";
 import type { Localized } from "~/i18n/types";
 
 export interface SpeedrunActivity {
   name: string;
+  // Logo carré en haut à droite de la carte, décoratif : le nom est écrit
+  // dans le titre ou le texte de la carte.
+  logo?: string;
   role: Localized;
   // Année de début (affichée « depuis 2026 »).
   since: number;
@@ -14,6 +20,7 @@ export interface SpeedrunActivity {
 export const speedrunActivities: readonly SpeedrunActivity[] = [
   {
     name: "JPP Speedrun",
+    logo: jppLogo,
     role: { fr: "Cofondateur" },
     since: 2026,
     text: {
@@ -27,16 +34,18 @@ export const speedrunActivities: readonly SpeedrunActivity[] = [
   },
   {
     name: "BigBadGame-a-thon",
+    logo: bbgLogo,
     role: { fr: "Membre du staff" },
     since: 2024,
     text: { fr: "Programmation des runs et animation de l'événement." },
   },
   {
     name: "Marathons caritatifs internationaux",
+    logo: gdqLogo,
     role: { fr: "Runner et commentateur" },
     since: 2021,
     text: {
-      fr: "Des runs et du commentaire lors de marathons comme Games Done Quick, Speedons ou Interglitches, dont certains récoltent des millions pour des associations. Restream en français de Games Done Quick avec Le French Restream.",
+      fr: "Des runs et du commentaire lors de marathons comme Games Done Quick, Speedons, Interglitches ou le Benelux Speedrun Gathering, dont certains récoltent des millions pour des associations.",
     },
   },
 ];
