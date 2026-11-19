@@ -73,7 +73,7 @@ export const cases: readonly CaseStudy[] = [
         tools:
           "Ruby on Rails, RSpec, Hotwire (Turbo/Stimulus), ViewComponent, Tailwind, Figma, PostHog",
         shows:
-          "Recherche utilisateur, décisions produit, développement front et back, mesure",
+          "Recherche utilisateur, décisions produit, développement front et back, mesure de l'impact avec PostHog",
       },
     },
   },
