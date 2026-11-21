@@ -102,7 +102,6 @@ export const fr = {
     lede: "16 ans de jeu vidéo, dont 9 comme Senior Game Designer chez Ubisoft et Don't Nod : des specs, des features priorisées et livrées en Scrum avec des développeurs, des artistes et des animateurs. Chez Ubisoft, j'ai encadré 4 game designers et suivi la rétention et la monétisation d'un RPG mobile par des A/B tests. Chez Ellii, j'ai organisé des tests utilisateurs auprès de 12 seniors et participé à la mise en place du suivi produit avec PostHog. Le rôle de Product Owner m'est donc familier : backlog, user stories, recette.",
     cvCta: "Télécharger mon CV",
     casesCta: "Voir les études de cas produit",
-    redirect: "Aller à l'accueil",
     methodEyebrow: "Ma méthode",
     methodTitle: "Comprendre, prioriser, livrer, mesurer",
     method: [

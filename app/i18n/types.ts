@@ -86,8 +86,6 @@ export interface Dictionary {
     lede: string;
     cvCta: string;
     casesCta: string;
-    // Lien de secours de l'ancienne page /produit.
-    redirect: string;
     methodEyebrow: string;
     methodTitle: string;
     method: readonly TitledText[];
