@@ -1,5 +1,6 @@
 import type { CaseBrief } from "~/content/cases";
 import type { Focus } from "~/content/positioning";
+import type { GameloftRole } from "~/content/gameloft";
 import type { CareerKind } from "~/content/profile";
 
 // Langues du site. Ajouter "en" ici obligera TypeScript à réclamer
@@ -89,6 +90,16 @@ export interface Dictionary {
     methodEyebrow: string;
     methodTitle: string;
     method: readonly TitledText[];
+  };
+  // Les jeux suivis chez Gameloft (étude de cas).
+  gameloft: {
+    roles: Record<GameloftRole, string>;
+    googlePlay: string;
+    appStore: string;
+    // Une fonction : le texte contient la tranche (« 500 M+ »).
+    downloads: (range: string) => string;
+    // Note lue par les lecteurs d'écran (« 4,4 sur 5 »).
+    ratingLabel: (rating: string) => string;
   };
   games: {
     eyebrow: string;

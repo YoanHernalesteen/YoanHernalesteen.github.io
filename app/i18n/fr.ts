@@ -123,6 +123,17 @@ export const fr = {
       },
     ],
   },
+  gameloft: {
+    roles: {
+      both: "Création et mises à jour",
+      updates: "Mises à jour",
+      creation: "Création",
+    },
+    googlePlay: "Google Play",
+    appStore: "App Store",
+    downloads: (range) => `${range} téléchargements`,
+    ratingLabel: (rating) => `${rating} sur 5`,
+  },
   games: {
     eyebrow: "Jeux livrés · 2008 – 2025",
     title: "25 jeux, de la spec à la sortie",
