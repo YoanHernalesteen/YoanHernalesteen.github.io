@@ -26,6 +26,14 @@ import "./app.css";
 
 config.autoAddCss = false;
 
+// Le SVG pour les navigateurs récents, le .ico pour les autres, et le PNG
+// pour l'écran d'accueil des iPhone. Fichiers générés depuis favicon.svg.
+export const links: Route.LinksFunction = () => [
+  { rel: "icon", href: "/favicon.ico", sizes: "any" },
+  { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+  { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+];
+
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     // suppressHydrationWarning : le script ci-dessous peut ajouter data-theme
