@@ -1,3 +1,7 @@
+import recherche from "../../../assets/cases/media-trackr/recherche.webp";
+import chatbot from "../../../assets/cases/media-trackr/chatbot.webp";
+import ficheProfil from "../../../assets/cases/media-trackr/fiche-profil.webp";
+
 ## Le contexte
 
 Projet de fin de formation au Wagon (développement web), réalisé en équipe de 3 en 2 semaines, en décembre 2025. La stack était imposée : Ruby on Rails et Hotwire. J'ai eu l'idée de départ et j'ai été lead technique. J'ai continué à faire évoluer l'application seul après le bootcamp.
@@ -16,6 +20,38 @@ Projet de fin de formation au Wagon (développement web), réalisé en équipe d
 6. **Fonctionnalités transverses** : la recherche en temps réel avec Turbo Streams, les favoris (« J'aime » et « À voir ») et la page de détail d'un média. _Moi._
 7. **Le reste de l'équipe** : les collections, les avis avec notes en étoiles, le profil, les statistiques et l'authentification (Devise), ainsi que l'identité visuelle et l'interface (navigation, cartes, upload d'images avec Cloudinary).
 8. **Après le bootcamp** : refonte de l'enregistrement des médias en base, qui sont maintenant créés au moment de la recherche, puis passage à une version responsive pour ordinateur. _Moi, seul._
+
+<figure>
+  <img
+    src={recherche}
+    alt="Trois recherches sur téléphone : des films pour « frankenstein », des jeux pour « mario » et des livres pour « murder ». Chaque résultat a sa couverture, son année, une icône de type de média, trois icônes (collection, favori, à voir) et un bouton de détails."
+    loading="lazy"
+  />
+  <figcaption>
+    La recherche, un type de média à la fois : films, jeux vidéo et livres.
+  </figcaption>
+</figure>
+
+<figure>
+  <img
+    src={chatbot}
+    alt="Deux conversations avec le chatbot sur téléphone : sous l'affiche de Home Alone, il présente le film ; sous l'affiche de Frankenstein, il propose d'autres jeux de monstres, dont la série Castlevania."
+    loading="lazy"
+  />
+  <figcaption>
+    Le chatbot, centré sur un média : il le présente ou recommande des titres
+    proches.
+  </figcaption>
+</figure>
+
+<figure>
+  <img
+    src={ficheProfil}
+    alt="À gauche, la fiche du livre Gone Girl, avec sa couverture et trois boutons : ajouter à la collection, aux favoris, à voir. À droite, le récapitulatif du profil : 10 médias collectés, 8 à voir, 10 aimés, et les activités récentes."
+    loading="lazy"
+  />
+  <figcaption>La fiche d'un média et le récapitulatif du profil.</figcaption>
+</figure>
 
 ## Les décisions et les arbitrages
 

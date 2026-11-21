@@ -62,9 +62,18 @@ describe("CaseArticle", () => {
   });
 
   it("n'affiche pas d'emplacement vide quand le cas n'a pas de visuel", () => {
-    renderArticle({ ...requireCase("media-trackr"), cover: undefined });
+    const study = requireCase("media-trackr");
+    if (!study.cover) throw new Error("media-trackr devrait avoir un visuel");
 
-    expect(screen.queryByRole("img")).not.toBeInTheDocument();
+    renderArticle({ ...study, cover: undefined });
+
+    expect(
+      screen.getByRole("heading", { level: 1, name: study.title.fr }),
+    ).toBeInTheDocument();
+    // Les captures du texte restent : seul le visuel d'en-tête disparaît.
+    expect(
+      screen.queryByRole("img", { name: study.cover.alt.fr }),
+    ).not.toBeInTheDocument();
     expect(screen.queryByText(/Visuel du projet/)).not.toBeInTheDocument();
   });
 
