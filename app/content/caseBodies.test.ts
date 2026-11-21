@@ -1,3 +1,6 @@
+import { readFileSync } from "node:fs";
+import path from "node:path";
+
 import { describe, expect, it } from "vitest";
 
 import { caseBodies } from "./caseBodies";
@@ -7,6 +10,15 @@ describe("caseBodies", () => {
   it("charge le texte de chaque étude de cas publiée", () => {
     for (const study of cases) {
       expect(caseBodies[`fr/${study.slug}`], study.slug).toBeDefined();
+    }
+  });
+
+  it("ne publie aucun texte provisoire", () => {
+    for (const study of cases) {
+      const file = path.join("app/content/cases/fr", `${study.slug}.mdx`);
+      const body = readFileSync(file, "utf8");
+
+      expect(body, study.slug).not.toMatch(/TODO|À compléter/i);
     }
   });
 

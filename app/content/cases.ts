@@ -52,7 +52,7 @@ export const cases: readonly CaseStudy[] = [
       fr: "Ellii : refondre l'application et la valider avec 12 seniors",
     },
     summary: {
-      fr: "Construire une partie des pages publiques de la refonte, puis la valider auprès de 12 membres seniors avant sa mise en ligne.",
+      fr: "Construire une partie des pages publiques de la refonte, la valider auprès de 12 membres seniors, puis relancer les membres avec Customer.io : abandons au paiement passés de 23 % à 15 %, absences aux ateliers divisées par 2.",
     },
     tracks: ["dev", "produit"],
     year: { fr: "2026" },
@@ -67,13 +67,14 @@ export const cases: readonly CaseStudy[] = [
     },
     brief: {
       fr: {
-        role: "Développeur full-stack : pages publiques de la refonte (accueil, pages partenaires, FAQ, navigation), protocole de test, conduite des 12 tests, synthèse et recommandations, mesure de l'impact",
-        period: "2026 · 3 mois (juin → début septembre)",
+        role: "Développeur full-stack : pages publiques de la refonte (accueil, pages partenaires, FAQ, navigation), protocole de test, conduite des 12 tests, synthèse et recommandations, participation au plan de suivi PostHog, campagnes Customer.io, mesure de l'impact",
+        period:
+          "2026 · avril → novembre (refonte mise en ligne début septembre)",
         team: "CTO, développeur front",
         tools:
-          "Ruby on Rails, RSpec, Hotwire (Turbo/Stimulus), ViewComponent, Tailwind, Figma, PostHog",
+          "Ruby on Rails, RSpec, Hotwire (Turbo/Stimulus), ViewComponent, Tailwind, Figma, PostHog, Customer.io",
         shows:
-          "Recherche utilisateur, décisions produit, développement front et back, mesure de l'impact avec PostHog",
+          "Recherche utilisateur, décisions produit, développement front et back, mesure de l'impact avec PostHog, relance des membres avec Customer.io",
       },
     },
   },
@@ -84,7 +85,7 @@ export const cases: readonly CaseStudy[] = [
       fr: "Ellii : recommander les ateliers à programmer à partir des données",
     },
     summary: {
-      fr: "Prévoir, avant de publier une séance, son risque d'annulation et le nombre de participants attendus, pour aider l'équipe à construire le planning.",
+      fr: "Prévoir, avant de publier une séance, son risque d'annulation et le nombre de participants attendus, pour aider l'équipe à construire le planning : +38 % de réservations sur les premières semaines, hors effet de la refonte.",
     },
     tracks: ["dev", "produit"],
     year: { fr: "2026" },
