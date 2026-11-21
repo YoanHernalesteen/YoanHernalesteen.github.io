@@ -1,7 +1,6 @@
 import { CaseFilter } from "~/components/CaseFilter";
 import { GamesSection } from "~/components/GamesSection";
 import { cases, sortCasesForTrack } from "~/content/cases";
-import { FOCUS, positionings } from "~/content/positioning";
 import { site } from "~/content/site";
 import { t } from "~/i18n";
 import { pageMeta } from "~/seo";
@@ -25,10 +24,8 @@ export default function Cases() {
       </p>
       {/* Titre lu par les lecteurs d'écran : évite de sauter du h1 au h3. */}
       <h2 className="sr-only">{t.cases.listTitle}</h2>
-      {/* Les cas de l'angle actif (FOCUS) d'abord. */}
-      <CaseFilter
-        cases={sortCasesForTrack(cases, positionings[FOCUS].primaryTrack)}
-      />
+      {/* Les cas produit d'abord. */}
+      <CaseFilter cases={sortCasesForTrack(cases, "produit")} />
       <GamesSection />
     </div>
   );

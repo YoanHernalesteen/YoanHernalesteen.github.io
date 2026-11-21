@@ -54,6 +54,15 @@ describe("SiteHeader", () => {
     ).toHaveAttribute("href", positionings["dev-produit"].cvHref);
   });
 
+  it("renvoie vers le contact de l'accueil depuis /produit, qui n'en a pas", () => {
+    renderHeaderAt("/produit");
+
+    expect(screen.getByRole("link", { name: "Contact" })).toHaveAttribute(
+      "href",
+      "/#contact",
+    );
+  });
+
   it("propose le CV Product Manager sur /produit", () => {
     renderHeaderAt("/produit");
 

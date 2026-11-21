@@ -9,18 +9,6 @@ export type Lang = "fr";
 // Un texte disponible dans chaque langue du site.
 export type Localized<T = string> = Record<Lang, T>;
 
-// Textes communs aux pages de profil (/dev, /produit).
-export interface ProfileText {
-  metaTitle: string;
-  eyebrow: string;
-  title: string;
-  lede: string;
-  cvCta: string;
-  casesEyebrow: string;
-  casesTitle: string;
-  contactTitle: string;
-}
-
 export interface TitledText {
   title: string;
   text: string;
@@ -77,15 +65,29 @@ export interface Dictionary {
     contactTitle: string;
     contactLede: string;
   };
-  dev: ProfileText & {
+  dev: {
+    metaTitle: string;
+    eyebrow: string;
+    title: string;
+    lede: string;
+    cvCta: string;
+    casesEyebrow: string;
+    casesTitle: string;
+    contactTitle: string;
     githubCta: string;
     stackEyebrow: string;
     stack: readonly TitledText[];
     strengthsEyebrow: string;
     strengths: readonly TitledText[];
   };
-  produit: ProfileText & {
+  // Le profil produit, affiché sur l'accueil.
+  produit: {
+    title: string;
+    lede: string;
+    cvCta: string;
     casesCta: string;
+    // Lien de secours de l'ancienne page /produit.
+    redirect: string;
     methodEyebrow: string;
     methodTitle: string;
     method: readonly TitledText[];

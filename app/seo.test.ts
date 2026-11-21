@@ -67,12 +67,14 @@ describe("pageMeta", () => {
 });
 
 describe("le sitemap", () => {
+  it("ne propose pas /produit, qui redirige vers l'accueil", () => {
+    expect(sitemapPaths()).not.toContain("/produit");
+  });
+
   it("liste les pages publiques et chaque étude de cas", () => {
     const paths = sitemapPaths();
 
-    expect(paths).toEqual(
-      expect.arrayContaining(["/", "/dev", "/produit", "/cas"]),
-    );
+    expect(paths).toEqual(expect.arrayContaining(["/", "/dev", "/cas"]));
     for (const study of cases) {
       expect(paths).toContain(`/cas/${study.slug}`);
     }

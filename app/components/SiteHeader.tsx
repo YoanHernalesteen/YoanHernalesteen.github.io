@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useState, type KeyboardEvent } from "react";
 import { Link, NavLink, useLocation } from "react-router";
 
-import { FOCUS, focusForPath, positionings } from "~/content/positioning";
+import { positionings } from "~/content/positioning";
 import { site } from "~/content/site";
 import { t } from "~/i18n";
 
@@ -19,13 +19,12 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
 
-  // Sur /dev et /produit, le CV de ce profil ; ailleurs, celui de l'angle actif.
-  const pageFocus = focusForPath(pathname);
-  const cvHref = positionings[pageFocus ?? FOCUS].cvHref;
+  const onDev = pathname === "/dev" || pathname.startsWith("/dev/");
+  const cvHref = positionings[onDev ? "dev-produit" : "pm"].cvHref;
 
-  // L'accueil et les pages de profil ont un bloc contact ; ailleurs,
-  // le lien mène à celui de l'accueil.
-  const contactHref = pathname === "/" || pageFocus ? "#contact" : "/#contact";
+  // L'accueil et /dev ont un bloc contact ; ailleurs, le lien mène à celui
+  // de l'accueil.
+  const contactHref = pathname === "/" || onDev ? "#contact" : "/#contact";
 
   const close = () => setOpen(false);
 

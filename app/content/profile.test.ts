@@ -75,6 +75,16 @@ describe("les recommandations", () => {
     expect(testimonialsFor(page).length).toBeGreaterThan(0);
   });
 
+  it("s'affichent chacune sur au moins une page du site", () => {
+    for (const testimonial of testimonials) {
+      const pages = TESTIMONIAL_PAGES.filter(
+        (page) => testimonial.highlights[page],
+      );
+
+      expect(pages, testimonial.role.fr).not.toEqual([]);
+    }
+  });
+
   it("n'affichent que le poste et l'entreprise, jamais le nom", () => {
     const allowed = [
       "role",

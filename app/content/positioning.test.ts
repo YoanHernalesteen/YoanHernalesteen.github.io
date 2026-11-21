@@ -5,36 +5,15 @@ import { describe, expect, it } from "vitest";
 
 import { fr } from "~/i18n/fr";
 
-import { FOCUS, FOCUSES, focusForPath, positionings } from "./positioning";
+import { FOCUSES, positionings } from "./positioning";
 
-describe("focusForPath", () => {
-  it("reconnaît les pages de profil", () => {
-    expect(focusForPath("/dev")).toBe("dev-produit");
-    expect(focusForPath("/produit")).toBe("pm");
-    expect(focusForPath("/produit/")).toBe("pm");
-  });
-
-  it("renvoie undefined ailleurs, même pour un chemin qui commence pareil", () => {
-    expect(focusForPath("/")).toBeUndefined();
-    expect(focusForPath("/cas")).toBeUndefined();
-    expect(focusForPath("/devis")).toBeUndefined();
-  });
-});
-
-describe("le positionnement", () => {
-  it("a un angle actif parmi les angles connus", () => {
-    expect(FOCUSES).toContain(FOCUS);
-  });
-
-  it.each(FOCUSES)("l'angle « %s » est complet", (focus) => {
-    const { primaryTrack, cvHref } = positionings[focus];
-
-    expect(["dev", "produit"]).toContain(primaryTrack);
-    expect(cvHref).toMatch(/^\/cv\/.+\.pdf$/);
+describe("les CV", () => {
+  it.each(FOCUSES)("le CV « %s » a un nom et une adresse en PDF", (focus) => {
+    expect(positionings[focus].cvHref).toMatch(/^\/cv\/.+\.pdf$/);
     expect(fr.header.cvByFocus[focus].trim()).not.toBe("");
   });
 
-  it.each(FOCUSES)("le CV de l'angle « %s » existe dans public/", (focus) => {
+  it.each(FOCUSES)("le CV « %s » existe dans public/", (focus) => {
     // /cv/x.pdf est servi depuis public/cv/x.pdf : sans le fichier, le
     // bouton de téléchargement mènerait à une page introuvable.
     const file = path.join("public", positionings[focus].cvHref);

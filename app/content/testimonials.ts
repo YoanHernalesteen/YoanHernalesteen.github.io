@@ -1,6 +1,6 @@
 import type { Localized } from "~/i18n/types";
 
-export const TESTIMONIAL_PAGES = ["accueil", "dev", "produit"] as const;
+export const TESTIMONIAL_PAGES = ["accueil", "dev"] as const;
 export type TestimonialPage = (typeof TESTIMONIAL_PAGES)[number];
 
 // Volontairement sans champ pour le nom : on n'affiche que le poste
@@ -40,9 +40,6 @@ export const testimonials: readonly Testimonial[] = [
       },
       dev: {
         fr: "Yoan connaissait déjà notre stack Ruby on Rails, et il s'est approprié très rapidement notre base de code et les spécificités de notre métier. Il sait tirer pleinement parti des outils d'IA pour avancer, explorer et itérer efficacement.",
-      },
-      produit: {
-        fr: "Yoan se pose les bonnes questions, garde toujours en tête l'expérience de l'utilisateur final, et n'hésite pas à faire des parallèles avec ce qu'il a vu dans l'industrie du jeu.",
       },
     },
   },
@@ -87,25 +84,6 @@ export const testimonials: readonly Testimonial[] = [
     highlights: {
       accueil: {
         fr: "Grâce à sa connaissance approfondie du design et à ses capacités d'analyse, nous avons repéré et anticipé d'innombrables problèmes dans nos jeux.",
-      },
-    },
-  },
-  {
-    role: { fr: "Consultant en game design" },
-    relation: { fr: "a encadré Yoan" },
-    paragraphs: {
-      fr: [
-        "Yoan a montré une grande compréhension de ce que les joueurs attendent d'un produit. Sa connaissance des jeux, et en particulier des mécaniques de jeu, est un atout dans une équipe de design. Yoan est aussi une personne très investie, capable de travailler avec un grand souci du détail.",
-      ],
-    },
-    translatedFrom: "en",
-    // Prénom corrigé (« Yoann » dans le texte d'origine).
-    original: [
-      "Yoan has displayed a great understanding of what game users are expecting from a product. His knowledge of games, and game mechanics, in particular, is an asset in a design team. Yoan is also a very dedicated person able to work in great details.",
-    ],
-    highlights: {
-      produit: {
-        fr: "Yoan a montré une grande compréhension de ce que les joueurs attendent d'un produit. Sa connaissance des jeux, et en particulier des mécaniques de jeu, est un atout dans une équipe de design.",
       },
     },
   },

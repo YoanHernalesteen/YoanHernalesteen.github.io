@@ -1,6 +1,6 @@
 # Yoan Hernalesteen — Portfolio
 
-Personal portfolio of a product-minded developer: after years as a game designer, I now design and build web products.
+Personal portfolio of a technical Product Manager: after years as a game designer, I now design and build web products.
 The site presents case studies that show how I work: the problem, my decisions and the results.
 
 **Live site:** [yoanhernalesteen.com](https://yoanhernalesteen.com)
@@ -38,11 +38,11 @@ the compiler. The long-form text lives in
 `app/content/cases/<lang>/<slug>.mdx`. A test makes sure every case has
 exactly one MDX file.
 
-**One switch for positioning.** `FOCUS` in
-[`app/content/positioning.ts`](app/content/positioning.ts) sets the angle of
-the site (`"dev-produit"` or `"pm"`): role, headline, highlighted CV, skills
-and the order of case studies. TypeScript requires every text for every
-angle, so switching is a one-line change.
+**One profile first.** The home page presents the Product Manager profile;
+the developer profile has its own page, `/dev`. The old `/produit` address
+redirects to the home page, so printed QR codes and CVs already sent keep
+working. Each profile's CV is set in
+[`app/content/positioning.ts`](app/content/positioning.ts).
 
 **Typed translations.** UI text lives in a typed dictionary
 ([`app/i18n/`](app/i18n/)). Adding `"en"` to the `Lang` type makes the

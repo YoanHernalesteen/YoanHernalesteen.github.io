@@ -44,13 +44,7 @@ export function pageMeta({
 
 // Pages proposées aux moteurs de recherche (les mentions légales n'y sont pas).
 export function sitemapPaths(): string[] {
-  return [
-    "/",
-    "/dev",
-    "/produit",
-    "/cas",
-    ...cases.map((study) => `/cas/${study.slug}`),
-  ];
+  return ["/", "/dev", "/cas", ...cases.map((study) => `/cas/${study.slug}`)];
 }
 
 export function buildSitemap(paths: readonly string[]): string {

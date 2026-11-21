@@ -20,7 +20,7 @@ interface Props {
   footnote?: ReactNode;
 }
 
-// Bandeau coloré en haut de l'accueil, de /dev et de /produit.
+// Bandeau coloré en haut de l'accueil et de /dev.
 export function ProfileHero({
   track,
   eyebrow,
