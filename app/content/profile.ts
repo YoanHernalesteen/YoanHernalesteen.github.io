@@ -24,8 +24,6 @@ export interface CareerStep {
   period: Localized;
   title: Localized;
   details: Localized;
-  // Le poste actuel, mis en valeur dans la frise.
-  current?: boolean;
   // Logo de l'entreprise ou de l'école : vignette carrée de 160 px sur le
   // fond d'origine du logo (app/assets/logos/), décorative car le nom est
   // écrit à côté.
@@ -109,10 +107,9 @@ export const career: readonly CareerStep[] = [
     kind: "poste",
     startYear: 2026,
     logo: elliiLogo,
-    period: { fr: "2026 – aujourd'hui" },
+    period: { fr: "Avril – novembre 2026" },
     title: { fr: "Développeur full-stack Ruby on Rails" },
     details: { fr: "Ellii · stage de 6 mois, puis freelance" },
-    current: true,
   },
 ];
 

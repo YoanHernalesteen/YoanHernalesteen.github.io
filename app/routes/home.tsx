@@ -123,14 +123,12 @@ export default function Home() {
               key={step.startYear + step.title[LANG]}
               // Formation : ligne en pointillés ; poste : ligne pleine.
               // L'étiquette écrite reste l'information principale.
-              className={`border-t-2 pt-4 ${step.kind === "formation" ? "border-dashed" : "border-solid"} ${step.current ? "border-dev" : "border-ink"}`}
+              className={`border-t-2 border-ink pt-4 ${step.kind === "formation" ? "border-dashed" : "border-solid"}`}
             >
               {/* Étiquette à gauche, logo en haut à droite : le texte reste
                   aligné d'une étape à l'autre, avec ou sans logo. */}
               <div className="flex items-start justify-between gap-3">
-                <p
-                  className={`flex items-center gap-1.5 font-mono text-[13px] ${step.current ? "text-dev" : "text-subtle"}`}
-                >
+                <p className="flex items-center gap-1.5 font-mono text-[13px] text-subtle">
                   <CareerKindIcon kind={step.kind} />
                   {t.home.careerKinds[step.kind]} · {step.period[LANG]}
                 </p>

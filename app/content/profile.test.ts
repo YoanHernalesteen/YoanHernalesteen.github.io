@@ -26,10 +26,11 @@ describe("le parcours", () => {
     ).toEqual([2004, 2007, 2025]);
   });
 
-  it("se termine par le poste actuel", () => {
-    expect(career.at(-1)?.current).toBe(true);
+  it("se termine par un poste, sans poste en cours", () => {
     expect(career.at(-1)?.kind).toBe("poste");
-    expect(career.filter((step) => step.current)).toHaveLength(1);
+    expect(
+      career.filter((step) => step.period.fr.includes("aujourd'hui")),
+    ).toEqual([]);
   });
 });
 
