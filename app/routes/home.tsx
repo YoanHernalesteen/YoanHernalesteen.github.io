@@ -3,13 +3,14 @@ import { Link } from "react-router";
 import { CareerKindIcon } from "~/components/CareerKindIcon";
 import { CaseCard } from "~/components/CaseCard";
 import { ContactSection } from "~/components/ContactSection";
+import { GameList } from "~/components/GameList";
 import { MethodSection } from "~/components/MethodSection";
 import { heroButton, ProfileHero } from "~/components/ProfileHero";
 import { SectionHeader, sectionLabel } from "~/components/SectionHeader";
 import { TestimonialList } from "~/components/TestimonialList";
 import { cases, featuredCases } from "~/content/cases";
 import { positionings } from "~/content/positioning";
-import { career } from "~/content/profile";
+import { career, games } from "~/content/profile";
 import { site } from "~/content/site";
 import { speedrunActivities } from "~/content/speedrun";
 import { testimonialsFor } from "~/content/testimonials";
@@ -155,6 +156,23 @@ export default function Home() {
         <a href={site.mobygames} className="mt-8 more-link">
           {t.home.careerCredits}
         </a>
+      </section>
+
+      <section
+        aria-labelledby={sectionLabel("games")}
+        className="page pb-20 md:pb-24"
+      >
+        <SectionHeader
+          id="games"
+          eyebrow={t.games.eyebrow}
+          title={t.games.highlightTitle}
+          action={
+            <Link to="/cas#jeux" className="more-link">
+              {t.games.allGames}
+            </Link>
+          }
+        />
+        <GameList games={games.filter((game) => game.highlighted)} />
       </section>
 
       <section

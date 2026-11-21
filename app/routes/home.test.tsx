@@ -182,6 +182,38 @@ describe("Home", () => {
     }
   });
 
+  it("montre 3 jeux aux publics différents, entre le parcours et le speedrun", () => {
+    renderHome();
+
+    const section = screen.getByRole("region", { name: /Trois jeux/ });
+    expect(
+      within(section)
+        .getAllByRole("heading", { level: 3 })
+        .map((h) => h.textContent),
+    ).toEqual([
+      "Jusant",
+      "The Mighty Quest for Epic Loot",
+      "15 jeux free-to-play",
+    ]);
+    expect(
+      within(section).getByRole("link", { name: "Voir tous les jeux →" }),
+    ).toHaveAttribute("href", "/cas#jeux");
+
+    const timeline = document.getElementById("parcours");
+    if (!timeline) throw new Error("section parcours introuvable");
+    const speedrun = screen.getByRole("region", {
+      name: /Organiser des événements en direct/,
+    });
+    expect(
+      timeline.compareDocumentPosition(section) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(
+      section.compareDocumentPosition(speedrun) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+  });
+
   it("propose les crédits MobyGames sous le parcours", () => {
     renderHome();
 

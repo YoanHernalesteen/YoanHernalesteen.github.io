@@ -125,6 +125,8 @@ export interface Game {
   // Visuel officiel facultatif (image dans app/assets/games/).
   image?: { src: string; alt: Localized; credit: string };
   hasTrailer: boolean;
+  // Affiché sur l'accueil : un jeu par type de public.
+  highlighted?: boolean;
 }
 
 export const games: readonly Game[] = [
@@ -159,6 +161,7 @@ export const games: readonly Game[] = [
       credit: "© Don't Nod",
     },
     hasTrailer: true,
+    highlighted: true,
   },
   {
     title: "Banishers: Ghosts of New Eden",
@@ -179,7 +182,7 @@ export const games: readonly Game[] = [
     year: 2019,
     meta: { fr: "Ubisoft Paris Mobile · iOS, Android · 2019" },
     role: {
-      fr: "Senior Game Designer : encadrement de plusieurs designers, boucle de jeu, rétention, monétisation, événements.",
+      fr: "Senior Game Designer : encadrement de 4 game designers, boucle de jeu, rétention, monétisation, événements.",
     },
     image: {
       src: mightyQuestImage,
@@ -189,6 +192,7 @@ export const games: readonly Game[] = [
       credit: "© Ubisoft",
     },
     hasTrailer: true,
+    highlighted: true,
   },
   {
     title: "DmC Devil May Cry",
@@ -221,6 +225,7 @@ export const games: readonly Game[] = [
       credit: "© Gameloft",
     },
     hasTrailer: false,
+    highlighted: true,
   },
 ];
 

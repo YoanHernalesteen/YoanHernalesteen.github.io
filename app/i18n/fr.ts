@@ -126,13 +126,16 @@ export const fr = {
     ],
     casesEyebrow: "Études de cas · Produit",
     casesTitle: "Des décisions fondées sur des preuves",
-    gamesEyebrow: "Jeux livrés · 2008 – 2025",
-    gamesTitle: "25 jeux, de la spec à la sortie",
-    gamesLede:
-      "7 jeux console et PC, 18 jeux mobiles, chez Don't Nod, Ubisoft, Gameloft, Ninja Theory, AMA Studios, Birdies Road et Ankama. Une sélection :",
-    allCredits: "Tous mes crédits sur MobyGames →",
     contactTitle:
       "Me contacter pour un poste de Product Manager ou de Product Owner",
+  },
+  games: {
+    eyebrow: "Jeux livrés · 2008 – 2025",
+    title: "25 jeux, de la spec à la sortie",
+    lede: "7 jeux console et PC, 18 jeux mobiles, chez Don't Nod, Ubisoft, Gameloft, Ninja Theory, AMA Studios, Birdies Road et Ankama. Une sélection :",
+    allCredits: "Tous mes crédits sur MobyGames →",
+    highlightTitle: "Trois jeux, trois publics",
+    allGames: "Voir tous les jeux →",
   },
   testimonial: {
     readFull: "Lire la recommandation complète",
@@ -148,9 +151,10 @@ export const fr = {
   cases: {
     metaTitle: "Études de cas",
     eyebrow: "Études de cas",
-    title: "Du game design au code",
+    title: "Des problèmes, des décisions, des résultats",
     intro:
-      "Chaque cas raconte le problème, mon rôle, les décisions prises et ce qui a changé. Filtrez selon le poste que vous cherchez à pourvoir.",
+      "Pour chaque projet : le contexte, mon rôle, ce que j'ai choisi d'écarter et ce qui a changé. Filtrez par domaine : produit ou développement.",
+    listTitle: "Toutes les études de cas",
     filterLabel: "Filtrer les études de cas",
     filters: {
       tous: "Tous",

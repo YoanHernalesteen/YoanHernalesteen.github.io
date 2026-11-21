@@ -89,10 +89,16 @@ export interface Dictionary {
     methodEyebrow: string;
     methodTitle: string;
     method: readonly TitledText[];
-    gamesEyebrow: string;
-    gamesTitle: string;
-    gamesLede: string;
+  };
+  games: {
+    eyebrow: string;
+    title: string;
+    lede: string;
     allCredits: string;
+    // Titre de la sélection de l'accueil.
+    highlightTitle: string;
+    // Lien de l'accueil vers la liste complète.
+    allGames: string;
   };
   testimonial: {
     readFull: string;
@@ -111,6 +117,8 @@ export interface Dictionary {
     eyebrow: string;
     title: string;
     intro: string;
+    // Titre de la liste, lu par les lecteurs d'écran.
+    listTitle: string;
     filterLabel: string;
     // Libellés des boutons du filtre (les badges des cartes utilisent `tracks`).
     filters: Record<"tous" | "dev" | "produit", string>;
