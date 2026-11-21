@@ -35,9 +35,9 @@ export interface Dictionary {
     contact: string;
   };
   header: {
-    // Libellé du bouton CV hors pages de profil.
+    // Libellé du bouton CV de l'en-tête.
     cv: string;
-    // Libellé du bouton CV sur /dev et /produit.
+    // Nom de chaque CV dans le bloc contact.
     cvByFocus: Record<Focus, string>;
     menuOpen: string;
     menuClose: string;

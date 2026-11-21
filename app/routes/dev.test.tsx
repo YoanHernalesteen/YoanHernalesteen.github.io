@@ -14,15 +14,18 @@ function renderDev() {
 }
 
 describe("la page /dev", () => {
-  it("présente le profil développeur", () => {
+  it("présente le profil par ce que je fais, avec le CV développeur", () => {
     renderDev();
 
     expect(
       screen.getByRole("heading", {
         level: 1,
-        name: /Développeur Ruby on Rails/,
+        name: "Je code en Ruby on Rails, avec 16 ans de culture produit.",
       }),
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Télécharger mon CV" }),
+    ).toHaveAttribute("href", positionings["dev-produit"].cvHref);
   });
 
   it("propose le CV développeur et le GitHub, jamais le CV Product Manager", () => {
@@ -72,7 +75,7 @@ describe("la page /dev", () => {
     if (!contact) throw new Error("pas de bloc contact");
     expect(
       within(contact).getByRole("heading", {
-        name: "Me contacter pour un poste de développeur Rails",
+        name: "Me contacter pour un poste ou une mission en Ruby on Rails",
       }),
     ).toBeInTheDocument();
   });

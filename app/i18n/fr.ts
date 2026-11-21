@@ -59,9 +59,9 @@ export const fr = {
     metaTitle: "Profil développeur",
     eyebrow: "Côté code",
 
-    title: "Développeur Ruby on Rails, avec 16 ans de culture produit.",
+    title: "Je code en Ruby on Rails, avec 16 ans de culture produit.",
     lede: "Chez Ellii, je développe des features front et back pour la refonte complète d'une plateforme d'ateliers en ligne pour seniors, testées avec RSpec. Je pratique React et Next.js sur mes projets personnels depuis 2021, et je progresse en TypeScript avec ce site.",
-    cvCta: "Télécharger le CV développeur",
+    cvCta: "Télécharger mon CV",
     githubCta: "Voir mon GitHub",
     stackEyebrow: "Ma stack",
     stack: [
@@ -95,7 +95,7 @@ export const fr = {
     ],
     casesEyebrow: "Études de cas · Développement",
     casesTitle: "Du code en production",
-    contactTitle: "Me contacter pour un poste de développeur Rails",
+    contactTitle: "Me contacter pour un poste ou une mission en Ruby on Rails",
   },
   produit: {
     metaTitle: "Profil Product Manager",

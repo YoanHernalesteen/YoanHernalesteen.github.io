@@ -21,12 +21,7 @@ export function SiteHeader() {
 
   // Sur /dev et /produit, le CV de ce profil ; ailleurs, celui de l'angle actif.
   const pageFocus = focusForPath(pathname);
-  const cv = pageFocus
-    ? {
-        href: positionings[pageFocus].cvHref,
-        label: t.header.cvByFocus[pageFocus],
-      }
-    : { href: positionings[FOCUS].cvHref, label: t.header.cv };
+  const cvHref = positionings[pageFocus ?? FOCUS].cvHref;
 
   // L'accueil et les pages de profil ont un bloc contact ; ailleurs,
   // le lien mène à celui de l'accueil.
@@ -92,11 +87,11 @@ export function SiteHeader() {
             {t.nav.contact}
           </a>
           <a
-            href={cv.href}
+            href={cvHref}
             onClick={close}
             className="inline-flex min-h-11 items-center justify-center rounded-[10px] bg-ink px-[18px] font-semibold text-bg hover:opacity-90"
           >
-            {cv.label}
+            {t.header.cv}
           </a>
         </nav>
       </div>

@@ -50,7 +50,7 @@ describe("SiteHeader", () => {
     renderHeaderAt("/dev");
 
     expect(
-      screen.getByRole("link", { name: "CV développeur" }),
+      screen.getByRole("link", { name: "Télécharger mon CV" }),
     ).toHaveAttribute("href", positionings["dev-produit"].cvHref);
   });
 
@@ -58,7 +58,7 @@ describe("SiteHeader", () => {
     renderHeaderAt("/produit");
 
     expect(
-      screen.getByRole("link", { name: "CV Product Manager" }),
+      screen.getByRole("link", { name: "Télécharger mon CV" }),
     ).toHaveAttribute("href", positionings.pm.cvHref);
   });
 
