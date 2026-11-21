@@ -30,6 +30,9 @@ export function ContactSection({ title, lede, cvs }: Props) {
               {lede}
             </p>
           )}
+          <p className={`${lede ? "mt-2" : "mt-5"} text-lg font-semibold`}>
+            {t.contact.availability}
+          </p>
         </div>
         <div className="flex min-w-0 flex-[1_1_320px] flex-col gap-3">
           {cvs.map((focus) => (

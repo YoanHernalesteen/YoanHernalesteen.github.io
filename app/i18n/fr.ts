@@ -60,7 +60,7 @@ export const fr = {
     eyebrow: "Côté code",
 
     title: "Je code en Ruby on Rails, avec 16 ans de culture produit.",
-    lede: "Chez Ellii, j'ai développé des features front et back pour la refonte complète d'une plateforme d'ateliers en ligne pour seniors, testées avec RSpec. Je pratique React et Next.js sur mes projets personnels depuis 2021, et je progresse en TypeScript avec ce site.",
+    lede: "Chez Ellii, d'avril à novembre 2026, j'ai développé des features front et back pour la refonte complète d'une plateforme d'ateliers en ligne pour seniors, testées avec RSpec. Je pratique React et Next.js sur mes projets personnels depuis 2021, et je progresse en TypeScript avec ce site.",
     cvCta: "Télécharger mon CV",
     githubCta: "Voir mon GitHub",
     stackEyebrow: "Ma stack",
@@ -138,6 +138,7 @@ export const fr = {
     translatedFrom: "Traduit de l'anglais",
   },
   contact: {
+    availability: "Disponible immédiatement.",
     pdf: "PDF",
   },
   video: {

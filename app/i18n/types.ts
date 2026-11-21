@@ -108,6 +108,7 @@ export interface Dictionary {
     translatedFrom: string;
   };
   contact: {
+    availability: string;
     pdf: string;
   };
   video: {
