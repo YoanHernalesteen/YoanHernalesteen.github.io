@@ -1,12 +1,12 @@
 ## Le contexte
 
-Après plusieurs années comme game designer et producer dans le jeu vidéo, je conçois et développe aujourd'hui des produits web. Un CV raconte mal ce parcours. Les recruteurs qui cherchent un Product Manager veulent voir comment je cadre un problème. Ceux qui cherchent un développeur veulent voir du code. Il me fallait un seul site qui parle aux deux.
+Je développe en Ruby on Rails au quotidien, et j'utilise déjà Next.js sur un autre projet (The Rolistes). Pour ce portfolio, j'ai voulu montrer React et TypeScript seuls, sans framework qui fasse le travail à ma place : routes, composants, état, typage, tests et build.
 
-Je l'ai codé moi-même plutôt que de prendre un constructeur de sites. Pour un poste de développeur, le site est lui-même une preuve : son code est public, testé et vérifié à chaque push. Au quotidien, je travaille en Ruby on Rails, et j'utilise déjà Next.js sur un autre projet (The Rolistes). Ce site montre donc React et TypeScript seuls, sans framework qui fasse le travail à ma place.
+J'ai codé ce site moi-même plutôt que de prendre un constructeur de sites. Son code est public, testé et vérifié automatiquement : il sert lui-même de preuve.
 
 ## Le problème
 
-Un recruteur passe moins d'une minute sur un portfolio : il doit comprendre tout de suite si mon profil correspond à son poste, puis trouver la preuve sans chercher.
+Un portfolio change souvent : nouvelles études de cas, textes réécrits, pages réorganisées. Il fallait un site statique, rapide et lisible avant le chargement du JavaScript, qu'on peut faire évoluer sans casser un lien, une page ou un téléchargement.
 
 ## La démarche
 
@@ -16,9 +16,9 @@ Un recruteur passe moins d'une minute sur un portfolio : il doit comprendre tout
 
 **Un site prérendu.** Au build, chaque page devient un fichier HTML statique, études de cas comprises. Le contenu s'affiche avant le chargement du JavaScript. Chaque page a son propre titre et son propre aperçu quand on la partage sur LinkedIn. Les liens directs fonctionnent sur un hébergement statique comme GitHub Pages.
 
-**Les tests d'abord.** Pour chaque fonctionnalité, j'écris d'abord le test qui la décrit, je le vois échouer, puis je l'implémente. Un test vérifie par exemple que chaque étude de cas a exactement un fichier de texte : si j'en oublie un, la suite échoue.
+**Les tests d'abord, sur les comportements.** Pour chaque changement de comportement, j'écris d'abord les tests, je les vois échouer, puis j'implémente. Ils vérifient ce qui peut vraiment casser : un lien ou une ancre qui ne mène nulle part, un CV absent, une redirection, une donnée invalide, ou un élément sans nom pour les lecteurs d'écran. Un test vérifie par exemple que chaque étude de cas a exactement un fichier de texte : si j'en oublie un, la suite échoue.
 
-**L'intégration continue dès le premier jour.** À chaque push, GitHub Actions vérifie les types, le lint, le formatage, lance les tests et fait le build. Les droits de la CI sont réduits au minimum : elle lit le code, rien de plus.
+**L'intégration et le déploiement continus.** À chaque pull request et à chaque push sur la branche principale, GitHub Actions vérifie les types, le lint, le formatage, lance les tests et fait le build. Si tout passe, un second job publie le site sur GitHub Pages. Chaque job n'a que les droits dont il a besoin.
 
 ## Les décisions et les arbitrages
 
@@ -26,16 +26,17 @@ Un recruteur passe moins d'une minute sur un portfolio : il doit comprendre tout
 
 **MDX pour les textes, TypeScript pour les métadonnées.** Le titre, le résumé, les tags et l'encadré « En bref » de chaque cas sont typés dans un fichier TypeScript, donc vérifiés par le compilateur. Le texte long est en MDX, plus agréable à écrire et à relire. J'ai écarté un CMS : il aurait ajouté un service à maintenir pour un site que je suis seul à modifier.
 
-**Des polices hébergées avec le site.** Charger les polices depuis Google Fonts aurait été plus simple. Mais cela envoie l'adresse IP du visiteur à un tiers, ce qui pose un problème de RGPD, et ajoute une connexion avant l'affichage. Le site ne fait donc aucune requête vers un tiers.
+**Des polices hébergées avec le site.** Charger les polices depuis Google Fonts aurait été plus simple. Mais cela envoie l'adresse IP du visiteur à un tiers, ce qui pose un problème de RGPD, et ajoute une connexion avant l'affichage. Le site ne fait donc aucune requête vers un tiers sans action du visiteur : une vidéo YouTube ne se charge que s'il clique dessus.
 
-**Un accueil à deux portes.** J'ai écarté deux options : un site unique et généraliste, qui ne convainc vraiment personne, et deux sites séparés, à maintenir deux fois. L'accueil propose une porte « produit » et une porte « développement », et deux pages dédiées, /produit et /dev, que j'envoie avec mes candidatures ciblées. Un seul réglage choisit quelle porte passe en premier. TypeScript exige un texte pour chaque angle, donc changer de positionnement tient en une ligne.
+**Rediriger plutôt que supprimer.** Une ancienne page faisait doublon après une refonte de l'accueil, mais son adresse figurait sur des CV imprimés. GitHub Pages ne permet pas de redirection côté serveur : la page prérendue contient une balise `refresh` qui renvoie vers l'accueil même sans JavaScript, et une adresse canonique qui signale l'accueil aux moteurs de recherche.
 
 ## Les résultats
 
-- **Plus d'une centaine de tests automatisés** (Vitest et Testing Library), lancés à chaque push avec la vérification des types, le lint et le build.
+- **Plus d'une centaine de tests automatisés** (Vitest et Testing Library), lancés avec la vérification des types, le lint, le formatage et le build.
+- **Un site en ligne, publié automatiquement** dès que les vérifications passent.
 
 ## Ce que je ferais autrement
 
-**Écrire les textes avant le code.** J'ai construit les pages avec des textes provisoires, puis j'ai écrit les études de cas en dernier. Or c'est le contenu qui décide de la mise en page : plusieurs composants ont dû être ajustés une fois les vrais textes en place.
+**Stabiliser les contenus avant de figer les composants.** J'ai construit les pages avec des textes provisoires. Quand l'accueil a été réorganisé, des composants entiers sont devenus inutiles et une partie de la configuration ne servait plus. C'est le contenu qui décide de la structure, pas l'inverse.
 
-**Ne pas faire confiance qu'aux tests.** Un jour, une erreur de configuration cassait le build alors que tous les tests passaient : le fichier de configuration est chargé par Node avant Vite, et les tests ne le chargent jamais. Depuis, le build fait partie de chaque vérification, en local comme dans la CI. Les tests disent que le code fait ce que j'attends ; seul le build prouve que le site sort.
+**Ne pas me fier aux seuls tests.** Un jour, une erreur de configuration cassait le build alors que tous les tests passaient : le fichier de configuration est chargé par Node avant Vite, et les tests ne le chargent jamais. Depuis, le build fait partie de chaque vérification, en local comme dans la CI. Les tests disent que le code fait ce que j'attends ; seul le build prouve que le site sort.

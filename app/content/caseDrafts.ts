@@ -58,7 +58,7 @@ export const draftCases: readonly CaseStudy[] = [
     slug: "ce-portfolio",
     title: { fr: "Ce portfolio : un site React typé, testé et accessible" },
     summary: {
-      fr: "Composants en TypeScript, tests, intégration continue, accessibilité et performances mesurées avec Lighthouse.",
+      fr: "Composants en TypeScript, tests, intégration et déploiement continus, accessibilité.",
     },
     tracks: ["dev"],
     year: { fr: "2026" },
@@ -71,7 +71,8 @@ export const draftCases: readonly CaseStudy[] = [
         period: "2026",
         team: "Seul",
         tools: "React, TypeScript, React Router, Vitest, GitHub Actions",
-        shows: "TypeScript strict, tests, CI, accessibilité",
+        shows:
+          "TypeScript strict, tests, intégration et déploiement continus, accessibilité",
       },
     },
   },
