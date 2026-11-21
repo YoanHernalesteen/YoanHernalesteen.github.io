@@ -3,16 +3,12 @@ import { Link } from "react-router";
 import { CareerKindIcon } from "~/components/CareerKindIcon";
 import { CaseCard } from "~/components/CaseCard";
 import { ContactSection } from "~/components/ContactSection";
+import { MethodSection } from "~/components/MethodSection";
+import { heroButton, ProfileHero } from "~/components/ProfileHero";
 import { SectionHeader, sectionLabel } from "~/components/SectionHeader";
 import { TestimonialList } from "~/components/TestimonialList";
 import { cases, featuredCases } from "~/content/cases";
-import {
-  FOCUS,
-  FOCUSES,
-  positionings,
-  profilePaths,
-  type Focus,
-} from "~/content/positioning";
+import { positionings } from "~/content/positioning";
 import { career } from "~/content/profile";
 import { site } from "~/content/site";
 import { speedrunActivities } from "~/content/speedrun";
@@ -22,106 +18,50 @@ import { pageMeta } from "~/seo";
 
 import type { Route } from "./+types/home";
 
-// L'angle actif d'abord, puis les autres.
-const doorOrder: Focus[] = [FOCUS, ...FOCUSES.filter((f) => f !== FOCUS)];
-
-// Couleurs de chaque porte, selon sa piste.
-const doorStyles = {
-  dev: {
-    card: "bg-dev-soft border-dev-line",
-    accent: "text-dev",
-  },
-  produit: {
-    card: "bg-produit-soft border-produit-line",
-    accent: "text-produit",
-  },
-} as const;
-
 export function meta(): Route.MetaDescriptors {
   const title = `${site.name} · ${t.home.metaTitle}`;
-  return pageMeta({ title, description: t.home.lede, path: "/" });
+  return pageMeta({ title, description: t.home.metaDescription, path: "/" });
 }
 
 export default function Home() {
-  const featured = featuredCases(cases, positionings[FOCUS].primaryTrack);
+  const featured = featuredCases(cases, "produit");
 
   return (
     <>
-      <section className="page pt-16 pb-12 md:pt-24 md:pb-16">
-        <p className="eyebrow mb-5">{t.home.eyebrow}</p>
-        <h1 className="max-w-[980px] font-display text-[clamp(2.4rem,6vw,5rem)] leading-[1.02] font-bold tracking-[-0.02em]">
-          {t.home.title}
-        </h1>
-        <p className="mt-7 max-w-[720px] text-lg leading-[1.6] text-muted md:text-xl">
-          {t.home.lede}
-        </p>
-      </section>
-
-      <p className="page eyebrow pb-4">{t.home.doorsEyebrow}</p>
-      <section
-        aria-label={t.home.doorsLabel}
-        className="page flex flex-wrap gap-6 pb-20"
-      >
-        {doorOrder.map((focus, index) => {
-          const door = t.doors[focus];
-          const style = doorStyles[positionings[focus].primaryTrack];
-          return (
-            <Link
-              key={focus}
-              to={profilePaths[focus]}
-              className={`flex min-w-0 flex-[1_1_420px] flex-col gap-4 rounded-2xl border p-7 md:p-9 ${style.card}`}
+      <ProfileHero
+        track="produit"
+        eyebrow={t.home.eyebrow}
+        title={t.produit.title}
+        lede={t.produit.lede}
+        actions={
+          <>
+            <a
+              href={positionings.pm.cvHref}
+              className={heroButton.primary("produit")}
             >
-              <span className={`eyebrow ${style.accent}`}>
-                {String(index + 1).padStart(2, "0")} · {door.eyebrow}
-              </span>
-              <span className="font-display text-2xl leading-tight font-bold md:text-[32px]">
-                {door.title}
-              </span>
-              <span className="leading-[1.6] text-body">{door.text}</span>
-              <span className="flex flex-wrap gap-2">
-                {door.chips.map((chip) => (
-                  <span
-                    key={chip}
-                    className="rounded-lg bg-surface px-2.5 py-1.5 text-[13px] text-body"
-                  >
-                    {chip}
-                  </span>
-                ))}
-              </span>
-              <span className={`mt-2 font-semibold ${style.accent}`}>
-                {door.cta}
-              </span>
-            </Link>
-          );
-        })}
-      </section>
+              {t.produit.cvCta}
+            </a>
+            <a
+              href="#etudes-de-cas"
+              className={heroButton.secondary("produit")}
+            >
+              {t.produit.casesCta}
+            </a>
+          </>
+        }
+        footnote={
+          <Link to="/dev" className="more-link">
+            {t.home.devLink}
+          </Link>
+        }
+      />
 
-      {/* Le profil en trois piliers, chacun avec sa preuve. */}
-      <section
-        aria-labelledby="pillars-title"
-        className="border-y border-line bg-surface"
-      >
-        {/* Titre lu par les lecteurs d'écran : évite de sauter du h1 au h3. */}
-        <h2 id="pillars-title" className="sr-only">
-          {t.home.pillarsLabel}
-        </h2>
-        <div className="page grid gap-8 py-10 md:grid-cols-3">
-          {t.home.pillars.map((pillar) => (
-            <div key={pillar.title}>
-              <h3 className="font-display text-[22px] leading-tight font-bold">
-                {pillar.title}
-              </h3>
-              <p className="mt-2 text-[15px] leading-[1.6] text-muted">
-                {pillar.text}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <MethodSection />
 
       <section
+        id="etudes-de-cas"
         aria-labelledby={sectionLabel("cases")}
-        className="page pt-20 pb-8 md:pt-24"
+        className="page scroll-mt-4 pt-20 pb-8"
       >
         <SectionHeader
           id="cases"
@@ -288,7 +228,7 @@ export default function Home() {
       <ContactSection
         title={t.home.contactTitle}
         lede={t.home.contactLede}
-        cvs={doorOrder}
+        cvs={["pm"]}
       />
     </>
   );

@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { createRoutesStub } from "react-router";
 import { describe, expect, it } from "vitest";
 
-import { FOCUS, positionings } from "~/content/positioning";
+import { positionings } from "~/content/positioning";
 
 import { SiteHeader } from "./SiteHeader";
 
@@ -38,12 +38,12 @@ describe("SiteHeader", () => {
     );
   });
 
-  it("propose le CV de l'angle actif sur l'accueil", () => {
+  it("propose le CV Product Manager sur l'accueil", () => {
     renderHeaderAt("/");
 
     expect(
       screen.getByRole("link", { name: "Télécharger mon CV" }),
-    ).toHaveAttribute("href", positionings[FOCUS].cvHref);
+    ).toHaveAttribute("href", positionings.pm.cvHref);
   });
 
   it("propose le CV développeur sur /dev", () => {

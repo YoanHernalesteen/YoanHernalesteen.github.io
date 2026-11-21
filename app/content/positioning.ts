@@ -4,8 +4,8 @@ import type { Track } from "./cases";
 export const FOCUSES = ["dev-produit", "pm"] as const;
 export type Focus = (typeof FOCUSES)[number];
 
-// ⬇ Le seul réglage à changer pour basculer le site vers le profil PO.
-export const FOCUS: Focus = "dev-produit";
+// ⬇ Le seul réglage à changer pour choisir le profil mis en avant.
+export const FOCUS: Focus = "pm";
 
 interface Positioning {
   // Piste des études de cas affichées en premier.

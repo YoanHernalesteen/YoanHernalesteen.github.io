@@ -9,15 +9,6 @@ export type Lang = "fr";
 // Un texte disponible dans chaque langue du site.
 export type Localized<T = string> = Record<Lang, T>;
 
-// Une porte de l'accueil (« Je recrute un développeur »…).
-export interface DoorText {
-  eyebrow: string;
-  title: string;
-  text: string;
-  chips: readonly string[];
-  cta: string;
-}
-
 // Textes communs aux pages de profil (/dev, /produit).
 export interface ProfileText {
   metaTitle: string;
@@ -62,14 +53,11 @@ export interface Dictionary {
   };
   home: {
     metaTitle: string;
+    // Description courte (Google, LinkedIn) : 160 caractères au plus.
+    metaDescription: string;
     eyebrow: string;
-    title: string;
-    lede: string;
-    doorsEyebrow: string;
-    doorsLabel: string;
-    pillarsLabel: string;
-    // Les trois piliers du profil, chacun avec sa preuve.
-    pillars: readonly TitledText[];
+    // Lien de l'introduction vers /dev.
+    devLink: string;
     careerCredits: string;
     casesEyebrow: string;
     casesTitle: string;
@@ -147,6 +135,4 @@ export interface Dictionary {
     title: string;
     text: string;
   };
-  // Une porte par angle : impossible d'oublier un angle, TypeScript le signale.
-  doors: Record<Focus, DoorText>;
 }

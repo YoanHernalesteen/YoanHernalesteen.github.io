@@ -66,7 +66,7 @@ export const testimonials: readonly Testimonial[] = [
     ],
     highlights: {
       accueil: {
-        fr: "Au-delà de ses solides compétences et de sa culture en design, Yoan a un vrai esprit d'équipe : il est toujours prêt à aider ses coéquipiers et à leur apporter son soutien ou ses conseils.",
+        fr: "Il sait aussi donner des retours constructifs, pertinents et argumentés, à son équipe comme à ses responsables, tout en restant assez souple et ouvert d'esprit pour s'adapter rapidement aux contraintes de temps ou de création des projets.",
       },
     },
   },

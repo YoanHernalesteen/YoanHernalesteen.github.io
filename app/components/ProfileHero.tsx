@@ -16,10 +16,19 @@ interface Props {
   title: string;
   lede: string;
   actions: ReactNode;
+  // Lien secondaire, en plus petit sous les boutons.
+  footnote?: ReactNode;
 }
 
-// Bandeau coloré en haut des pages /dev et /produit.
-export function ProfileHero({ track, eyebrow, title, lede, actions }: Props) {
+// Bandeau coloré en haut de l'accueil, de /dev et de /produit.
+export function ProfileHero({
+  track,
+  eyebrow,
+  title,
+  lede,
+  actions,
+  footnote,
+}: Props) {
   const style = trackStyles[track];
 
   return (
@@ -33,6 +42,7 @@ export function ProfileHero({ track, eyebrow, title, lede, actions }: Props) {
           {lede}
         </p>
         <div className="mt-8 flex flex-wrap gap-3">{actions}</div>
+        {footnote && <p className="mt-4 text-sm">{footnote}</p>}
       </div>
     </section>
   );

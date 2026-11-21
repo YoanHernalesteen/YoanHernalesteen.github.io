@@ -3,18 +3,14 @@ import { createRoutesStub } from "react-router";
 import { describe, expect, it } from "vitest";
 
 import { cases, featuredCases } from "~/content/cases";
-import {
-  FOCUS,
-  FOCUSES,
-  positionings,
-  profilePaths,
-} from "~/content/positioning";
+import { positionings } from "~/content/positioning";
 import { career } from "~/content/profile";
 import { site } from "~/content/site";
 import { speedrunActivities } from "~/content/speedrun";
 import { testimonialsFor } from "~/content/testimonials";
+import { fr } from "~/i18n/fr";
 
-import Home from "./home";
+import Home, { meta } from "./home";
 
 function renderHome() {
   const Stub = createRoutesStub([{ path: "/", Component: Home }]);
@@ -22,28 +18,93 @@ function renderHome() {
 }
 
 describe("Home", () => {
-  it("affiche la phrase de positionnement comme titre principal", () => {
+  it("ouvre sur la présentation Product Manager", () => {
     renderHome();
 
     expect(
       screen.getByRole("heading", {
         level: 1,
-        name: "Je conçois et je code des produits web.",
+        name: "Un Product Manager qui comprend le code.",
       }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/^16 ans de jeu vidéo, dont 9 comme Senior/),
     ).toBeInTheDocument();
   });
 
-  it("propose les deux portes, celle de l'angle actif en premier", () => {
+  it("présente le profil Product Manager dans le surtitre et l'onglet", () => {
     renderHome();
 
-    const doors = within(
-      screen.getByRole("region", { name: "Choisir un profil" }),
-    ).getAllByRole("link");
+    expect(
+      screen.getByText("Product Manager au profil technique"),
+    ).toBeInTheDocument();
+    expect(meta()).toContainEqual({
+      title: `${site.name} · Product Manager au profil technique`,
+    });
+  });
 
-    expect(doors.map((door) => door.getAttribute("href"))).toEqual([
-      profilePaths[FOCUS],
-      ...FOCUSES.filter((f) => f !== FOCUS).map((f) => profilePaths[f]),
-    ]);
+  it("donne une description courte, que Google et LinkedIn n'auront pas à couper", () => {
+    const description = meta().find(
+      (tag) => "name" in tag && tag.name === "description",
+    );
+
+    expect(description).toBeDefined();
+    expect(
+      String(description && "content" in description ? description.content : "")
+        .length,
+    ).toBeLessThanOrEqual(160);
+  });
+
+  it("propose sous l'introduction le CV et les études de cas", () => {
+    renderHome();
+
+    expect(
+      screen.getByRole("link", { name: "Télécharger le CV Product Manager" }),
+    ).toHaveAttribute("href", positionings.pm.cvHref);
+
+    const casesLink = screen.getByRole("link", {
+      name: /Voir les études de cas/,
+    });
+    const target = casesLink.getAttribute("href") ?? "";
+    expect(target).toMatch(/^#/);
+    expect(document.getElementById(target.slice(1))).toContainElement(
+      screen.getByRole("heading", {
+        level: 2,
+        name: "Ce que j'ai conçu et livré",
+      }),
+    );
+  });
+
+  it("propose le profil développeur dans un lien à part, sous les boutons", () => {
+    renderHome();
+
+    const cvLink = screen.getByRole("link", {
+      name: "Télécharger le CV Product Manager",
+    });
+    const devLink = screen.getByRole("link", {
+      name: "Voir mes expériences de développement →",
+    });
+
+    expect(devLink).toHaveAttribute("href", "/dev");
+    expect(cvLink.parentElement).not.toContainElement(devLink);
+    expect(
+      cvLink.compareDocumentPosition(devLink) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+  });
+
+  it("présente la méthode en 4 étapes, celle de la page produit", () => {
+    renderHome();
+
+    const section = screen.getByRole("region", { name: /Ma méthode/ });
+    const steps = within(section).getAllByRole("listitem");
+
+    expect(
+      steps.map((step) => within(step).getByRole("heading").textContent),
+    ).toEqual(["Comprendre", "Prioriser", "Livrer", "Mesurer"]);
+    steps.forEach((step, index) => {
+      expect(step).toHaveTextContent(fr.produit.method[index].text);
+    });
   });
 
   it("met en avant les études de cas choisies, celles de l'angle actif d'abord", () => {
@@ -55,9 +116,7 @@ describe("Home", () => {
       .map((h) => h.textContent);
 
     expect(titles).toEqual(
-      featuredCases(cases, positionings[FOCUS].primaryTrack).map(
-        (c) => c.title.fr,
-      ),
+      featuredCases(cases, "produit").map((c) => c.title.fr),
     );
   });
 
@@ -78,11 +137,35 @@ describe("Home", () => {
     );
   });
 
+  it("met en avant des qualités de Product Manager dans les recommandations", () => {
+    renderHome();
+
+    const quotes = Array.from(document.querySelectorAll("blockquote")).map(
+      (quote) => quote.textContent,
+    );
+
+    expect(quotes).toEqual([
+      expect.stringContaining("vision produit particulièrement fine"),
+      expect.stringContaining("retours constructifs, pertinents et argumentés"),
+      expect.stringContaining("repéré et anticipé d'innombrables problèmes"),
+    ]);
+  });
+
   it("contient les sections Parcours et Contact visées par l'en-tête", () => {
     renderHome();
 
     expect(document.getElementById("parcours")).not.toBeNull();
     expect(document.getElementById("contact")).not.toBeNull();
+  });
+
+  it("présente le parcours comme un passage du game design au produit", () => {
+    renderHome();
+
+    const timeline = document.getElementById("parcours");
+    if (!timeline) throw new Error("section parcours introuvable");
+    expect(
+      within(timeline).getByRole("heading", { level: 2 }),
+    ).toHaveTextContent("Du game design au produit");
   });
 
   it("étiquette chaque étape du parcours comme formation ou poste", () => {
@@ -97,24 +180,6 @@ describe("Home", () => {
         within(timeline).getByText(`${labels[step.kind]} · ${step.period.fr}`),
       ).toBeInTheDocument();
     }
-  });
-
-  it("résume le profil en trois piliers, sans chiffres clés", () => {
-    renderHome();
-
-    const section = screen.getByRole("region", { name: "Mon profil en bref" });
-    expect(
-      within(section)
-        .getAllByRole("heading", { level: 3 })
-        .map((h) => h.textContent),
-    ).toEqual([
-      "Je pars de l'utilisateur",
-      "Je décide avec des données",
-      "Je code ce que je conçois",
-    ]);
-    expect(
-      screen.queryByRole("region", { name: "En chiffres" }),
-    ).not.toBeInTheDocument();
   });
 
   it("propose les crédits MobyGames sous le parcours", () => {
@@ -210,14 +275,15 @@ describe("Home", () => {
     }
   });
 
-  it("propose les deux CV dans le bloc contact", () => {
+  it("ne propose que le CV Product Manager dans le bloc contact", () => {
     renderHome();
 
-    expect(
-      screen.getByRole("link", { name: /CV développeur/ }),
-    ).toHaveAttribute("href", positionings["dev-produit"].cvHref);
-    expect(
-      screen.getByRole("link", { name: /CV Product Manager/ }),
-    ).toHaveAttribute("href", positionings.pm.cvHref);
+    const contact = document.getElementById("contact");
+    if (!contact) throw new Error("pas de bloc contact");
+    const cvLinks = within(contact).getAllByRole("link", { name: /^CV / });
+
+    expect(cvLinks.map((link) => link.getAttribute("href"))).toEqual([
+      positionings.pm.cvHref,
+    ]);
   });
 });

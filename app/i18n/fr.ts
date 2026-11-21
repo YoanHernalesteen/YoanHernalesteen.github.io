@@ -26,28 +26,11 @@ export const fr = {
     sourceCode: "code source",
   },
   home: {
-    metaTitle: "Conception produit et développement Ruby on Rails / React",
-    eyebrow: "Conception produit · Développement Ruby on Rails / React",
-    title: "Je conçois et je code des produits web.",
-
-    lede: "Pendant 16 ans, j'ai conçu des jeux vidéo chez Don't Nod, Ubisoft, Gameloft et Ninja Theory : specs, priorisation, Scrum. Aujourd'hui, je développe en Ruby on Rails chez Ellii, avec le même réflexe : partir de l'utilisateur.",
-    doorsEyebrow: "Deux façons de lire mon profil",
-    doorsLabel: "Choisir un profil",
-    pillarsLabel: "Mon profil en bref",
-    pillars: [
-      {
-        title: "Je pars de l'utilisateur",
-        text: "16 ans à concevoir des jeux pour leurs joueurs, puis des tests avec 12 seniors pour valider une refonte.",
-      },
-      {
-        title: "Je décide avec des données",
-        text: "Un modèle de prévision qui aide l'équipe d'Ellii à construire son planning d'ateliers.",
-      },
-      {
-        title: "Je code ce que je conçois",
-        text: "Développeur Ruby on Rails / React, du besoin à la mise en production.",
-      },
-    ],
+    metaTitle: "Product Manager au profil technique",
+    metaDescription:
+      "Product Manager au profil technique. 16 ans à concevoir des jeux chez Ubisoft, Don't Nod et Gameloft, puis une plateforme pour seniors chez Ellii.",
+    eyebrow: "Product Manager au profil technique",
+    devLink: "Voir mes expériences de développement →",
     careerCredits: "Tous mes jeux sur MobyGames →",
     casesEyebrow: "Études de cas",
     casesTitle: "Ce que j'ai conçu et livré",
@@ -55,7 +38,7 @@ export const fr = {
     testimonialsLabel: "Recommandations",
     testimonialsTitle: "Ils ont travaillé avec moi",
     allTestimonials: "Toutes mes recommandations sur LinkedIn →",
-    careerTitle: "Du game design au code",
+    careerTitle: "Du game design au produit",
     careerLede:
       "Le fil rouge : concevoir pour des utilisateurs, piloter des features, travailler en Scrum.",
     careerKinds: {
@@ -126,19 +109,19 @@ export const fr = {
     method: [
       {
         title: "Comprendre",
-        text: "Tests utilisateurs et playtests, recueil des besoins, lecture des données d'usage.",
+        text: "Tests utilisateurs et playtests, recueil des besoins, lecture des données d'usage. Chez Ellii, 12 seniors testés : note des visuels passée de 3,8 à 4,7 sur 5.",
       },
       {
         title: "Prioriser",
-        text: "Backlog, user stories, critères d'acceptation, arbitrages avec l'équipe.",
+        text: "Backlog, user stories, critères d'acceptation, arbitrages avec l'équipe. Chez Ellii, ce qui bloquait les membres est passé avant les remarques de goût : la page de parrainage a été refaite en premier.",
       },
       {
         title: "Livrer",
-        text: "Scrum, specs claires pour les développeurs, recette et validation.",
+        text: "Scrum, specs claires pour les développeurs, recette et validation. 25 jeux livrés, puis une refonte complète mise en ligne chez Ellii.",
       },
       {
         title: "Mesurer",
-        text: "Plan de suivi des événements dans PostHog, indicateurs, itérations.",
+        text: "Plan de suivi des événements dans PostHog, indicateurs, itérations. Chez Ellii, +38 % de réservations sur les premières semaines avec le modèle de prévision.",
       },
     ],
     casesEyebrow: "Études de cas · Produit",
@@ -201,35 +184,5 @@ export const fr = {
   error: {
     title: "Une erreur est survenue",
     text: "Réessayez dans un instant.",
-  },
-  doors: {
-    "dev-produit": {
-      eyebrow: "Développement",
-      title: "Je recrute un développeur",
-      text: "Des features front et back pour la refonte complète d'Ellii, testées avec RSpec. Des projets personnels en React et Next.js depuis 2021.",
-      chips: [
-        "Ruby on Rails",
-        "RSpec",
-        "Sidekiq",
-        "PostgreSQL",
-        "React",
-        "Next.js",
-      ],
-      cta: "Voir le profil développeur →",
-    },
-    pm: {
-      eyebrow: "Produit",
-      title: "Je recrute un Product Manager",
-      text: "16 ans à écrire des specs, prioriser et livrer en Scrum avec des équipes pluridisciplinaires. Des tests utilisateurs et du suivi produit chez Ellii.",
-      chips: [
-        "Specs",
-        "User stories",
-        "Priorisation",
-        "Scrum",
-        "Tests utilisateurs",
-        "PostHog",
-      ],
-      cta: "Voir le profil produit →",
-    },
   },
 } satisfies Dictionary;
