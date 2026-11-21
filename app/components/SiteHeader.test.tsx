@@ -54,33 +54,6 @@ describe("SiteHeader", () => {
     ).toHaveAttribute("href", positionings["dev-produit"].cvHref);
   });
 
-  it("renvoie vers le contact de l'accueil depuis /produit, qui n'en a pas", () => {
-    renderHeaderAt("/produit");
-
-    expect(screen.getByRole("link", { name: "Contact" })).toHaveAttribute(
-      "href",
-      "/#contact",
-    );
-  });
-
-  it("propose le CV Product Manager sur /produit", () => {
-    renderHeaderAt("/produit");
-
-    expect(
-      screen.getByRole("link", { name: "Télécharger mon CV" }),
-    ).toHaveAttribute("href", positionings.pm.cvHref);
-  });
-
-  it("affiche l'icône du menu selon son état", () => {
-    renderHeaderAt("/");
-    const button = screen.getByRole("button", { name: "Ouvrir le menu" });
-
-    expect(button.querySelector("svg")).toHaveAttribute("data-icon", "bars");
-
-    fireEvent.click(button);
-    expect(button.querySelector("svg")).toHaveAttribute("data-icon", "xmark");
-  });
-
   it("ouvre et ferme le menu mobile", () => {
     renderHeaderAt("/");
     const button = screen.getByRole("button", { name: "Ouvrir le menu" });

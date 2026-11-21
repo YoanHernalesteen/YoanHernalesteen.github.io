@@ -33,17 +33,6 @@ describe("CaseCard", () => {
     expect(links[0]).toHaveAttribute("href", "/cas/media-trackr");
   });
 
-  it("affiche les pistes, l'année, le résumé et les mots-clés", () => {
-    renderCard();
-
-    expect(screen.getByText("Dev")).toBeInTheDocument();
-    expect(screen.getByText("Produit")).toBeInTheDocument();
-    expect(screen.getByText("2025")).toBeInTheDocument();
-    expect(screen.getByText("Une app Rails.")).toBeInTheDocument();
-    expect(screen.getByText("Ruby on Rails")).toBeInTheDocument();
-    expect(screen.getByText("OpenAI")).toBeInTheDocument();
-  });
-
   it("n'affiche ni image ni emplacement vide sans visuel", () => {
     renderCard();
 

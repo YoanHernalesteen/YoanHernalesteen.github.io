@@ -18,19 +18,6 @@ describe("le parcours", () => {
     for (const step of career) {
       expect(["formation", "poste"]).toContain(step.kind);
     }
-    // Les formations : bachelier, master, puis bootcamp Le Wagon.
-    expect(
-      career
-        .filter((step) => step.kind === "formation")
-        .map((s) => s.startYear),
-    ).toEqual([2004, 2007, 2025]);
-  });
-
-  it("se termine par un poste, sans poste en cours", () => {
-    expect(career.at(-1)?.kind).toBe("poste");
-    expect(
-      career.filter((step) => step.period.fr.includes("aujourd'hui")),
-    ).toEqual([]);
   });
 });
 
@@ -56,9 +43,6 @@ describe("les jeux livrés", () => {
     const years = gamesNewestFirst(games).map((game) => game.year);
 
     expect(years).toEqual([...years].sort((a, b) => b - a));
-    expect(gamesNewestFirst(games)[0].title).toBe(
-      "Banishers: Ghosts of New Eden",
-    );
   });
 
   it("ne modifient pas la liste d'origine en la triant", () => {

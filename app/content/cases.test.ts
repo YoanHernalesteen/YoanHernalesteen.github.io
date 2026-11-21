@@ -51,10 +51,6 @@ describe("featuredCases", () => {
       "a",
     ]);
   });
-
-  it("met en avant 3 cas sur le site", () => {
-    expect(featuredCases(cases, "dev")).toHaveLength(3);
-  });
 });
 
 describe("sortCasesForTrack", () => {

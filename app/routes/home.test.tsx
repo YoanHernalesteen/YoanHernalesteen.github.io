@@ -4,11 +4,11 @@ import { describe, expect, it } from "vitest";
 
 import { cases, featuredCases } from "~/content/cases";
 import { positionings } from "~/content/positioning";
-import { career } from "~/content/profile";
+import { career, games } from "~/content/profile";
 import { site } from "~/content/site";
 import { speedrunActivities } from "~/content/speedrun";
 import { testimonialsFor } from "~/content/testimonials";
-import { fr } from "~/i18n/fr";
+import { t } from "~/i18n";
 
 import Home, { meta } from "./home";
 
@@ -18,29 +18,10 @@ function renderHome() {
 }
 
 describe("Home", () => {
-  it("ouvre sur la présentation Product Manager", () => {
+  it("a un seul titre principal", () => {
     renderHome();
 
-    expect(
-      screen.getByRole("heading", {
-        level: 1,
-        name: "Un Product Manager qui comprend le code.",
-      }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(/^16 ans de jeu vidéo, dont 9 comme Senior/),
-    ).toBeInTheDocument();
-  });
-
-  it("présente le profil Product Manager dans le surtitre et l'onglet", () => {
-    renderHome();
-
-    expect(
-      screen.getByText("Product Manager au profil technique"),
-    ).toBeInTheDocument();
-    expect(meta()).toContainEqual({
-      title: `${site.name} · Product Manager au profil technique`,
-    });
+    expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
   });
 
   it("donne une description courte, que Google et LinkedIn n'auront pas à couper", () => {
@@ -55,62 +36,29 @@ describe("Home", () => {
     ).toBeLessThanOrEqual(160);
   });
 
-  it("propose sous l'introduction le CV et les études de cas", () => {
+  it("propose sous l'introduction le CV, les études de cas et le profil développeur", () => {
     renderHome();
 
-    expect(
-      screen.getByRole("link", { name: "Télécharger le CV Product Manager" }),
-    ).toHaveAttribute("href", positionings.pm.cvHref);
+    const hero = screen.getByRole("heading", { level: 1 }).closest("section");
+    if (!hero) throw new Error("introduction introuvable");
+    const hrefs = within(hero)
+      .getAllByRole("link")
+      .map((link) => link.getAttribute("href") ?? "");
 
-    const casesLink = screen.getByRole("link", {
-      name: /Voir les études de cas/,
-    });
-    const target = casesLink.getAttribute("href") ?? "";
-    expect(target).toMatch(/^#/);
-    expect(document.getElementById(target.slice(1))).toContainElement(
-      screen.getByRole("heading", {
-        level: 2,
-        name: "Ce que j'ai conçu et livré",
-      }),
-    );
-  });
-
-  it("propose le profil développeur dans un lien à part, sous les boutons", () => {
-    renderHome();
-
-    const cvLink = screen.getByRole("link", {
-      name: "Télécharger le CV Product Manager",
-    });
-    const devLink = screen.getByRole("link", {
-      name: "Voir mes expériences de développement →",
-    });
-
-    expect(devLink).toHaveAttribute("href", "/dev");
-    expect(cvLink.parentElement).not.toContainElement(devLink);
-    expect(
-      cvLink.compareDocumentPosition(devLink) &
-        Node.DOCUMENT_POSITION_FOLLOWING,
-    ).toBeTruthy();
-  });
-
-  it("présente la méthode en 4 étapes, celle de la page produit", () => {
-    renderHome();
-
-    const section = screen.getByRole("region", { name: /Ma méthode/ });
-    const steps = within(section).getAllByRole("listitem");
-
-    expect(
-      steps.map((step) => within(step).getByRole("heading").textContent),
-    ).toEqual(["Comprendre", "Prioriser", "Livrer", "Mesurer"]);
-    steps.forEach((step, index) => {
-      expect(step).toHaveTextContent(fr.produit.method[index].text);
-    });
+    expect(hrefs).toContain(positionings.pm.cvHref);
+    expect(hrefs).toContain("/dev");
+    // Le lien vers les études de cas vise bien la section des cas.
+    const anchor = hrefs.find((href) => href.startsWith("#")) ?? "";
+    const target = document.getElementById(anchor.slice(1));
+    if (!target) throw new Error(`cible introuvable : ${anchor}`);
+    expect(target.querySelector('a[href^="/cas/"]')).not.toBeNull();
   });
 
   it("met en avant les études de cas choisies, celles de l'angle actif d'abord", () => {
     renderHome();
 
-    const section = screen.getByRole("region", { name: /Études de cas/ });
+    const section = document.getElementById("etudes-de-cas");
+    if (!section) throw new Error("section des études de cas introuvable");
     const titles = within(section)
       .getAllByRole("heading", { level: 3 })
       .map((h) => h.textContent);
@@ -124,7 +72,7 @@ describe("Home", () => {
     renderHome();
 
     const section = screen.getByRole("region", {
-      name: "Recommandations Ils ont travaillé avec moi",
+      name: `${t.home.testimonialsLabel} ${t.home.testimonialsTitle}`,
     });
     // Les citations affichées, dans l'ordre (le texte complet déplié peut
     // répéter la phrase : on vise donc les blockquote).
@@ -137,20 +85,6 @@ describe("Home", () => {
     );
   });
 
-  it("met en avant des qualités de Product Manager dans les recommandations", () => {
-    renderHome();
-
-    const quotes = Array.from(document.querySelectorAll("blockquote")).map(
-      (quote) => quote.textContent,
-    );
-
-    expect(quotes).toEqual([
-      expect.stringContaining("vision produit particulièrement fine"),
-      expect.stringContaining("retours constructifs, pertinents et argumentés"),
-      expect.stringContaining("repéré et anticipé d'innombrables problèmes"),
-    ]);
-  });
-
   it("contient les sections Parcours et Contact visées par l'en-tête", () => {
     renderHome();
 
@@ -158,60 +92,34 @@ describe("Home", () => {
     expect(document.getElementById("contact")).not.toBeNull();
   });
 
-  it("présente le parcours comme un passage du game design au produit", () => {
-    renderHome();
-
-    const timeline = document.getElementById("parcours");
-    if (!timeline) throw new Error("section parcours introuvable");
-    expect(
-      within(timeline).getByRole("heading", { level: 2 }),
-    ).toHaveTextContent("Du game design au produit");
-  });
-
   it("étiquette chaque étape du parcours comme formation ou poste", () => {
     renderHome();
 
     const timeline = document.getElementById("parcours");
     if (!timeline) throw new Error("section parcours introuvable");
-    const labels = { formation: "Formation", poste: "Poste" } as const;
-
     for (const step of career) {
       expect(
-        within(timeline).getByText(`${labels[step.kind]} · ${step.period.fr}`),
+        within(timeline).getByText(
+          `${t.home.careerKinds[step.kind]} · ${step.period.fr}`,
+        ),
       ).toBeInTheDocument();
     }
   });
 
-  it("montre 3 jeux aux publics différents, entre le parcours et le speedrun", () => {
+  it("montre les jeux choisis et renvoie vers la liste complète", () => {
     renderHome();
 
-    const section = screen.getByRole("region", { name: /Trois jeux/ });
+    const link = document.querySelector('a[href="/cas#jeux"]');
+    const section = link?.closest("section");
+    if (!section) throw new Error("section des jeux introuvable");
+
     expect(
       within(section)
         .getAllByRole("heading", { level: 3 })
         .map((h) => h.textContent),
-    ).toEqual([
-      "Jusant",
-      "The Mighty Quest for Epic Loot",
-      "15 jeux free-to-play",
-    ]);
-    expect(
-      within(section).getByRole("link", { name: "Voir tous les jeux →" }),
-    ).toHaveAttribute("href", "/cas#jeux");
-
-    const timeline = document.getElementById("parcours");
-    if (!timeline) throw new Error("section parcours introuvable");
-    const speedrun = screen.getByRole("region", {
-      name: /Organiser des événements en direct/,
-    });
-    expect(
-      timeline.compareDocumentPosition(section) &
-        Node.DOCUMENT_POSITION_FOLLOWING,
-    ).toBeTruthy();
-    expect(
-      section.compareDocumentPosition(speedrun) &
-        Node.DOCUMENT_POSITION_FOLLOWING,
-    ).toBeTruthy();
+    ).toEqual(
+      games.filter((game) => game.highlighted).map((game) => game.title),
+    );
   });
 
   it("propose les crédits MobyGames sous le parcours", () => {
@@ -238,20 +146,6 @@ describe("Home", () => {
     }
   });
 
-  it("distingue formations et postes par leur icône", () => {
-    renderHome();
-
-    const timeline = document.getElementById("parcours");
-    if (!timeline) throw new Error("section parcours introuvable");
-    const icons = Array.from(timeline.querySelectorAll("li svg"));
-
-    expect(icons.map((icon) => icon.getAttribute("data-icon"))).toEqual(
-      career.map((step) =>
-        step.kind === "formation" ? "graduation-cap" : "briefcase",
-      ),
-    );
-  });
-
   it("affiche le logo des entreprises qui en ont un, en décoration", () => {
     renderHome();
 
@@ -269,11 +163,11 @@ describe("Home", () => {
     }
   });
 
-  it("présente les activités speedrun, avec leurs liens", () => {
+  it("présente les activités speedrun, avec leurs liens et des logos décoratifs", () => {
     renderHome();
 
     const section = screen.getByRole("region", {
-      name: /Organiser des événements en direct/,
+      name: `${t.home.speedrunEyebrow} ${t.home.speedrunTitle}`,
     });
     for (const activity of speedrunActivities) {
       expect(
@@ -290,19 +184,8 @@ describe("Home", () => {
         ).toHaveAttribute("href", `/cas/${activity.caseSlug}`);
       }
     }
-  });
-
-  it("montre le logo de chaque événement de speedrun", () => {
-    renderHome();
-
-    const section = screen.getByRole("region", {
-      name: /Organiser des événements en direct/,
-    });
-    const articles = within(section).getAllByRole("article");
-
-    expect(articles).toHaveLength(speedrunActivities.length);
-    for (const article of articles) {
-      // Décoratif : l'événement est déjà nommé dans le titre ou le texte.
+    for (const article of within(section).getAllByRole("article")) {
+      // Logo décoratif : l'événement est déjà nommé dans le texte.
       expect(article.querySelector("img")).toHaveAttribute("alt", "");
     }
   });

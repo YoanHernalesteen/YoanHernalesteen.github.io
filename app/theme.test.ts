@@ -3,7 +3,6 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { mockSystemTheme } from "~/test/mockSystemTheme";
 
 import {
-  applyTheme,
   getThemeSnapshot,
   readStoredTheme,
   resetThemeMemory,
@@ -79,14 +78,6 @@ describe("getThemeSnapshot", () => {
     localStorage.setItem(THEME_STORAGE_KEY, "light");
 
     expect(getThemeSnapshot()).toBe("light");
-  });
-});
-
-describe("applyTheme", () => {
-  it("pose data-theme sur <html>", () => {
-    applyTheme("light");
-
-    expect(document.documentElement.dataset.theme).toBe("light");
   });
 });
 

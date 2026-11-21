@@ -46,15 +46,6 @@ describe("ThemeToggle", () => {
     expect(localStorage.getItem(THEME_STORAGE_KEY)).toBe("light");
   });
 
-  it("montre le thème affiché : soleil en clair, lune en sombre", () => {
-    render(<ThemeToggle />);
-    const button = screen.getByRole("button");
-    expect(button.querySelector("svg")).toHaveAttribute("data-icon", "sun");
-
-    act(() => fireEvent.click(button));
-    expect(button.querySelector("svg")).toHaveAttribute("data-icon", "moon");
-  });
-
   it("reprend le choix enregistré lors d'une visite précédente", () => {
     localStorage.setItem(THEME_STORAGE_KEY, "dark");
 

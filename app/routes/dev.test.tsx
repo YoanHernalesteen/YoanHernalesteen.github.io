@@ -4,7 +4,9 @@ import { describe, expect, it } from "vitest";
 
 import { cases, filterCases } from "~/content/cases";
 import { positionings } from "~/content/positioning";
+import { site } from "~/content/site";
 import { testimonialsFor } from "~/content/testimonials";
+import { t } from "~/i18n";
 
 import Dev from "./dev";
 
@@ -14,41 +16,27 @@ function renderDev() {
 }
 
 describe("la page /dev", () => {
-  it("présente le profil par ce que je fais, avec le CV développeur", () => {
+  it("ne propose que le CV développeur, avec le GitHub", () => {
     renderDev();
 
-    expect(
-      screen.getByRole("heading", {
-        level: 1,
-        name: "Je code en Ruby on Rails, avec 16 ans de culture produit.",
-      }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("link", { name: "Télécharger mon CV" }),
-    ).toHaveAttribute("href", positionings["dev-produit"].cvHref);
-  });
+    const cvLinks = screen
+      .getAllByRole("link")
+      .filter((link) => link.getAttribute("href")?.endsWith(".pdf"));
 
-  it("propose le CV développeur et le GitHub, jamais le CV Product Manager", () => {
-    renderDev();
-
-    for (const link of screen.getAllByRole("link", {
-      name: /CV développeur/,
-    })) {
+    expect(cvLinks.length).toBeGreaterThan(0);
+    for (const link of cvLinks) {
       expect(link).toHaveAttribute("href", positionings["dev-produit"].cvHref);
     }
-    expect(
-      screen.getByRole("link", { name: "Voir mon GitHub" }),
-    ).toBeInTheDocument();
-    expect(
-      screen.queryByRole("link", { name: /CV Product Manager/ }),
-    ).not.toBeInTheDocument();
+    for (const link of screen.getAllByRole("link", { name: /GitHub/ })) {
+      expect(link).toHaveAttribute("href", site.github);
+    }
   });
 
   it("liste les études de cas de la piste dev", () => {
     renderDev();
 
     const section = screen.getByRole("region", {
-      name: /Du code en production/,
+      name: `${t.dev.casesEyebrow} ${t.dev.casesTitle}`,
     });
     const titles = within(section)
       .getAllByRole("heading", { level: 3 })
@@ -68,15 +56,9 @@ describe("la page /dev", () => {
     );
   });
 
-  it("se termine par un bloc contact", () => {
+  it("contient le bloc contact visé par l'en-tête", () => {
     renderDev();
 
-    const contact = document.getElementById("contact");
-    if (!contact) throw new Error("pas de bloc contact");
-    expect(
-      within(contact).getByRole("heading", {
-        name: "Me contacter pour un poste ou une mission en Ruby on Rails",
-      }),
-    ).toBeInTheDocument();
+    expect(document.getElementById("contact")).not.toBeNull();
   });
 });

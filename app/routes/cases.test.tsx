@@ -14,25 +14,12 @@ function renderCases() {
 }
 
 describe("la page /cas", () => {
-  it("annonce ce que contient chaque cas, et un filtre par domaine", () => {
-    renderCases();
-
-    expect(
-      screen.getByRole("heading", {
-        level: 1,
-        name: "Des problèmes, des décisions, des résultats",
-      }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(/Filtrez par domaine : produit ou développement\.$/),
-    ).toBeInTheDocument();
-  });
-
   it("liste tous les jeux livrés, du plus récent au plus ancien", () => {
     renderCases();
 
-    const section = screen.getByRole("region", { name: /25 jeux/ });
-    expect(section).toHaveAttribute("id", "jeux");
+    // Cible du lien « Voir tous les jeux » de l'accueil.
+    const section = document.getElementById("jeux");
+    if (!section) throw new Error("section #jeux introuvable");
     expect(
       within(section)
         .getAllByRole("heading", { level: 3 })
