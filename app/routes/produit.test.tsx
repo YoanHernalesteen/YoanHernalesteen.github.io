@@ -15,24 +15,31 @@ function renderProduit() {
 }
 
 describe("la page /produit", () => {
-  it("présente le profil Product Owner", () => {
+  it("présente le profil Product Manager", () => {
     renderProduit();
 
     expect(
       screen.getByRole("heading", {
         level: 1,
-        name: "Un Product Owner qui comprend le code.",
+        name: "Un Product Manager qui comprend le code.",
       }),
     ).toBeInTheDocument();
   });
 
-  it("propose le CV Product Owner, jamais le CV développeur", () => {
+  it("ouvre sur l'expérience de Senior et cite aussi Product Owner", () => {
+    renderProduit();
+
+    const lede = screen.getByText(/^16 ans de jeu vidéo, dont 9 comme Senior/);
+    expect(lede).toHaveTextContent("Product Owner");
+  });
+
+  it("propose le CV Product Manager, jamais le CV développeur", () => {
     renderProduit();
 
     for (const link of screen.getAllByRole("link", {
-      name: /CV Product Owner/,
+      name: /CV Product Manager/,
     })) {
-      expect(link).toHaveAttribute("href", positionings.po.cvHref);
+      expect(link).toHaveAttribute("href", positionings.pm.cvHref);
     }
     expect(
       screen.queryByRole("link", { name: /CV développeur/ }),
@@ -104,6 +111,12 @@ describe("la page /produit", () => {
   it("se termine par un bloc contact", () => {
     renderProduit();
 
-    expect(document.getElementById("contact")).not.toBeNull();
+    const contact = document.getElementById("contact");
+    if (!contact) throw new Error("pas de bloc contact");
+    expect(
+      within(contact).getByRole("heading", {
+        name: "Me contacter pour un poste de Product Manager ou de Product Owner",
+      }),
+    ).toBeInTheDocument();
   });
 });

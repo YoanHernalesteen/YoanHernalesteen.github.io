@@ -1,4 +1,4 @@
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 
 import { describe, expect, it } from "vitest";
@@ -10,8 +10,8 @@ import { FOCUS, FOCUSES, focusForPath, positionings } from "./positioning";
 describe("focusForPath", () => {
   it("reconnaît les pages de profil", () => {
     expect(focusForPath("/dev")).toBe("dev-produit");
-    expect(focusForPath("/produit")).toBe("po");
-    expect(focusForPath("/produit/")).toBe("po");
+    expect(focusForPath("/produit")).toBe("pm");
+    expect(focusForPath("/produit/")).toBe("pm");
   });
 
   it("renvoie undefined ailleurs, même pour un chemin qui commence pareil", () => {
@@ -45,5 +45,13 @@ describe("le positionnement", () => {
     const file = path.join("public", positionings[focus].cvHref);
 
     expect(existsSync(file), file).toBe(true);
+  });
+
+  it("garde l'ancienne adresse du CV produit, avec le CV à jour", () => {
+    // Adresse déjà envoyée en candidature : elle doit donner le même CV.
+    const current = path.join("public", positionings.pm.cvHref);
+    const previous = "public/cv/yoan-hernalesteen-cv-product-owner.pdf";
+
+    expect(readFileSync(previous).equals(readFileSync(current))).toBe(true);
   });
 });

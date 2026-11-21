@@ -12,7 +12,7 @@ export const fr = {
     cv: "Télécharger mon CV",
     cvByFocus: {
       "dev-produit": "CV développeur",
-      po: "CV Product Owner",
+      pm: "CV Product Manager",
     },
     menuOpen: "Ouvrir le menu",
     menuClose: "Fermer le menu",
@@ -103,7 +103,7 @@ export const fr = {
       },
       {
         title: "Je comprends les specs",
-        text: "J'en ai écrit pendant des années : je clarifie le besoin avant de coder, et je parle la même langue que le Product Owner.",
+        text: "J'en ai écrit pendant des années : je clarifie le besoin avant de coder, et je parle la même langue que le Product Manager.",
       },
       {
         title: "Je livre en équipe",
@@ -112,14 +112,14 @@ export const fr = {
     ],
     casesEyebrow: "Études de cas · Développement",
     casesTitle: "Du code en production",
-    contactTitle: "Vous recrutez un développeur Rails ? Parlons-en.",
+    contactTitle: "Me contacter pour un poste de développeur Rails",
   },
   produit: {
-    metaTitle: "Profil Product Owner",
+    metaTitle: "Profil Product Manager",
     eyebrow: "Côté produit",
-    title: "Un Product Owner qui comprend le code.",
-    lede: "Pendant 16 ans, j'ai écrit des specs, priorisé des features et livré en Scrum avec des développeurs, des artistes et des animateurs. Chez Ubisoft, j'ai encadré plusieurs designers et piloté la rétention et la monétisation d'un RPG mobile. Chez Ellii, j'ai organisé des tests utilisateurs auprès de 12 seniors et mis en place le suivi produit avec PostHog.",
-    cvCta: "Télécharger le CV Product Owner",
+    title: "Un Product Manager qui comprend le code.",
+    lede: "16 ans de jeu vidéo, dont 9 comme Senior Game Designer chez Ubisoft et Don't Nod : des specs, des features priorisées et livrées en Scrum avec des développeurs, des artistes et des animateurs. Chez Ubisoft, j'ai encadré 4 game designers et suivi la rétention et la monétisation d'un RPG mobile par des A/B tests. Chez Ellii, j'ai organisé des tests utilisateurs auprès de 12 seniors et participé à la mise en place du suivi produit avec PostHog. Le rôle de Product Owner m'est donc familier : backlog, user stories, recette.",
+    cvCta: "Télécharger le CV Product Manager",
     casesCta: "Voir les études de cas produit",
     methodEyebrow: "Ma méthode",
     methodTitle: "Comprendre, prioriser, livrer, mesurer",
@@ -148,7 +148,8 @@ export const fr = {
     gamesLede:
       "7 jeux console et PC, 18 jeux mobiles, chez Don't Nod, Ubisoft, Gameloft, Ninja Theory, AMA Studios, Birdies Road et Ankama. Une sélection :",
     allCredits: "Tous mes crédits sur MobyGames →",
-    contactTitle: "Vous recrutez un Product Owner ? Parlons-en.",
+    contactTitle:
+      "Me contacter pour un poste de Product Manager ou de Product Owner",
   },
   testimonial: {
     readFull: "Lire la recommandation complète",
@@ -216,9 +217,9 @@ export const fr = {
       ],
       cta: "Voir le profil développeur →",
     },
-    po: {
+    pm: {
       eyebrow: "Produit",
-      title: "Je recrute un Product Owner",
+      title: "Je recrute un Product Manager",
       text: "16 ans à écrire des specs, prioriser et livrer en Scrum avec des équipes pluridisciplinaires. Des tests utilisateurs et du suivi produit chez Ellii.",
       chips: [
         "Specs",

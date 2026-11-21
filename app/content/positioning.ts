@@ -1,7 +1,7 @@
 import type { Track } from "./cases";
 
 // Les angles possibles du site.
-export const FOCUSES = ["dev-produit", "po"] as const;
+export const FOCUSES = ["dev-produit", "pm"] as const;
 export type Focus = (typeof FOCUSES)[number];
 
 // ⬇ Le seul réglage à changer pour basculer le site vers le profil PO.
@@ -19,16 +19,16 @@ export const positionings: Record<Focus, Positioning> = {
     primaryTrack: "dev",
     cvHref: "/cv/yoan-hernalesteen-cv-developpeur.pdf",
   },
-  po: {
+  pm: {
     primaryTrack: "produit",
-    cvHref: "/cv/yoan-hernalesteen-cv-product-owner.pdf",
+    cvHref: "/cv/yoan-hernalesteen-cv-product-manager.pdf",
   },
 };
 
 // Page de profil propre à chaque angle.
 export const profilePaths: Record<Focus, string> = {
   "dev-produit": "/dev",
-  po: "/produit",
+  pm: "/produit",
 };
 
 // L'angle d'une page de profil (/dev, /produit), ou undefined ailleurs.

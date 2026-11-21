@@ -217,7 +217,7 @@ describe("Home", () => {
       screen.getByRole("link", { name: /CV développeur/ }),
     ).toHaveAttribute("href", positionings["dev-produit"].cvHref);
     expect(
-      screen.getByRole("link", { name: /CV Product Owner/ }),
-    ).toHaveAttribute("href", positionings.po.cvHref);
+      screen.getByRole("link", { name: /CV Product Manager/ }),
+    ).toHaveAttribute("href", positionings.pm.cvHref);
   });
 });

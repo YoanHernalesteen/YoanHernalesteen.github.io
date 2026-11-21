@@ -40,7 +40,7 @@ exactly one MDX file.
 
 **One switch for positioning.** `FOCUS` in
 [`app/content/positioning.ts`](app/content/positioning.ts) sets the angle of
-the site (`"dev-produit"` or `"po"`): role, headline, highlighted CV, skills
+the site (`"dev-produit"` or `"pm"`): role, headline, highlighted CV, skills
 and the order of case studies. TypeScript requires every text for every
 angle, so switching is a one-line change.
 

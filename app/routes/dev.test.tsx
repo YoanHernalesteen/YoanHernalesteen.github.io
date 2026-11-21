@@ -25,7 +25,7 @@ describe("la page /dev", () => {
     ).toBeInTheDocument();
   });
 
-  it("propose le CV développeur et le GitHub, jamais le CV PO", () => {
+  it("propose le CV développeur et le GitHub, jamais le CV Product Manager", () => {
     renderDev();
 
     for (const link of screen.getAllByRole("link", {
@@ -37,7 +37,7 @@ describe("la page /dev", () => {
       screen.getByRole("link", { name: "Voir mon GitHub" }),
     ).toBeInTheDocument();
     expect(
-      screen.queryByRole("link", { name: /CV Product Owner/ }),
+      screen.queryByRole("link", { name: /CV Product Manager/ }),
     ).not.toBeInTheDocument();
   });
 
@@ -68,6 +68,12 @@ describe("la page /dev", () => {
   it("se termine par un bloc contact", () => {
     renderDev();
 
-    expect(document.getElementById("contact")).not.toBeNull();
+    const contact = document.getElementById("contact");
+    if (!contact) throw new Error("pas de bloc contact");
+    expect(
+      within(contact).getByRole("heading", {
+        name: "Me contacter pour un poste de développeur Rails",
+      }),
+    ).toBeInTheDocument();
   });
 });

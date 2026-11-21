@@ -54,12 +54,12 @@ describe("SiteHeader", () => {
     ).toHaveAttribute("href", positionings["dev-produit"].cvHref);
   });
 
-  it("propose le CV Product Owner sur /produit", () => {
+  it("propose le CV Product Manager sur /produit", () => {
     renderHeaderAt("/produit");
 
     expect(
-      screen.getByRole("link", { name: "CV Product Owner" }),
-    ).toHaveAttribute("href", positionings.po.cvHref);
+      screen.getByRole("link", { name: "CV Product Manager" }),
+    ).toHaveAttribute("href", positionings.pm.cvHref);
   });
 
   it("affiche l'icône du menu selon son état", () => {
