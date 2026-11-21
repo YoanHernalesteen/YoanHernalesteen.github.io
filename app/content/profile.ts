@@ -109,7 +109,7 @@ export const career: readonly CareerStep[] = [
     logo: elliiLogo,
     period: { fr: "Avril – novembre 2026" },
     title: { fr: "Développeur full-stack Ruby on Rails" },
-    details: { fr: "Ellii · stage de 6 mois, puis freelance" },
+    details: { fr: "Ellii · freelance, après un stage de 6 mois" },
   },
 ];
 
