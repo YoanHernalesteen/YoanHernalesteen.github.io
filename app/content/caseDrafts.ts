@@ -32,29 +32,6 @@ export const draftCases: readonly CaseStudy[] = [
     },
   },
   {
-    slug: "ubisoft-mighty-quest",
-    title: {
-      fr: "Ubisoft : boucle de jeu, rétention et monétisation d'un RPG mobile",
-    },
-    summary: {
-      fr: "Encadrer plusieurs designers et piloter les systèmes clés de Mighty Quest : boucle de jeu, progression, événements, boutique.",
-    },
-    tracks: ["produit"],
-    year: { fr: "2016 – 2019" },
-    org: "Ubisoft",
-    tags: { fr: ["Rétention", "Monétisation", "Encadrement"] },
-    featured: false,
-    brief: {
-      fr: {
-        role: "Senior Game Designer",
-        period: "2016 – 2019",
-        team: "[taille et rôles de l'équipe]",
-        tools: "[outils]",
-        shows: "Encadrement, systèmes de rétention et de monétisation",
-      },
-    },
-  },
-  {
     slug: "ce-portfolio",
     title: { fr: "Ce portfolio : un site React typé, testé et accessible" },
     summary: {

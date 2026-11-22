@@ -4,6 +4,7 @@ import elliiRecommandationCover from "~/assets/cases/ellii-recommandation-atelie
 import jppCover from "~/assets/cases/jpp-speedrun/logo.webp";
 import mediaTrackrCover from "~/assets/cases/media-trackr/cover.webp";
 import rolistesCover from "~/assets/cases/the-rolistes/cover.webp";
+import mightyQuestCover from "~/assets/games/mighty-quest.webp";
 import type { Localized } from "~/i18n/types";
 
 export type Track = "dev" | "produit";
@@ -200,6 +201,37 @@ export const cases: readonly CaseStudy[] = [
         tools: "Unreal Engine 5",
         shows:
           "Accessibilité, conception à partir des difficultés des joueurs, options de jeu",
+      },
+    },
+  },
+  {
+    slug: "ubisoft-mighty-quest",
+    title: {
+      fr: "Ubisoft · Mighty Quest : guider les joueurs dès la première session",
+    },
+    summary: {
+      fr: "Diriger le design d'un RPG mobile free-to-play pendant deux ans, et départager deux tutoriels en A/B test : le tutoriel guidé atteint 80 % de complétion, contre moins de 50 % pour la version libre.",
+    },
+    tracks: ["produit"],
+    year: { fr: "2016 – 2019" },
+    org: "Ubisoft",
+    tags: { fr: ["A/B tests", "Onboarding", "Monétisation"] },
+    featured: false,
+    cover: {
+      src: mightyQuestCover,
+      alt: {
+        fr: "Visuel officiel de The Mighty Quest for Epic Loot : un chevalier couronné brandit une épée au milieu de monstres et d'un tas d'or.",
+      },
+      credit: "© Ubisoft",
+    },
+    brief: {
+      fr: {
+        role: "Senior Game Designer, faisant fonction de lead design pendant deux ans",
+        period:
+          "Septembre 2016 – avril 2019 · soft launch en janvier 2017, sortie mondiale en juillet 2019",
+        team: "4 game designers encadrés (level design, monétisation, systèmes), dont un stagiaire",
+        tools: "Unity, Confluence, Excel",
+        shows: "Direction du design, A/B tests, onboarding, monétisation",
       },
     },
   },
