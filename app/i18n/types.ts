@@ -17,6 +17,8 @@ export interface TitledText {
 
 export interface Dictionary {
   skipToContent: string;
+  // Texte alternatif de l'image d'aperçu des réseaux sociaux.
+  ogImageAlt: string;
   nav: {
     label: string;
     cases: string;

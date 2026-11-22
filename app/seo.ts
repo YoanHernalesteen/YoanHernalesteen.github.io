@@ -2,6 +2,7 @@ import type { MetaDescriptor } from "react-router";
 
 import { cases } from "~/content/cases";
 import { site } from "~/content/site";
+import { t } from "~/i18n";
 
 // Adresse complète d'une page. GitHub Pages sert /dev depuis dev/index.html
 // et redirige /dev vers /dev/ : on écrit donc l'adresse avec la barre finale,
@@ -10,6 +11,14 @@ export function absoluteUrl(path: string): string {
   const withSlash = path.endsWith("/") ? path : `${path}/`;
   return new URL(withSlash, site.url).href;
 }
+
+// Image de l'aperçu LinkedIn (1200 × 627, le format conseillé), fichier
+// dans public/. Les dimensions évitent un aperçu réduit au premier partage.
+export const ogImage = {
+  path: "/og-image.png",
+  width: 1200,
+  height: 627,
+};
 
 interface PageMetaOptions {
   title: string;
@@ -37,6 +46,11 @@ export function pageMeta({
     { property: "og:title", content: title },
     { property: "og:description", content: description },
     { property: "og:url", content: url },
+    { property: "og:image", content: new URL(ogImage.path, site.url).href },
+    { property: "og:image:width", content: String(ogImage.width) },
+    { property: "og:image:height", content: String(ogImage.height) },
+    { property: "og:image:alt", content: t.ogImageAlt },
+    { name: "twitter:card", content: "summary_large_image" },
     { tagName: "link", rel: "canonical", href: url },
     ...(noindex ? [{ name: "robots", content: "noindex" }] : []),
   ];

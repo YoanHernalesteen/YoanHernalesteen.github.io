@@ -2,6 +2,7 @@ import type { Dictionary } from "./types";
 
 export const fr = {
   skipToContent: "Aller au contenu",
+  ogImageAlt: "Yoan Hernalesteen, Product Manager au profil technique",
   nav: {
     label: "Navigation principale",
     cases: "Études de cas",

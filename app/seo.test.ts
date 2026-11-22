@@ -1,3 +1,6 @@
+import { readFileSync } from "node:fs";
+import path from "node:path";
+
 import { describe, expect, it } from "vitest";
 
 import { cases } from "~/content/cases";
@@ -6,6 +9,7 @@ import {
   absoluteUrl,
   buildRobots,
   buildSitemap,
+  ogImage,
   pageMeta,
   sitemapPaths,
 } from "./seo";
@@ -52,6 +56,40 @@ describe("pageMeta", () => {
       rel: "canonical",
       href: url,
     });
+  });
+
+  it("donne l'image d'aperçu en adresse complète, avec ses dimensions et un texte alternatif", () => {
+    const image = meta.find(
+      (tag) => "property" in tag && tag.property === "og:image",
+    );
+
+    expect(image).toEqual({
+      property: "og:image",
+      content: "https://yoanhernalesteen.com/og-image.png",
+    });
+    expect(meta).toContainEqual({
+      property: "og:image:width",
+      content: "1200",
+    });
+    expect(meta).toContainEqual({
+      property: "og:image:height",
+      content: "627",
+    });
+    expect(meta).toContainEqual(
+      expect.objectContaining({ property: "og:image:alt" }),
+    );
+    expect(meta).toContainEqual({
+      name: "twitter:card",
+      content: "summary_large_image",
+    });
+  });
+
+  it("annonce les dimensions réelles du fichier de l'image d'aperçu", () => {
+    // Dans un PNG, la largeur et la hauteur sont aux octets 16 à 23.
+    const png = readFileSync(path.join("public", ogImage.path));
+
+    expect(png.readUInt32BE(16)).toBe(ogImage.width);
+    expect(png.readUInt32BE(20)).toBe(ogImage.height);
   });
 
   it("peut demander aux moteurs de ne pas indexer la page", () => {
