@@ -172,6 +172,7 @@ export const fr = {
     resultCount: (count) =>
       count > 1 ? `${count} études de cas` : `${count} étude de cas`,
     readCase: "Lire l'étude de cas →",
+    testimonialsTitle: "Recommandations",
     back: "← Toutes les études de cas",
     next: "Étude suivante",
     brief: {

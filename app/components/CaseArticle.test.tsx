@@ -4,6 +4,8 @@ import { describe, expect, it } from "vitest";
 
 import { CaseArticle } from "~/components/CaseArticle";
 import { cases, getCase, nextCase, type CaseStudy } from "~/content/cases";
+import { testimonialsForCase } from "~/content/testimonials";
+import { t } from "~/i18n";
 
 function requireCase(slug: string): CaseStudy {
   const study = getCase(slug);
@@ -75,6 +77,34 @@ describe("CaseArticle", () => {
       screen.queryByRole("img", { name: study.cover.alt.fr }),
     ).not.toBeInTheDocument();
     expect(screen.queryByText(/Visuel du projet/)).not.toBeInTheDocument();
+  });
+
+  it("affiche les recommandations liées au cas", () => {
+    const study = requireCase("ellii-refonte-tests-seniors");
+    const linked = testimonialsForCase(study.slug);
+    expect(linked.length).toBeGreaterThan(0);
+
+    renderArticle(study);
+
+    const section = screen.getByRole("region", {
+      name: t.cases.testimonialsTitle,
+    });
+    expect(
+      Array.from(section.querySelectorAll("blockquote")).map(
+        (quote) => quote.textContent,
+      ),
+    ).toEqual(linked.map(({ highlight }) => highlight.fr));
+  });
+
+  it("n'affiche pas de section de recommandations vide", () => {
+    const study = requireCase("media-trackr");
+    expect(testimonialsForCase(study.slug)).toEqual([]);
+
+    renderArticle(study);
+
+    expect(
+      screen.queryByRole("region", { name: t.cases.testimonialsTitle }),
+    ).not.toBeInTheDocument();
   });
 
   it("affiche le visuel du cas avec son texte alternatif", () => {

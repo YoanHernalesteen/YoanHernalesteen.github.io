@@ -19,6 +19,8 @@ export interface Testimonial {
   original?: readonly string[];
   // Phrase mise en avant sur chaque page où la recommandation apparaît.
   highlights: Partial<Record<TestimonialPage, Localized>>;
+  // Phrase mise en avant dans une étude de cas, indexée par son slug.
+  caseHighlights?: Record<string, Localized>;
 }
 
 export const testimonials: readonly Testimonial[] = [
@@ -86,12 +88,62 @@ export const testimonials: readonly Testimonial[] = [
         fr: "Grâce à sa connaissance approfondie du design et à ses capacités d'analyse, nous avons repéré et anticipé d'innombrables problèmes dans nos jeux.",
       },
     },
+    caseHighlights: {
+      "gameloft-multi-studios": {
+        fr: "Pour moi, il ne fait aucun doute que sans ses contributions, ces projets n'auraient jamais atteint le niveau de qualité dont nous sommes si fiers aujourd'hui.",
+      },
+    },
+  },
+  {
+    role: { fr: "Assistant Production Manager · Gameloft" },
+    relation: { fr: "collègue" },
+    paragraphs: {
+      fr: [
+        "Yoan est un game designer doté d'une grande culture du jeu vidéo, ce qui lui donne l'avantage d'avoir toujours la bonne référence pour le bon projet.",
+        "Il s'investit vraiment dans son travail et n'hésite pas à donner son point de vue, avec des arguments solides, même quand ce n'est pas l'avis de la majorité.",
+      ],
+    },
+    translatedFrom: "en",
+    original: [
+      "Yoan is a game designer with a strong gaming culture which gives him this advantage to always have the good reference for the right project.",
+      "He is someone really involved in his work and he does not hesitate to give his point of view with strong arguments even if it is not the opinion of the majority.",
+    ],
+    highlights: {},
+    caseHighlights: {
+      "gameloft-multi-studios": {
+        fr: "Il s'investit vraiment dans son travail et n'hésite pas à donner son point de vue, avec des arguments solides, même quand ce n'est pas l'avis de la majorité.",
+      },
+    },
+  },
+  {
+    role: { fr: "CEO · Ellii" },
+    relation: { fr: "a travaillé avec Yoan" },
+    // « avec » ajouté : il manque dans le texte publié sur LinkedIn.
+    paragraphs: {
+      fr: [
+        "Un vrai plaisir de travailler avec Yoan! Corpo, sérieux, autonome, autodidacte, sont tout autant de qualités dont nous avons eu la chance de pouvoir profiter.",
+      ],
+    },
+    highlights: {},
+    caseHighlights: {
+      "ellii-refonte-tests-seniors": {
+        fr: "Un vrai plaisir de travailler avec Yoan! Corpo, sérieux, autonome, autodidacte, sont tout autant de qualités dont nous avons eu la chance de pouvoir profiter.",
+      },
+    },
   },
 ];
 
 export interface PageTestimonial {
   testimonial: Testimonial;
   highlight: Localized;
+}
+
+// Les recommandations d'une étude de cas, chacune avec sa phrase mise en avant.
+export function testimonialsForCase(slug: string): PageTestimonial[] {
+  return testimonials.flatMap((testimonial) => {
+    const highlight = testimonial.caseHighlights?.[slug];
+    return highlight ? [{ testimonial, highlight }] : [];
+  });
 }
 
 // Les recommandations d'une page, chacune avec sa phrase mise en avant.

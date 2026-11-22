@@ -2,8 +2,10 @@ import { Link } from "react-router";
 
 import { caseBodies } from "~/content/caseBodies";
 import type { CaseBrief, CaseStudy } from "~/content/cases";
+import { testimonialsForCase } from "~/content/testimonials";
 import { LANG, t } from "~/i18n";
 
+import { TestimonialList } from "./TestimonialList";
 import { TrackBadge } from "./TrackBadge";
 
 // Ordre des lignes de l'encadré « En bref ».
@@ -30,6 +32,7 @@ export function CaseArticle({ study, next }: Props) {
       ? "[--case-accent:var(--color-produit)]"
       : "[--case-accent:var(--color-dev)]";
   const brief = study.brief[LANG];
+  const testimonials = testimonialsForCase(study.slug);
 
   return (
     <article className="page pt-12 pb-24">
@@ -103,6 +106,25 @@ export function CaseArticle({ study, next }: Props) {
           </dl>
         </aside>
       </div>
+
+      {testimonials.length > 0 && (
+        <section aria-labelledby="case-testimonials-title" className="mt-18">
+          <h2
+            id="case-testimonials-title"
+            className="mb-6 font-display text-[28px] leading-tight font-bold"
+          >
+            {t.cases.testimonialsTitle}
+          </h2>
+          <TestimonialList
+            items={testimonials}
+            className={
+              testimonials.length > 1
+                ? "grid gap-6 md:grid-cols-2"
+                : "grid gap-6"
+            }
+          />
+        </section>
+      )}
 
       {next && (
         <nav

@@ -1,10 +1,13 @@
 import { describe, expect, it } from "vitest";
 
+import { draftCases } from "./caseDrafts";
+import { cases } from "./cases";
 import { career, games, gamesNewestFirst } from "./profile";
 import {
   TESTIMONIAL_PAGES,
   testimonials,
   testimonialsFor,
+  testimonialsForCase,
 } from "./testimonials";
 
 describe("le parcours", () => {
@@ -59,13 +62,42 @@ describe("les recommandations", () => {
     expect(testimonialsFor(page).length).toBeGreaterThan(0);
   });
 
-  it("s'affichent chacune sur au moins une page du site", () => {
+  it("s'affichent chacune sur une page ou dans une étude de cas", () => {
     for (const testimonial of testimonials) {
-      const pages = TESTIMONIAL_PAGES.filter(
-        (page) => testimonial.highlights[page],
-      );
+      const places = [
+        ...TESTIMONIAL_PAGES.filter((page) => testimonial.highlights[page]),
+        ...Object.keys(testimonial.caseHighlights ?? {}),
+      ];
 
-      expect(pages, testimonial.role.fr).not.toEqual([]);
+      expect(places, testimonial.role.fr).not.toEqual([]);
+    }
+  });
+
+  it("ne renvoient qu'à des études de cas qui existent, publiées ou en brouillon", () => {
+    const slugs = [...cases, ...draftCases].map((study) => study.slug);
+
+    for (const testimonial of testimonials) {
+      for (const slug of Object.keys(testimonial.caseHighlights ?? {})) {
+        expect(slugs, testimonial.role.fr).toContain(slug);
+      }
+    }
+  });
+
+  it("renvoient pour chaque étude de cas la phrase mise en avant", () => {
+    const linked = testimonials.filter(
+      (testimonial) => testimonial.caseHighlights,
+    );
+    expect(linked.length).toBeGreaterThan(0);
+
+    for (const testimonial of linked) {
+      for (const [slug, highlight] of Object.entries(
+        testimonial.caseHighlights ?? {},
+      )) {
+        expect(testimonialsForCase(slug)).toContainEqual({
+          testimonial,
+          highlight,
+        });
+      }
     }
   });
 
@@ -77,6 +109,7 @@ describe("les recommandations", () => {
       "translatedFrom",
       "original",
       "highlights",
+      "caseHighlights",
     ];
 
     for (const testimonial of testimonials) {
@@ -90,7 +123,10 @@ describe("les recommandations", () => {
     for (const testimonial of testimonials) {
       const fullText = testimonial.paragraphs.fr.join(" ");
 
-      for (const highlight of Object.values(testimonial.highlights)) {
+      for (const highlight of [
+        ...Object.values(testimonial.highlights),
+        ...Object.values(testimonial.caseHighlights ?? {}),
+      ]) {
         expect(fullText).toContain(highlight.fr);
       }
     }

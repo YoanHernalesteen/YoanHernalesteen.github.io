@@ -140,6 +140,8 @@ export interface Dictionary {
     // Une fonction : le texte dépend du nombre (singulier, pluriel).
     resultCount: (count: number) => string;
     readCase: string;
+    // Titre de la section des recommandations d'une étude de cas.
+    testimonialsTitle: string;
     back: string;
     next: string;
     brief: { title: string } & Record<keyof CaseBrief, string>;
