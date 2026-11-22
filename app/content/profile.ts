@@ -124,6 +124,8 @@ export interface Game {
   hasTrailer: boolean;
   // Affiché sur l'accueil : un jeu par type de public.
   highlighted?: boolean;
+  // Étude de cas liée, si elle est publiée (un test vérifie le slug).
+  caseSlug?: string;
 }
 
 export const games: readonly Game[] = [
@@ -145,6 +147,7 @@ export const games: readonly Game[] = [
   },
   {
     title: "Jusant",
+    caseSlug: "dont-nod-jusant-accessibilite",
     year: 2023,
     meta: { fr: "Don't Nod · 2023" },
     role: {
@@ -176,6 +179,7 @@ export const games: readonly Game[] = [
   },
   {
     title: "The Mighty Quest for Epic Loot",
+    caseSlug: "ubisoft-mighty-quest",
     year: 2019,
     meta: { fr: "Ubisoft Paris Mobile · iOS, Android · 2019" },
     role: {

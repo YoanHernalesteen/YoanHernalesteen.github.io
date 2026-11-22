@@ -1,5 +1,7 @@
+import { Link } from "react-router";
+
 import type { Game } from "~/content/profile";
-import { LANG } from "~/i18n";
+import { LANG, t } from "~/i18n";
 
 interface Props {
   games: readonly Game[];
@@ -35,6 +37,15 @@ export function GameList({ games }: Props) {
           <p className="mt-2 text-sm leading-normal text-muted">
             {game.role[LANG]}
           </p>
+          {game.caseSlug && (
+            <Link
+              to={`/cas/${game.caseSlug}`}
+              className="mt-auto pt-3 text-[15px] font-semibold underline-offset-4 hover:underline"
+            >
+              {t.cases.readCase}
+              <span className="sr-only">{` : ${game.title}`}</span>
+            </Link>
+          )}
         </li>
       ))}
     </ul>

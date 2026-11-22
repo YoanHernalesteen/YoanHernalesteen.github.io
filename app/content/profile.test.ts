@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { draftCases } from "./caseDrafts";
-import { cases } from "./cases";
+import { cases, getCase } from "./cases";
 import { career, games, gamesNewestFirst } from "./profile";
 import {
   TESTIMONIAL_PAGES,
@@ -25,6 +25,15 @@ describe("le parcours", () => {
 });
 
 describe("les jeux livrés", () => {
+  it("ne renvoient qu'à des études de cas publiées", () => {
+    const linked = games.filter((game) => game.caseSlug);
+    expect(linked.length).toBeGreaterThan(0);
+
+    for (const game of linked) {
+      expect(getCase(game.caseSlug ?? ""), game.title).toBeDefined();
+    }
+  });
+
   it("ont un titre, une ligne d'informations et un rôle", () => {
     expect(games.length).toBeGreaterThan(0);
     for (const game of games) {

@@ -122,6 +122,22 @@ describe("Home", () => {
     );
   });
 
+  it("relie chaque jeu à son étude de cas, avec un lien qui nomme le jeu", () => {
+    renderHome();
+
+    const linked = games.filter((game) => game.highlighted && game.caseSlug);
+    expect(linked.length).toBeGreaterThan(0);
+    for (const game of linked) {
+      // Le nom du jeu rend le lien compréhensible hors de sa carte.
+      expect(
+        screen.getByRole("link", {
+          name: (name) =>
+            name.startsWith(t.cases.readCase) && name.endsWith(game.title),
+        }),
+      ).toHaveAttribute("href", `/cas/${game.caseSlug}`);
+    }
+  });
+
   it("propose les crédits MobyGames sous le parcours", () => {
     renderHome();
 
