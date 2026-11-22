@@ -174,9 +174,12 @@ describe("Home", () => {
         within(section).getByRole("heading", { level: 3, name: activity.name }),
       ).toBeInTheDocument();
       for (const link of activity.links ?? []) {
-        expect(
-          within(section).getByRole("link", { name: link.label }),
-        ).toHaveAttribute("href", link.href);
+        const element = within(section).getByRole("link", { name: link.label });
+        expect(element).toHaveAttribute("href", link.href);
+        expect(element.querySelector("svg")).toHaveAttribute(
+          "aria-hidden",
+          "true",
+        );
       }
       if (activity.caseSlug) {
         expect(
@@ -187,6 +190,20 @@ describe("Home", () => {
     for (const article of within(section).getAllByRole("article")) {
       // Logo décoratif : l'événement est déjà nommé dans le texte.
       expect(article.querySelector("img")).toHaveAttribute("alt", "");
+    }
+  });
+
+  it("montre LinkedIn et GitHub dans le contact, avec une icône décorative", () => {
+    renderHome();
+
+    const contact = document.getElementById("contact");
+    if (!contact) throw new Error("pas de bloc contact");
+    for (const href of [site.linkedin, site.github]) {
+      const link = contact.querySelector(`a[href="${href}"]`);
+      expect(link?.querySelector("svg"), href).toHaveAttribute(
+        "aria-hidden",
+        "true",
+      );
     }
   });
 

@@ -7,6 +7,7 @@ import { GameList } from "~/components/GameList";
 import { MethodSection } from "~/components/MethodSection";
 import { heroButton, ProfileHero } from "~/components/ProfileHero";
 import { SectionHeader, sectionLabel } from "~/components/SectionHeader";
+import { SocialLink } from "~/components/SocialLink";
 import { TestimonialList } from "~/components/TestimonialList";
 import { cases, featuredCases } from "~/content/cases";
 import { positionings } from "~/content/positioning";
@@ -226,13 +227,13 @@ export default function Home() {
                     </Link>
                   )}
                   {activity.links?.map((link) => (
-                    <a
+                    <SocialLink
                       key={link.href}
                       href={link.href}
                       className="underline-offset-4 hover:underline"
                     >
                       {link.label}
-                    </a>
+                    </SocialLink>
                   ))}
                 </p>
               )}

@@ -2,6 +2,8 @@ import { positionings, type Focus } from "~/content/positioning";
 import { site } from "~/content/site";
 import { t } from "~/i18n";
 
+import { SocialLink } from "./SocialLink";
+
 interface Props {
   title: string;
   lede?: string;
@@ -48,12 +50,12 @@ export function ContactSection({ title, lede, cvs }: Props) {
             </a>
           ))}
           <div className="mt-3 flex flex-wrap gap-6 text-[15px]">
-            <a href={site.linkedin} className="underline">
+            <SocialLink href={site.linkedin} className="underline">
               LinkedIn
-            </a>
-            <a href={site.github} className="underline">
+            </SocialLink>
+            <SocialLink href={site.github} className="underline">
               GitHub
-            </a>
+            </SocialLink>
             <a href={`mailto:${site.email}`} className="underline">
               {site.email}
             </a>
