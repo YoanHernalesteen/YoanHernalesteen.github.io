@@ -1,3 +1,6 @@
+import dontNodLogo from "~/assets/logos/dont-nod.webp";
+import elliiLogo from "~/assets/logos/ellii.webp";
+import gameloftLogo from "~/assets/logos/gameloft.webp";
 import type { Localized } from "~/i18n/types";
 
 export const TESTIMONIAL_PAGES = ["accueil", "dev"] as const;
@@ -8,6 +11,9 @@ export type TestimonialPage = (typeof TESTIMONIAL_PAGES)[number];
 export interface Testimonial {
   // Poste et entreprise, par exemple « Cofondateur et CTO · Ellii ».
   role: Localized;
+  // Logo de l'entreprise (app/assets/logos/), décoratif : son nom est écrit
+  // dans `role`.
+  logo?: string;
   // Lien avec Yoan, par exemple « a encadré Yoan ».
   relation?: Localized;
   // Texte complet, un paragraphe par élément.
@@ -26,6 +32,7 @@ export interface Testimonial {
 export const testimonials: readonly Testimonial[] = [
   {
     role: { fr: "Cofondateur et CTO · Ellii" },
+    logo: elliiLogo,
     relation: { fr: "a encadré Yoan" },
     paragraphs: {
       fr: [
@@ -55,6 +62,7 @@ export const testimonials: readonly Testimonial[] = [
   },
   {
     role: { fr: "Producer · Don't Nod" },
+    logo: dontNodLogo,
     relation: { fr: "a encadré Yoan sur Jusant" },
     paragraphs: {
       fr: [
@@ -79,6 +87,7 @@ export const testimonials: readonly Testimonial[] = [
   },
   {
     role: { fr: "HQ Producer · Gameloft" },
+    logo: gameloftLogo,
     relation: { fr: "collègue sur Gangstar Vegas et Asphalt 8" },
     paragraphs: {
       fr: [
@@ -104,6 +113,7 @@ export const testimonials: readonly Testimonial[] = [
   },
   {
     role: { fr: "Assistant Production Manager · Gameloft" },
+    logo: gameloftLogo,
     relation: { fr: "collègue" },
     paragraphs: {
       fr: [
@@ -125,6 +135,7 @@ export const testimonials: readonly Testimonial[] = [
   },
   {
     role: { fr: "CEO · Ellii" },
+    logo: elliiLogo,
     relation: { fr: "a travaillé avec Yoan" },
     // « avec » ajouté : il manque dans le texte publié sur LinkedIn.
     paragraphs: {

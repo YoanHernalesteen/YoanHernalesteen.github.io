@@ -96,6 +96,36 @@ describe("TestimonialCard", () => {
     expect(onToggle).toHaveBeenCalledOnce();
   });
 
+  it("affiche le logo de l'entreprise à côté du poste, en décoration", () => {
+    render(
+      <TestimonialCard
+        testimonial={{ ...short, logo: "/logo.webp" }}
+        highlight={highlight}
+        expanded={false}
+        onToggle={() => {}}
+      />,
+    );
+
+    const caption = screen.getByText("Consultant").closest("figcaption");
+    const logo = caption?.querySelector("img");
+    expect(logo).toHaveAttribute("src", "/logo.webp");
+    // Le nom de l'entreprise est écrit juste à côté.
+    expect(logo).toHaveAttribute("alt", "");
+  });
+
+  it("n'affiche pas d'image quand l'entreprise n'a pas de logo", () => {
+    render(
+      <TestimonialCard
+        testimonial={short}
+        highlight={highlight}
+        expanded={false}
+        onToggle={() => {}}
+      />,
+    );
+
+    expect(document.querySelector("img")).toBeNull();
+  });
+
   it("ne propose pas de dépliage quand la phrase est tout le texte", () => {
     render(
       <TestimonialCard

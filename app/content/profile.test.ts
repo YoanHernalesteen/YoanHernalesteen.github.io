@@ -113,6 +113,7 @@ describe("les recommandations", () => {
   it("n'affichent que le poste et l'entreprise, jamais le nom", () => {
     const allowed = [
       "role",
+      "logo",
       "relation",
       "paragraphs",
       "translatedFrom",

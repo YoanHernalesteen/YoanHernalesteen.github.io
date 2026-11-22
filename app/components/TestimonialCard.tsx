@@ -104,14 +104,27 @@ export function TestimonialCard({
         </>
       )}
 
-      <figcaption className="pt-3 text-sm leading-normal text-muted">
-        <strong className="text-ink">{testimonial.role[LANG]}</strong>
-        {testimonial.relation && <> · {testimonial.relation[LANG]}</>}
-        {testimonial.translatedFrom && (
-          <span className="mt-1 block font-mono text-xs text-subtle">
-            {t.testimonial.translatedFrom}
-          </span>
+      <figcaption className="flex items-center gap-3 pt-3 text-sm leading-normal text-muted">
+        {testimonial.logo && (
+          <img
+            src={testimonial.logo}
+            alt=""
+            width={40}
+            height={40}
+            loading="lazy"
+            decoding="async"
+            className="size-10 shrink-0 rounded-lg ring-1 ring-line"
+          />
         )}
+        <span>
+          <strong className="text-ink">{testimonial.role[LANG]}</strong>
+          {testimonial.relation && <> · {testimonial.relation[LANG]}</>}
+          {testimonial.translatedFrom && (
+            <span className="mt-1 block font-mono text-xs text-subtle">
+              {t.testimonial.translatedFrom}
+            </span>
+          )}
+        </span>
       </figcaption>
     </figure>
   );
