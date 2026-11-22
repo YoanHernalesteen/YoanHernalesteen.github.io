@@ -26,6 +26,8 @@ export interface GameloftGame {
   playInstalls?: number;
   playRating?: number;
   appStoreRating?: number;
+  // Jeu payant : explique une tranche de téléchargements plus basse.
+  paid?: boolean;
 }
 
 // Chiffres publics relevés le 2026-11-21 sur Google Play et l'App Store US.
@@ -60,6 +62,7 @@ export const gameloftGames: readonly GameloftGame[] = [
     title: "The Amazing Spider-Man 2",
     icon: amazingSpiderMan2Icon,
     role: "both",
+    paid: true,
     playInstalls: 500_000,
     playRating: 4.3,
     appStoreRating: 4.6,

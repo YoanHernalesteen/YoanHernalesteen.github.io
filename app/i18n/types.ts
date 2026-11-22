@@ -102,6 +102,7 @@ export interface Dictionary {
     downloads: (range: string) => string;
     // Note lue par les lecteurs d'écran (« 4,4 sur 5 »).
     ratingLabel: (rating: string) => string;
+    paid: string;
   };
   games: {
     eyebrow: string;

@@ -69,6 +69,7 @@ export function GameloftGames() {
                           {text.downloads(formatInstalls(game.playInstalls))}
                         </span>
                       )}
+                      {game.paid && <span>{text.paid}</span>}
                     </span>
                   </div>
                 </li>

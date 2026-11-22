@@ -134,6 +134,7 @@ export const fr = {
     appStore: "App Store",
     downloads: (range) => `${range} téléchargements`,
     ratingLabel: (rating) => `${rating} sur 5`,
+    paid: "Jeu payant",
   },
   games: {
     eyebrow: "Jeux livrés · 2008 – 2025",

@@ -57,4 +57,21 @@ describe("GameloftGames", () => {
       "true",
     );
   });
+
+  it("signale les jeux payants, et seulement eux", () => {
+    render(<GameloftGames />);
+
+    const paidGames = gameloftGames.filter((game) => game.paid);
+    expect(paidGames.length).toBeGreaterThan(0);
+    for (const game of gameloftGames) {
+      const item = screen
+        .getByRole("heading", { name: game.title })
+        .closest("li");
+      if (!item) throw new Error(`ligne de ${game.title} introuvable`);
+      const mention = within(item).queryByText(t.gameloft.paid);
+
+      if (game.paid) expect(mention, game.title).toBeInTheDocument();
+      else expect(mention, game.title).not.toBeInTheDocument();
+    }
+  });
 });
