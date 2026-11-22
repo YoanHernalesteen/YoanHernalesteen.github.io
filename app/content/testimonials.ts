@@ -44,6 +44,14 @@ export const testimonials: readonly Testimonial[] = [
         fr: "Yoan connaissait déjà notre stack Ruby on Rails, et il s'est approprié très rapidement notre base de code et les spécificités de notre métier. Il sait tirer pleinement parti des outils d'IA pour avancer, explorer et itérer efficacement.",
       },
     },
+    caseHighlights: {
+      "ellii-refonte-tests-seniors": {
+        fr: "Yoan se pose les bonnes questions, garde toujours en tête l'expérience de l'utilisateur final, et n'hésite pas à faire des parallèles avec ce qu'il a vu dans l'industrie du jeu.",
+      },
+      "ellii-recommandation-ateliers": {
+        fr: "On peut lui confier un sujet en sachant qu'il ira au bout, et souvent avec une idée en plus.",
+      },
+    },
   },
   {
     role: { fr: "Producer · Don't Nod" },
