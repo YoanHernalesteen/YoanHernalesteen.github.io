@@ -24,10 +24,12 @@ export const draftCases: readonly CaseStudy[] = [
     brief: {
       fr: {
         role: "Game Content Manager",
-        period: "2014 – 2016",
-        team: "6 studios internationaux",
-        tools: "[outils]",
-        shows: "Pilotage de plusieurs équipes, suivi après la sortie",
+        period: "2014 – 2016 · deux ans et demi",
+        team: "6 studios internationaux : Australie, Canada, Roumanie, Espagne, États-Unis, Chine",
+        tools:
+          "Confluence, PowerPoint, Excel, Unity 3D pour le prototypage, capture vidéo des sessions de jeu",
+        shows:
+          "Pilotage de plusieurs studios, veille et pitchs, revue de versions, game design et monétisation",
       },
     },
   },
