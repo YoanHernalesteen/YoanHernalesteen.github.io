@@ -40,7 +40,7 @@ describe("CaseArticle", () => {
     );
   });
 
-  it("résume le cas dans l'encadré « En bref »", () => {
+  it("résume le cas dans l'encadré « En bref », lu avant le texte", () => {
     const study = requireCase("media-trackr");
 
     renderArticle(study);
@@ -49,6 +49,16 @@ describe("CaseArticle", () => {
     for (const value of Object.values(study.brief.fr)) {
       expect(within(aside).getByText(value)).toBeInTheDocument();
     }
+    // Sur téléphone, l'encadré s'affiche au-dessus du texte : un lecteur
+    // d'écran doit le lire dans le même ordre.
+    const firstBodyHeading = screen
+      .getAllByRole("heading", { level: 2 })
+      .find((heading) => !aside.contains(heading));
+    if (!firstBodyHeading) throw new Error("texte du cas introuvable");
+    expect(
+      aside.compareDocumentPosition(firstBodyHeading) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
   });
 
   it("propose l'étude de cas suivante", () => {

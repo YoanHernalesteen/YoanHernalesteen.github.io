@@ -76,18 +76,13 @@ export function CaseArticle({ study, next }: Props) {
         </figure>
       )}
 
-      <div className="mt-14 flex flex-wrap items-start gap-14">
-        {Body && (
-          <div
-            className={`case-body case-body-numbered min-w-0 flex-[999_1_560px] ${accent}`}
-          >
-            <Body />
-          </div>
-        )}
-
+      {/* L'encadré vient avant le texte dans le code : au-dessus sur
+          téléphone, et lu en premier par les lecteurs d'écran. Sur grand
+          écran, il passe à droite. */}
+      <div className="mt-14 flex flex-col gap-14 lg:flex-row lg:items-start">
         <aside
           aria-labelledby="brief-title"
-          className="min-w-0 flex-[1_1_280px] rounded-2xl border border-line bg-surface p-7 md:sticky md:top-6"
+          className="min-w-0 rounded-2xl border border-line bg-surface p-7 lg:sticky lg:top-6 lg:order-last lg:flex-[1_1_280px]"
         >
           <h2 id="brief-title" className="eyebrow">
             {t.cases.brief.title}
@@ -105,6 +100,14 @@ export function CaseArticle({ study, next }: Props) {
             ))}
           </dl>
         </aside>
+
+        {Body && (
+          <div
+            className={`case-body case-body-numbered min-w-0 lg:flex-[999_1_560px] ${accent}`}
+          >
+            <Body />
+          </div>
+        )}
       </div>
 
       {testimonials.length > 0 && (
