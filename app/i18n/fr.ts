@@ -100,7 +100,7 @@ export const fr = {
   },
   produit: {
     title: "Un Product Manager qui comprend le code.",
-    lede: "16 ans de jeu vidéo, dont 9 comme Senior Game Designer chez Ubisoft et Don't Nod : des specs, des features priorisées et livrées en Scrum avec des développeurs, des artistes et des animateurs. Chez Ubisoft, j'ai encadré 4 game designers et suivi la rétention et la monétisation d'un RPG mobile par des A/B tests. Chez Ellii, j'ai organisé des tests utilisateurs auprès de 12 seniors et participé à la mise en place du suivi produit avec PostHog. Le rôle de Product Owner m'est donc familier : backlog, user stories, recette.",
+    lede: "16 ans à concevoir des produits pour des publics très différents : joueurs mobiles chez Gameloft et Ubisoft, joueurs console et PC chez Don't Nod, puis seniors chez Ellii. J'écris les specs, je priorise avec l'équipe, je teste avec les utilisateurs et je suis les KPI. Chez Ubisoft, j'ai encadré 4 game designers ; chez Ellii, j'ai aussi développé en Ruby on Rails.",
     cvCta: "Télécharger mon CV",
     casesCta: "Voir les études de cas produit",
     methodEyebrow: "Ma méthode",
@@ -112,15 +112,15 @@ export const fr = {
       },
       {
         title: "Prioriser",
-        text: "Backlog, user stories, critères d'acceptation, arbitrages avec l'équipe. Chez Ellii, ce qui bloquait les membres est passé avant les remarques de goût : la page de parrainage a été refaite en premier.",
+        text: "Backlog, user stories, critères d'acceptation, arbitrages avec l'équipe. Chez Gameloft, sur Dragon Mania Legends, avec un petit budget, nous avons misé sur l'attachement aux dragons plutôt que sur le combat ou la construction : 100 M+ téléchargements.",
       },
       {
         title: "Livrer",
-        text: "Scrum, specs claires pour les développeurs, recette et validation. 25 jeux livrés, puis une refonte complète mise en ligne chez Ellii.",
+        text: "Scrum, specs claires pour les développeurs, recette et validation. 25 jeux livrés, dont 15 free-to-play suivis avec 6 studios internationaux chez Gameloft.",
       },
       {
         title: "Mesurer",
-        text: "Plan de suivi des événements dans PostHog, indicateurs, itérations. Chez Ellii, +38 % de réservations sur les premières semaines avec le modèle de prévision.",
+        text: "Plan de suivi des événements dans PostHog, indicateurs, itérations. Chez Ubisoft, un A/B test a départagé 2 tutoriels : 80 % de complétion pour la version guidée, contre moins de 50 %.",
       },
     ],
   },
