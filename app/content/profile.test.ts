@@ -11,10 +11,10 @@ import {
 } from "./testimonials";
 
 describe("le parcours", () => {
-  it("est trié du plus ancien au plus récent", () => {
+  it("est trié du plus récent au plus ancien", () => {
     const years = career.map((step) => step.startYear);
 
-    expect(years).toEqual([...years].sort((a, b) => a - b));
+    expect(years).toEqual([...years].sort((a, b) => b - a));
   });
 
   it("indique pour chaque étape s'il s'agit d'une formation ou d'un poste", () => {
