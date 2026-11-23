@@ -141,7 +141,7 @@ export const fr = {
     title: "25 jeux, de la spec à la sortie",
     lede: "7 jeux console et PC, 18 jeux mobiles, chez Don't Nod, Ubisoft, Gameloft, Ninja Theory, AMA Studios, Birdies Road et Ankama. Une sélection :",
     allCredits: "Tous mes crédits sur MobyGames →",
-    highlightTitle: "Trois jeux, trois publics",
+    highlightTitle: "3 jeux, 3 publics",
     allGames: "Voir tous les jeux →",
   },
   testimonial: {

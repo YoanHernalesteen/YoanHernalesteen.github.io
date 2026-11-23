@@ -24,9 +24,9 @@ En résumé : l'outil estime, pour chaque séance, ses chances d'être annulée 
    - une part notable avait été décidée par un admin ;
    - une minorité seulement était due à un manque d'inscrits.
 
-2. **Modéliser.** Le point de départ est le taux de remplissage de chaque couple animateur × atelier. Quand un couple a peu d'historique, ce taux emprunte à l'historique de l'atelier, puis de sa catégorie, puis à la moyenne globale. Il est ensuite recalé sur les 8 dernières semaines et ajusté selon deux facteurs : les séances proches qui visent le même public, et le délai entre la publication et la séance. Enfin, ce taux est traduit en risque d'annulation et en marge attendue.
+2. **Modéliser.** Le point de départ est le taux de remplissage de chaque couple animateur × atelier. Quand un couple a peu d'historique, ce taux emprunte à l'historique de l'atelier, puis de sa catégorie, puis à la moyenne globale. Il est ensuite recalé sur les 8 dernières semaines et ajusté selon 2 facteurs : les séances proches qui visent le même public, et le délai entre la publication et la séance. Enfin, ce taux est traduit en risque d'annulation et en marge attendue.
 
-3. **Valider.** J'ai testé le modèle sur trois périodes passées qu'il n'avait pas vues (backtest), en comparant ses prédictions à ce qui s'est réellement passé. Une fois le modèle porté dans l'application, j'ai vérifié que le code Rails redonnait exactement les chiffres du prototype.
+3. **Valider.** J'ai testé le modèle sur 3 périodes passées qu'il n'avait pas vues (backtest), en comparant ses prédictions à ce qui s'est réellement passé. Une fois le modèle porté dans l'application, j'ai vérifié que le code Rails redonnait exactement les chiffres du prototype.
 
 4. **Proposer.** J'ai construit un planning pour novembre 2026 à partir du modèle. Le classement repose sur le risque d'annulation et le nombre de participants attendus, pas sur la marge : c'est la participation qui pèse le plus dans le renouvellement des contrats partenaires. J'ai aussi mis en place une revue des créneaux proposés par les animateurs.
 
@@ -108,7 +108,7 @@ En résumé : l'outil estime, pour chaque séance, ses chances d'être annulée 
 
 ## Les résultats
 
-- Le modèle a été validé sur deux périodes qu'il n'avait pas vues, de juillet à mi-novembre 2026 : ses prévisions d'annulations sont restées proches de la réalité, avec une AUC de 0,80 puis 0,81.
+- Le modèle a été validé sur 2 périodes qu'il n'avait pas vues, de juillet à mi-novembre 2026 : ses prévisions d'annulations sont restées proches de la réalité, avec une AUC de 0,80 puis 0,81.
 
   Une AUC de 0,8 veut dire que, dans 80 % des cas, le modèle juge une séance qui sera annulée plus risquée qu'une séance qui aura lieu.
 
@@ -118,5 +118,5 @@ En résumé : l'outil estime, pour chaque séance, ses chances d'être annulée 
 
 ## Ce que je ferais autrement
 
-- **Mettre l'analyse sous Git dès le premier jour.** Mes premiers scripts vivaient dans un dossier temporaire, qui a été vidé trois fois. J'ai perdu du temps à les reconstruire.
+- **Mettre l'analyse sous Git dès le premier jour.** Mes premiers scripts vivaient dans un dossier temporaire, qui a été vidé 3 fois. J'ai perdu du temps à les reconstruire.
 - **Sécuriser tôt les données de référence.** En cours de projet, les nouveaux dumps ont cessé d'inclure l'historique d'audit. J'ai dû conserver un ancien dump à part pour garder des chiffres comparables.

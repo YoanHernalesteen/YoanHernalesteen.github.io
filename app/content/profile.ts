@@ -222,7 +222,7 @@ export const games: readonly Game[] = [
     image: {
       src: dragonManiaImage,
       alt: {
-        fr: "Visuel officiel de Dragon Mania Legends : quatre jeunes dragons colorés dans un paysage verdoyant.",
+        fr: "Visuel officiel de Dragon Mania Legends : 4 jeunes dragons colorés dans un paysage verdoyant.",
       },
       credit: "© Gameloft",
     },

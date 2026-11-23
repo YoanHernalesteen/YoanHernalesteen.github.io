@@ -128,7 +128,7 @@ export const cases: readonly CaseStudy[] = [
     cover: {
       src: mediaTrackrCover,
       alt: {
-        fr: "L'app Media Trackr : son logo et trois œuvres suivies, le film Dune, le livre Le Seigneur des Anneaux et le jeu Zelda: Tears of the Kingdom.",
+        fr: "L'app Media Trackr : son logo et 3 œuvres suivies, le film Dune, le livre Le Seigneur des Anneaux et le jeu Zelda: Tears of the Kingdom.",
       },
     },
     brief: {
@@ -211,7 +211,7 @@ export const cases: readonly CaseStudy[] = [
       fr: "Ubisoft · Mighty Quest : guider les joueurs dès la première session",
     },
     summary: {
-      fr: "Diriger le design d'un RPG mobile free-to-play pendant deux ans, et départager deux tutoriels en A/B test : le tutoriel guidé atteint 80 % de complétion, contre moins de 50 % pour la version libre.",
+      fr: "Diriger le design d'un RPG mobile free-to-play pendant 2 ans, et départager 2 tutoriels en A/B test : le tutoriel guidé atteint 80 % de complétion, contre moins de 50 % pour la version libre.",
     },
     tracks: ["produit"],
     year: { fr: "2016 – 2019" },
@@ -227,7 +227,7 @@ export const cases: readonly CaseStudy[] = [
     },
     brief: {
       fr: {
-        role: "Senior Game Designer, faisant fonction de lead design pendant deux ans",
+        role: "Senior Game Designer, faisant fonction de lead design pendant 2 ans",
         period:
           "Septembre 2016 – avril 2019 · soft launch en janvier 2017, sortie mondiale en juillet 2019",
         team: "4 game designers encadrés (level design, monétisation, systèmes), dont un stagiaire",
@@ -254,14 +254,14 @@ export const cases: readonly CaseStudy[] = [
     cover: {
       src: dragonManiaCover,
       alt: {
-        fr: "Visuel officiel de Dragon Mania Legends : quatre jeunes dragons colorés dans un paysage verdoyant.",
+        fr: "Visuel officiel de Dragon Mania Legends : 4 jeunes dragons colorés dans un paysage verdoyant.",
       },
       credit: "© Gameloft",
     },
     brief: {
       fr: {
         role: "Game Content Manager",
-        period: "2014 – 2016 · deux ans et demi",
+        period: "2014 – 2016 · 2 ans et demi",
         team: "6 studios internationaux : Australie, Canada, Roumanie, Espagne, États-Unis, Chine",
         tools:
           "Confluence, PowerPoint, Excel, Unity 3D pour le prototypage, capture vidéo des sessions de jeu",
@@ -276,7 +276,7 @@ export const cases: readonly CaseStudy[] = [
       fr: "JPP Speedrun : cofonder et organiser des marathons de speedrun en direct",
     },
     summary: {
-      fr: "Cofonder un événement de speedrun francophone et en organiser deux éditions par an : programmation, coordination de l'équipe et supervision technique de la diffusion.",
+      fr: "Cofonder un événement de speedrun francophone et en organiser 2 éditions par an : programmation, coordination de l'équipe et supervision technique de la diffusion.",
     },
     tracks: ["produit"],
     year: { fr: "Depuis 2026" },
