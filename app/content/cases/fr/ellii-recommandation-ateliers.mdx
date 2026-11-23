@@ -9,7 +9,7 @@ import fiabilite from "../../../assets/cases/ellii-recommandation-ateliers/fiabi
 
 ## Le contexte
 
-Ellii vend des ateliers en ligne à des seniors : yoga, langues, chant, gym douce… Les membres achètent des _elliixirs_, une monnaie virtuelle, puis les dépensent pour réserver une séance. Une séance n'a lieu que si elle atteint un minimum de réservations, 3 ou 4 selon l'atelier ; sinon, elle est annulée. Le planning se faisait à l'intuition, à partir des créneaux proposés par les animateurs. J'ai mené ce projet pendant mon stage, en binôme avec le CTO.
+Ellii vend des ateliers en ligne à des seniors : yoga, langues, chant, gym douce… Les membres achètent des _elliixirs_, une monnaie virtuelle, puis les dépensent pour réserver une séance. Une séance n'a lieu que si elle atteint un minimum de réservations, 3 ou 4 selon l'atelier ; sinon, elle est annulée. Le planning se faisait à l'intuition, à partir des créneaux proposés par les animateurs. J'ai mené ce projet pendant ma mission, en binôme avec le CTO.
 
 ## Le problème
 
@@ -19,7 +19,7 @@ Sur les 12 derniers mois, une part importante des séances ont été annulées, 
 
 En résumé : l'outil estime, pour chaque séance, ses chances d'être annulée et le nombre de participants attendus, à partir de ce qui s'est passé pour des séances semblables.
 
-1. **Explorer les données.** J'ai travaillé sur un dump de production anonymisé, dans un dépôt d'analyse séparé de l'application, sans jamais versionner de données personnelles. Avant juin 2026, les annulations n'avaient pas de motif. Je les ai reconstitués à partir de l'historique d'audit, sans modifier la production. Parmi les annulations sans motif :
+1. **Explorer les données.** J'ai travaillé sur un dump de production anonymisé, dans un dépôt d'analyse séparé de l'application, sans jamais versionner de données personnelles. Avant juin 2026, les annulations n'avaient pas de motif. J'ai reconstitué ces motifs à partir de l'historique d'audit, sans modifier la production. Parmi les annulations sans motif :
    - la majorité concernaient des séances jamais publiées ;
    - une part notable avait été décidée par un admin ;
    - une minorité seulement était due à un manque d'inscrits.
@@ -108,7 +108,7 @@ En résumé : l'outil estime, pour chaque séance, ses chances d'être annulée 
 
 ## Les résultats
 
-- Le modèle a été validé sur 2 périodes qu'il n'avait pas vues, de juillet à mi-novembre 2026 : ses prévisions d'annulations sont restées proches de la réalité, avec une AUC de 0,80 puis 0,81.
+- Le modèle a été validé sur les 3 périodes de test qu'il n'avait pas vues, dont les 2 dernières de juillet à mi-novembre 2026 : ses prévisions d'annulations sont restées proches de la réalité, avec une AUC de 0,80 puis 0,81.
 
   Une AUC de 0,8 veut dire que, dans 80 % des cas, le modèle juge une séance qui sera annulée plus risquée qu'une séance qui aura lieu.
 

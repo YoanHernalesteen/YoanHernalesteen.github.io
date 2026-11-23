@@ -105,7 +105,7 @@ export const cases: readonly CaseStudy[] = [
     brief: {
       fr: {
         role: "Développeur full-stack : analyse des données, conception et validation du modèle de prévision, intégration dans l'application (back, front, tests), propositions de planning",
-        period: "2026 · environ 2 mois (fin septembre → novembre)",
+        period: "2026 · septembre → novembre",
         team: "Moi + le CTO (revue du code et des choix)",
         tools:
           "Ruby on Rails, Minitest, Turbo/Stimulus, PostgreSQL, Solid Cache, PostHog, Linear",
@@ -169,7 +169,7 @@ export const cases: readonly CaseStudy[] = [
     },
     brief: {
       fr: {
-        role: "Game Content Manager",
+        role: "Game Content Manager : veille, concepts, revue mensuelle des versions, A/B tests, accompagnement de 6 studios",
         period: "2014 – 2016 · 2 ans et demi",
         team: "6 studios internationaux : Australie, Canada, Roumanie, Espagne, États-Unis, Chine",
         tools:
