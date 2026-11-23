@@ -213,6 +213,7 @@ export const games: readonly Game[] = [
   },
   {
     title: "15 jeux free-to-play",
+    caseSlug: "gameloft-multi-studios",
     year: 2016,
     meta: { fr: "Gameloft · iOS, Android · 2014 – 2016" },
     role: {

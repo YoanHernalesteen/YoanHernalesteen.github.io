@@ -9,31 +9,6 @@ import type { CaseStudy } from "./cases";
 // son fichier MDX de brouillons/ vers fr/. Les tests vérifient les deux.
 export const draftCases: readonly CaseStudy[] = [
   {
-    slug: "gameloft-multi-studios",
-    title: {
-      fr: "Gameloft : superviser le design de jeux free-to-play dans plusieurs studios",
-    },
-    summary: {
-      fr: "Suivre la direction design de 15 jeux mobiles, du concept présenté à la direction jusqu'aux mises à jour après la sortie.",
-    },
-    tracks: ["produit"],
-    year: { fr: "2014 – 2016" },
-    org: "Gameloft",
-    tags: { fr: ["Pilotage multi-studios", "Pitch", "Free-to-play"] },
-    featured: false,
-    brief: {
-      fr: {
-        role: "Game Content Manager",
-        period: "2014 – 2016 · deux ans et demi",
-        team: "6 studios internationaux : Australie, Canada, Roumanie, Espagne, États-Unis, Chine",
-        tools:
-          "Confluence, PowerPoint, Excel, Unity 3D pour le prototypage, capture vidéo des sessions de jeu",
-        shows:
-          "Pilotage de plusieurs studios, veille et pitchs, revue de versions, game design et monétisation",
-      },
-    },
-  },
-  {
     slug: "ce-portfolio",
     title: { fr: "Ce portfolio : un site React typé, testé et accessible" },
     summary: {

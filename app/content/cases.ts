@@ -4,6 +4,7 @@ import elliiRecommandationCover from "~/assets/cases/ellii-recommandation-atelie
 import jppCover from "~/assets/cases/jpp-speedrun/logo.webp";
 import mediaTrackrCover from "~/assets/cases/media-trackr/cover.webp";
 import rolistesCover from "~/assets/cases/the-rolistes/cover.webp";
+import dragonManiaCover from "~/assets/games/dragon-mania-legends.webp";
 import mightyQuestCover from "~/assets/games/mighty-quest.webp";
 import type { Localized } from "~/i18n/types";
 
@@ -184,7 +185,7 @@ export const cases: readonly CaseStudy[] = [
     year: { fr: "2023" },
     org: "Don't Nod",
     tags: { fr: ["Accessibilité", "Tests utilisateurs", "Unreal Engine 5"] },
-    featured: true,
+    featured: false,
     cover: {
       src: jusantCover,
       alt: {
@@ -232,6 +233,40 @@ export const cases: readonly CaseStudy[] = [
         team: "4 game designers encadrés (level design, monétisation, systèmes), dont un stagiaire",
         tools: "Unity, Confluence, Excel",
         shows: "Direction du design, A/B tests, onboarding, monétisation",
+      },
+    },
+  },
+  {
+    slug: "gameloft-multi-studios",
+    title: {
+      fr: "Gameloft : superviser le design de jeux free-to-play dans plusieurs studios",
+    },
+    summary: {
+      fr: "Suivre le design de 15 jeux mobiles dans 6 studios, du concept aux mises à jour : Dragon Mania Legends dépasse les 100 millions de téléchargements, et un prototype que j'ai co-réalisé est devenu Iron Blade.",
+    },
+    tracks: ["produit"],
+    year: { fr: "2014 – 2016" },
+    org: "Gameloft",
+    tags: {
+      fr: ["Pilotage multi-studios", "A/B tests", "Free-to-play"],
+    },
+    featured: true,
+    cover: {
+      src: dragonManiaCover,
+      alt: {
+        fr: "Visuel officiel de Dragon Mania Legends : quatre jeunes dragons colorés dans un paysage verdoyant.",
+      },
+      credit: "© Gameloft",
+    },
+    brief: {
+      fr: {
+        role: "Game Content Manager",
+        period: "2014 – 2016 · deux ans et demi",
+        team: "6 studios internationaux : Australie, Canada, Roumanie, Espagne, États-Unis, Chine",
+        tools:
+          "Confluence, PowerPoint, Excel, Unity 3D pour le prototypage, capture vidéo des sessions de jeu",
+        shows:
+          "Pilotage de plusieurs studios, veille et pitchs, revue de versions, game design et monétisation",
       },
     },
   },
