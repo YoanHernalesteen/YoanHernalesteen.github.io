@@ -36,6 +36,20 @@ describe("Home", () => {
     ).toBeLessThanOrEqual(160);
   });
 
+  it("décrit Yoan aux moteurs de recherche avec une fiche Person (JSON-LD)", () => {
+    const tag = meta().find((entry) => "script:ld+json" in entry);
+    const person = tag && "script:ld+json" in tag ? tag["script:ld+json"] : {};
+
+    expect(person).toMatchObject({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: site.name,
+      url: `${site.url}/`,
+      jobTitle: site.jobTitle,
+    });
+    expect(person).toHaveProperty("sameAs", [site.linkedin, site.github]);
+  });
+
   it("propose sous l'introduction le CV, les études de cas et le profil développeur", () => {
     renderHome();
 

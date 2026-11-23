@@ -16,13 +16,16 @@ import { site } from "~/content/site";
 import { speedrunActivities } from "~/content/speedrun";
 import { testimonialsFor } from "~/content/testimonials";
 import { LANG, t } from "~/i18n";
-import { pageMeta } from "~/seo";
+import { pageMeta, personJsonLd } from "~/seo";
 
 import type { Route } from "./+types/home";
 
 export function meta(): Route.MetaDescriptors {
   const title = `${site.name} · ${t.home.metaTitle}`;
-  return pageMeta({ title, description: t.home.metaDescription, path: "/" });
+  return [
+    ...pageMeta({ title, description: t.home.metaDescription, path: "/" }),
+    personJsonLd(),
+  ];
 }
 
 export default function Home() {

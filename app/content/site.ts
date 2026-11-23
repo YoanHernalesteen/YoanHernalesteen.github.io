@@ -1,6 +1,8 @@
 // Informations publiques affichées sur le site.
 export const site = {
   name: "Yoan Hernalesteen",
+  // Poste recherché, repris dans la fiche Person (JSON-LD) de l'accueil.
+  jobTitle: "Product Manager",
   // Adresse publique du site (domaine acheté chez Cloudflare).
   url: "https://yoanhernalesteen.com",
   // Adresse dédiée au portfolio (Cloudflare Email Routing) : publique et indexée.

@@ -56,6 +56,22 @@ export function pageMeta({
   ];
 }
 
+// Fiche schema.org lue par les moteurs de recherche et les assistants IA :
+// qui est Yoan et où le retrouver. React Router l'écrit dans une balise
+// <script type="application/ld+json"> au prérendu.
+export function personJsonLd(): MetaDescriptor {
+  return {
+    "script:ld+json": {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: site.name,
+      url: absoluteUrl("/"),
+      jobTitle: site.jobTitle,
+      sameAs: [site.linkedin, site.github],
+    },
+  };
+}
+
 // Pages proposées aux moteurs de recherche (les mentions légales n'y sont pas).
 export function sitemapPaths(): string[] {
   return ["/", "/dev", "/cas", ...cases.map((study) => `/cas/${study.slug}`)];
