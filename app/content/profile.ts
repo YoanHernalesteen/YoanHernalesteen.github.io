@@ -126,6 +126,8 @@ export interface Game {
   hasTrailer: boolean;
   // Affiché sur l'accueil : un jeu par type de public.
   highlighted?: boolean;
+  // Public visé, affiché sur la carte.
+  audience?: Localized;
   // Étude de cas liée, si elle est publiée (un test vérifie le slug).
   caseSlug?: string;
 }
@@ -164,6 +166,7 @@ export const games: readonly Game[] = [
     },
     hasTrailer: true,
     highlighted: true,
+    audience: { fr: "Joueurs console et PC" },
   },
   {
     title: "Banishers: Ghosts of New Eden",
@@ -196,6 +199,7 @@ export const games: readonly Game[] = [
     },
     hasTrailer: true,
     highlighted: true,
+    audience: { fr: "Joueurs de RPG sur mobile" },
   },
   {
     title: "DmC Devil May Cry",
@@ -230,6 +234,7 @@ export const games: readonly Game[] = [
     },
     hasTrailer: false,
     highlighted: true,
+    audience: { fr: "Grand public sur mobile" },
   },
 ];
 

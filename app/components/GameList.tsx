@@ -34,6 +34,9 @@ export function GameList({ games }: Props) {
           <p className="mt-1 font-mono text-xs text-subtle">
             {game.meta[LANG]}
           </p>
+          {game.audience && (
+            <p className="mt-2 text-sm font-semibold">{game.audience[LANG]}</p>
+          )}
           <p className="mt-2 text-sm leading-normal text-muted">
             {game.role[LANG]}
           </p>
