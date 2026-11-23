@@ -13,7 +13,7 @@ The site presents case studies that show how I work: the problem, my decisions a
 | Routing/build | React Router 8 (framework mode) + Vite, static prerendering        |
 | Content       | MDX for case study text, typed TypeScript for metadata             |
 | Styling       | Tailwind CSS 4, light and dark themes, self-hosted fonts           |
-| Icons         | Font Awesome (free solid icons)                                    |
+| Icons         | Font Awesome (free solid and brand icons)                          |
 | Tests         | Vitest, Testing Library, jsdom                                     |
 | Quality       | ESLint (typescript-eslint, react-hooks), Prettier                  |
 | CI/CD         | GitHub Actions: typecheck, lint, format, tests, build, then deploy |
@@ -22,8 +22,9 @@ The site presents case studies that show how I work: the problem, my decisions a
 ## Technical choices
 
 **React without a heavy framework.** I already use Next.js on another project
-([The Rolistes](https://rolistespod.com)) and Ruby on Rails daily. This site
-shows React and TypeScript on their own: routing, components, state, build.
+([The Rolistes](https://rolistespod.com)), and I built Ruby on Rails features
+at Ellii in 2026. This site shows React and TypeScript on their own: routing,
+components, state, build.
 
 **Prerendering instead of a single-page app.** With `ssr: false` and
 `prerender` in [`react-router.config.ts`](react-router.config.ts), the build
@@ -95,7 +96,7 @@ app/
   routes/       One file per page, plus sitemap.xml and robots.txt
   root.tsx      Shared layout and error page
   routes.ts     Route definitions
-  seo.ts        Page titles, descriptions and canonical links
+  seo.ts        Page titles, descriptions, canonical links, Person JSON-LD
   theme.ts      Light and dark themes, saved choice
 ```
 
