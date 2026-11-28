@@ -59,7 +59,7 @@ export const cases: readonly CaseStudy[] = [
     tracks: ["dev", "produit"],
     year: { fr: "2026" },
     org: "Ellii",
-    tags: { fr: ["Ruby on Rails", "Tests utilisateurs", "PostHog"] },
+    tags: { fr: ["Tests utilisateurs", "PostHog", "Ruby on Rails"] },
     featured: true,
     cover: {
       src: elliiRefonteCover,
@@ -69,7 +69,7 @@ export const cases: readonly CaseStudy[] = [
     },
     brief: {
       fr: {
-        role: "Développeur full-stack : pages publiques de la refonte (accueil, pages partenaires, FAQ, navigation), protocole de test, conduite des 12 tests, synthèse et recommandations, participation au plan de suivi PostHog, campagnes Customer.io, mesure de l'impact",
+        role: "Produit et développement full-stack : protocole de test, conduite des 12 tests, synthèse et recommandations, participation au plan de suivi PostHog, campagnes Customer.io, mesure de l'impact ; développement d'une partie des pages publiques (accueil, pages partenaires, FAQ, navigation)",
         period:
           "2026 · avril → novembre (refonte mise en ligne début septembre)",
         team: "CTO, développeur front",
@@ -93,7 +93,7 @@ export const cases: readonly CaseStudy[] = [
     year: { fr: "2026" },
     org: "Ellii",
     tags: {
-      fr: ["Ruby on Rails", "Modèle de prévision", "Aide à la décision"],
+      fr: ["Modèle de prévision", "Aide à la décision", "Ruby on Rails"],
     },
     featured: true,
     cover: {
@@ -104,7 +104,7 @@ export const cases: readonly CaseStudy[] = [
     },
     brief: {
       fr: {
-        role: "Développeur full-stack : analyse des données, conception et validation du modèle de prévision, intégration dans l'application (back, front, tests), propositions de planning",
+        role: "Produit et développement full-stack : analyse des données, conception et validation du modèle de prévision, propositions de planning ; intégration dans l'application (back, front, tests)",
         period: "2026 · septembre → novembre",
         team: "Moi, avec une revue du code par l'équipe technique",
         tools:
