@@ -100,7 +100,7 @@ export const fr = {
   },
   produit: {
     title: "Un Product Manager qui comprend le code.",
-    lede: "16 ans à concevoir des produits pour des publics très différents : joueurs mobiles chez Gameloft et Ubisoft, joueurs console et PC chez Don't Nod, puis seniors chez Ellii. J'écris les specs, je priorise avec l'équipe, je teste avec les utilisateurs et je suis les KPI. Chez Ubisoft, j'ai encadré 4 game designers ; chez Ellii, j'ai aussi développé en Ruby on Rails.",
+    lede: "16 ans à concevoir des produits pour des publics très différents : joueurs mobiles chez Gameloft et Ubisoft, joueurs console et PC chez Don't Nod, puis seniors chez Ellii. J'écris les specs, je priorise avec l'équipe, je teste avec les utilisateurs et je suis les KPI. Chez Ubisoft, j'ai encadré 4 game designers ; chez Ellii, j'ai tenu un rôle hybride produit et tech, jusqu'au code en Ruby on Rails.",
     cvCta: "Télécharger mon CV",
     casesCta: "Voir les études de cas produit",
     methodEyebrow: "Ma méthode",
@@ -108,7 +108,7 @@ export const fr = {
     method: [
       {
         title: "Comprendre",
-        text: "Tests utilisateurs et playtests, recueil des besoins, lecture des données d'usage. Chez Ellii, 12 seniors testés : note des visuels passée de 3,8 à 4,7 sur 5.",
+        text: "Personas, tests utilisateurs et playtests, recueil des besoins, lecture des données d'usage. Chez Ellii, 12 seniors testés : note des visuels passée de 3,8 à 4,7 sur 5.",
       },
       {
         title: "Prioriser",
@@ -116,7 +116,7 @@ export const fr = {
       },
       {
         title: "Livrer",
-        text: "Scrum, specs claires pour les développeurs, recette et validation. 25 jeux livrés, dont 15 free-to-play suivis avec 6 studios internationaux chez Gameloft.",
+        text: "Scrum sur tous mes postes, specs claires pour les développeurs, recette et validation. 25 jeux livrés, dont 15 free-to-play suivis avec 6 studios internationaux chez Gameloft.",
       },
       {
         title: "Mesurer",
