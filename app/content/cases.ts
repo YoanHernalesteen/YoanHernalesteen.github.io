@@ -54,7 +54,7 @@ export const cases: readonly CaseStudy[] = [
       fr: "Ellii : refondre l'application et la valider avec 12 seniors",
     },
     summary: {
-      fr: "Construire une partie des pages publiques de la refonte, la valider auprès de 12 membres seniors, puis relancer les membres avec Customer.io : abandons au paiement passés de 23 % à 15 %, absences aux ateliers divisées par 2.",
+      fr: "Construire une partie des pages publiques de la refonte, la valider auprès de 12 membres seniors, puis relancer les membres avec Customer.io : abandons au paiement passés de 23 % à 15 % avec la refonte et les relances, absences aux ateliers divisées par 2.",
     },
     tracks: ["dev", "produit"],
     year: { fr: "2026" },
@@ -171,7 +171,7 @@ export const cases: readonly CaseStudy[] = [
       fr: {
         role: "Game Content Manager : veille, concepts, revue mensuelle des versions, A/B tests, accompagnement de 6 studios",
         period: "2014 – 2016 · 2 ans et demi",
-        team: "6 studios internationaux : Australie, Canada, Roumanie, Espagne, États-Unis, Chine",
+        team: "6 studios internationaux : Australie, Canada, Roumanie, Espagne, États-Unis, Hongrie",
         tools:
           "Confluence, PowerPoint, Excel, Unity 3D pour le prototypage, capture vidéo des sessions de jeu",
         shows:
@@ -218,7 +218,7 @@ export const cases: readonly CaseStudy[] = [
       fr: "JPP Speedrun : cofonder et organiser des marathons de speedrun en direct",
     },
     summary: {
-      fr: "Cofonder un événement de speedrun francophone et en organiser 2 éditions par an : programmation, coordination de l'équipe et supervision technique de la diffusion.",
+      fr: "Cofonder un événement de speedrun francophone et organiser ses 2 premiers événements en 2026 : programmation, coordination de l'équipe et supervision technique de la diffusion.",
     },
     tracks: ["produit"],
     year: { fr: "Depuis 2026" },
@@ -238,7 +238,7 @@ export const cases: readonly CaseStudy[] = [
     brief: {
       fr: {
         role: "Cofondateur : processus de diffusion, formulaires de soumission, lien avec les restreams, revue des soumissions, planning",
-        period: "Depuis 2026 · 2 événements par an",
+        period: "Depuis 2026 · 2 événements en 2026",
         team: "5 cofondateurs : direction artistique, communication, Discord, modération ; tous participent à la revue des soumissions et au planning",
         tools: "Twitch, YouTube, Bluesky, Discord, CryptPad",
         shows:

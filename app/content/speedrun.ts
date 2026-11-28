@@ -24,7 +24,7 @@ export const speedrunActivities: readonly SpeedrunActivity[] = [
     role: { fr: "Cofondateur" },
     since: 2026,
     text: {
-      fr: "2 événements par an : un marathon en direct avec des runners francophones, et le restream en français du BigBadGame-a-thon sur 2 week-ends. Programmation, coordination de l'équipe, supervision technique.",
+      fr: "2 événements en 2026 : un marathon en direct avec des runners francophones, et le restream en français du BigBadGame-a-thon sur 2 week-ends. Programmation, coordination de l'équipe, supervision technique.",
     },
     links: [
       { label: "YouTube", href: "https://www.youtube.com/@JPP_Speedrun" },
