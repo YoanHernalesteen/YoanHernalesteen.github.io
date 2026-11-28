@@ -16,7 +16,8 @@ function renderDev() {
 }
 
 describe("la page /dev", () => {
-  it("ne propose que le CV développeur, avec le GitHub", () => {
+  // Le CV développeur n'est plus à jour : /dev propose le CV Product Manager.
+  it("ne propose que le CV Product Manager, avec le GitHub", () => {
     renderDev();
 
     const cvLinks = screen
@@ -25,7 +26,7 @@ describe("la page /dev", () => {
 
     expect(cvLinks.length).toBeGreaterThan(0);
     for (const link of cvLinks) {
-      expect(link).toHaveAttribute("href", positionings["dev-produit"].cvHref);
+      expect(link).toHaveAttribute("href", positionings.pm.cvHref);
     }
     for (const link of screen.getAllByRole("link", { name: /GitHub/ })) {
       expect(link).toHaveAttribute("href", site.github);

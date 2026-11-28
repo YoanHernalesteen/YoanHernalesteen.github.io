@@ -20,7 +20,6 @@ export function SiteHeader() {
   const toggleRef = useRef<HTMLButtonElement>(null);
 
   const onDev = pathname === "/dev" || pathname.startsWith("/dev/");
-  const cvHref = positionings[onDev ? "dev-produit" : "pm"].cvHref;
 
   // L'accueil et /dev ont un bloc contact ; ailleurs, le lien mène à celui
   // de l'accueil.
@@ -86,7 +85,7 @@ export function SiteHeader() {
             {t.nav.contact}
           </a>
           <a
-            href={cvHref}
+            href={positionings.pm.cvHref}
             onClick={close}
             className="inline-flex min-h-11 items-center justify-center rounded-[10px] bg-ink px-[18px] font-semibold text-bg hover:opacity-90"
           >

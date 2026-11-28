@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { createRoutesStub } from "react-router";
 import { describe, expect, it } from "vitest";
 
@@ -38,20 +38,16 @@ describe("SiteHeader", () => {
     );
   });
 
-  it("propose le CV Product Manager sur l'accueil", () => {
-    renderHeaderAt("/");
+  it("propose le CV Product Manager partout, /dev compris", () => {
+    for (const path of ["/", "/dev"]) {
+      renderHeaderAt(path);
 
-    expect(
-      screen.getByRole("link", { name: "Télécharger mon CV" }),
-    ).toHaveAttribute("href", positionings.pm.cvHref);
-  });
-
-  it("propose le CV développeur sur /dev", () => {
-    renderHeaderAt("/dev");
-
-    expect(
-      screen.getByRole("link", { name: "Télécharger mon CV" }),
-    ).toHaveAttribute("href", positionings["dev-produit"].cvHref);
+      expect(
+        screen.getByRole("link", { name: "Télécharger mon CV" }),
+        path,
+      ).toHaveAttribute("href", positionings.pm.cvHref);
+      cleanup();
+    }
   });
 
   it("ouvre et ferme le menu mobile", () => {

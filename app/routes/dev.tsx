@@ -32,7 +32,7 @@ export default function Dev() {
         actions={
           <>
             <a
-              href={positionings["dev-produit"].cvHref}
+              href={positionings.pm.cvHref}
               className={heroButton.primary("dev")}
             >
               {text.cvCta}
@@ -114,7 +114,7 @@ export default function Dev() {
         />
       </section>
 
-      <ContactSection title={text.contactTitle} cvs={["dev-produit"]} />
+      <ContactSection title={text.contactTitle} cvs={["pm"]} />
     </>
   );
 }
