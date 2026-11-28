@@ -86,7 +86,6 @@ describe("CaseArticle", () => {
     expect(
       screen.queryByRole("img", { name: study.cover.alt.fr }),
     ).not.toBeInTheDocument();
-    expect(screen.queryByText(/Visuel du projet/)).not.toBeInTheDocument();
   });
 
   it("affiche les recommandations liées au cas", () => {

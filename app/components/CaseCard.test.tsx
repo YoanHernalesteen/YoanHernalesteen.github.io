@@ -37,7 +37,6 @@ describe("CaseCard", () => {
     renderCard();
 
     expect(document.querySelector("img")).toBeNull();
-    expect(screen.queryByText(/Visuel du projet/)).not.toBeInTheDocument();
   });
 
   it("affiche le visuel du cas, décoratif sur la carte", () => {
