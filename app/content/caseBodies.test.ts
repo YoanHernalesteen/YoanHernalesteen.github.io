@@ -18,7 +18,9 @@ describe("caseBodies", () => {
       const file = path.join("app/content/cases/fr", `${study.slug}.mdx`);
       const body = readFileSync(file, "utf8");
 
-      expect(body, study.slug).not.toMatch(/TODO|À compléter/i);
+      // Sensible à la casse : le marqueur « À compléter » ouvre une phrase,
+      // alors que « des encyclopédies à compléter » est du vrai texte.
+      expect(body, study.slug).not.toMatch(/TODO|À compléter/);
     }
   });
 
