@@ -106,7 +106,7 @@ export const cases: readonly CaseStudy[] = [
       fr: {
         role: "Développeur full-stack : analyse des données, conception et validation du modèle de prévision, intégration dans l'application (back, front, tests), propositions de planning",
         period: "2026 · septembre → novembre",
-        team: "Moi + le CTO (revue du code et des choix)",
+        team: "Moi, avec une revue du code par l'équipe technique",
         tools:
           "Ruby on Rails, Minitest, Turbo/Stimulus, PostgreSQL, Solid Cache, PostHog, Linear",
         shows:
